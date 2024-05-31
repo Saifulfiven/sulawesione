@@ -42,7 +42,7 @@ class BeritaPageController extends Controller
         $toptitle = "STIE NOBEL :. Tambah Data berita";
         $header = false;
         return view('berita.tambah', compact('header','toptitle'));
-        //return view('landingpage.layout');
+        //return view('landingpage.layout');..
     }
 
 
