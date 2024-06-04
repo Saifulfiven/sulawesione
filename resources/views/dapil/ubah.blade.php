@@ -15,29 +15,25 @@
             @endif
             <div class="card">
             <div class="card-header d-flex justify-content-between bg-info">
-                    <strong style="color:white">Ubah kabupaten</strong>
-                    <a href="/admin/kabupaten" class="btn btn-sm btn-info"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <strong style="color:white">Ubah Setting Dapil</strong>
+                    <a href="/admin/dapil" class="btn btn-sm btn-info"><i class="fas fa-arrow-left"></i> Kembali</a>
                 </div>
 
                 <div class="card-body">
 
-                    <form action="/admin/kabupaten/update" method="post" enctype="multipart/form-data">
+                    <form action="/admin/dapil/update" method="post">
                     @csrf
 
                     <div class="row">
 
-                        <div class="form-group">
-                            <label for="namakabupaten" class="col-sm-2 col-form-label">Nama Kabupaten</label>
-                            <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
-                            <input type="text" name="namakabupaten" class="form-control"  value="<?php echo $dataubah->namakabupaten ?>">
-                        </div>
+                        <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
 
-                        <?php 
-                           // $selectedidkandidat = $dataubah->id_kandidat; 
-                            $selectedidkandidat = $dataubah->id_kandidat;    
-                            $selectedidkabupaten = $dataubah->id_kabupaten;    
+                        <?php
+                           // $selectedidkandidat = $dataubah->id_kandidat;
+                            $selectedidkandidat = $dataubah->id_kandidat;
+                            $selectedidkabupaten = $dataubah->id_kabupaten;
                         ?>
-                        
+
                         <div class="form-group">
                             <label for="id_kandidat" class="col-sm-2 col-form-label">Nama kandidat</label>
                             <select name="id_kandidat" class="form-control" required>
@@ -48,27 +44,27 @@
                             </select>
                         </div>
 
+
+{{--                        <div class="form-group">--}}
+{{--                            <label for="options">Pilih Jenis:</label>--}}
+{{--                            <select id="options" onchange="showTextBoxes()" class="form-control" name="jeniskandidat">--}}
+{{--                                <option value="" disabled>Pilih...</option>--}}
+{{--                                <option value="pilkab">Pemilihan Walikota/Bupati</option>--}}
+{{--                                <option value="pilgub">Pemilihan Gubernur</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+
                         <div class="form-group">
                             <label for="id_kabupaten" class="col-sm-2 col-form-label">Nama kabupaten</label>
                             <select name="id_kabupaten" class="form-control" required>
                                 <option value="" disabled>--Pilih kabupaten--</option>
                                 @foreach ($kabupaten as $kab)
                                 <option value="{{ $kab->id }}" {{ $kab->id == $selectedidkabupaten ? 'selected' : '' }}>{{ $kab->namakabupaten }}</option>
-                            
+
                                 @endforeach
                             </select>
                         </div>
-                        
-                        <!-- <div class="form-group">
-                            <label for="id_provinsi" class="col-sm-2 col-form-label">Nama Provinsi</label>
-                            <select name="id_propinsi" class="form-control" required>
-                                <option value="" disabled>--Pilih Provinsi--</option>
-                                @foreach ($provinsi as $prov)
-                                <option value="{{ $prov->id }}" {{ $prov->id == $selectedidprovinsi ? 'selected' : '' }}>{{ $prov->namaprovinsi }}</option>
-                            
-                                @endforeach
-                            </select>
-                        </div> -->
+
 
                         <div class="form-group">
                             <div class="col-sm-2">
@@ -84,3 +80,20 @@
 @endsection
 
 
+<script>
+    function showTextBoxes() {
+        // Mendapatkan nilai dari elemen select
+        var selectedOption = document.getElementById("options").value;
+
+        // Menampilkan atau menyembunyikan textbox sesuai dengan pilihan
+        if (selectedOption === "pilgub") {
+            document.getElementById("pilih-kabupaten").style.display = "none";
+            document.getElementById("pilih-provinsi").style.display = "block";
+            document.getElementById("id_kabupaten").val('');
+        } else if (selectedOption === "pilkab") {
+            document.getElementById("pilih-kabupaten").style.display = "block";
+            document.getElementById("pilih-provinsi").style.display = "none";
+            document.getElementById("id_provinsi").val('');
+        }
+    }
+</script>

@@ -20,7 +20,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
-            
+
             <div class="card-header pb-0 position-relative mb-5">
               <h6>Data Tim Inti Pilkab</h6>
               <a href="{{ url('admin/timinti/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah timinti</a>
@@ -31,7 +31,9 @@
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
-                      <th class="text-secondary">Nama</th>
+                        <th class="text-secondary">Nama</th>
+                        <th class="text-secondary">Kontak</th>
+                        <th class="text-secondary">Email</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Kabupaten</th>
                       <th class="text-secondary">Aksi</th>
@@ -39,14 +41,15 @@
                   </thead>
                     <tbody>
                       <?php $no = 1; ?>
-                      @foreach ($timintis as $timinti)  
+                      @foreach ($timintis as $timinti)
                         <tr>
                           <td> {{ $no }}</td>
                           <td>{{ $timinti->nama }}</td>
-                          <td>{{ $timinti->kontak }}</td>
+                            <td>{{ $timinti->kontak }}</td>
+                            <td>{{ $timinti->email }}</td>
                           <td>{{ $timinti->namakandidat }}</td>
                           <td>{{ $timinti->namakabupaten }}</td>
-                          
+
                           <td class="text-center">
                             <a href="{{ url('admin/timinti/ubah/'.$timinti->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{{ url('admin/timinti/hapus/'.$timinti->id) }}" class="btn btn-sm btn-danger">Hapus</a>
@@ -62,7 +65,7 @@
           </div>
         </div>
       </div>
-   
+
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -122,7 +125,7 @@
 
     window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
+        $(this).remove();
     });
     }, 2000);
 </script>

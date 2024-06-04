@@ -22,36 +22,33 @@
             @endif
 
             <div class="card-header pb-0 position-relative mb-5">
-              <h6>Data Pendukung Pilkab</h6>
-              <a href="{{ url('admin/pendukung/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah pendukung</a>
+              <h6>Data Desa</h6>
+              <a href="{{ url('admin/desa/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah Desa</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0"><table class="table align-items-center mb-0" id="tabel-data">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
-                        <th class="text-secondary">Nama</th>
-                        <th class="text-secondary">Email</th>
-                      <th class="text-secondary">Kontak</th>
-                      <th class="text-secondary">Kandidat</th>
-                      <th class="text-secondary">Kabupaten</th>
+                      <th class="text-secondary">Nama Desa</th>
+                        <th class="text-secondary">Kecamatan</th>
+                      <th class="text-secondary">Created at</th>
                       <th class="text-secondary">Aksi</th>
                     </tr>
                   </thead>
                     <tbody>
                       <?php $no = 1; ?>
-                      @foreach ($pendukungs as $pendukung)
+                      @foreach ($desas as $desa)
                         <tr>
                           <td> {{ $no }}</td>
-                            <td>{{ $pendukung->nama }}</td>
-                            <td>{{ $pendukung->email }}</td>
-                          <td>{{ $pendukung->kontak }}</td>
-                          <td>{{ $pendukung->namakandidat }}</td>
-                          <td>{{ $pendukung->namakabupaten }}</td>
 
+                            <td>{{ $desa->namadesa }}</td>
+                          <td>{{ $desa->namakecamatan }}</td>
+                          <td>{{ $desa->created_at }}</td>
                           <td class="text-center">
-                            <a href="{{ url('admin/pendukung/ubah/'.$pendukung->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="{{ url('admin/pendukung/hapus/'.$pendukung->id) }}" class="btn btn-sm btn-danger">Hapus</a>
+                            <a href="{{ url('admin/desa/ubah/'.$desa->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="{{ url('admin/desa/hapus/'.$desa->id) }}" class="btn btn-sm btn-danger">Hapus</a>
                           </td>
                         </tr>
                         <?php $no++; ?>

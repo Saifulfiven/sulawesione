@@ -20,9 +20,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
-            
+
             <div class="card-header pb-0 position-relative mb-5">
-              <h6>Data pendukungpilgub Pilkab</h6>
+              <h6>Data Tim Pendukung Calon Gubernur</h6>
               <a href="{{ url('admin/pendukungpilgub/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah pendukungpilgub</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -31,24 +31,26 @@
                     <tr>
                       <th class="text-secondary">No</th>
                       <th class="text-secondary">Nama</th>
-                      <th class="text-secondary">Kontak</th>
+                        <th class="text-secondary">Kontak</th>
+                        <th class="text-secondary">Email</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Provinsi</th>
+                        <!-- Ini Adalah Wilayah Kandidat -->
                       <th class="text-secondary">Aksi</th>
                     </tr>
                   </thead>
                     <tbody>
                       <?php $no = 1; ?>
-                      @foreach ($pendukungpilgubs as $pendukungpilgub)  
+                      @foreach ($pendukungpilgubs as $pendukungpilgub)
                         <tr>
                           <td> {{ $no }}</td>
                           <td>{{ $pendukungpilgub->nama }}</td>
-                          <td>{{ $pendukungpilgub->kontak }}</td>
+                            <td>{{ $pendukungpilgub->kontak }}</td>
+                            <td>{{ $pendukungpilgub->email }}</td>
                           <td>{{ $pendukungpilgub->namakandidat }}</td>
                           <td>{{ $pendukungpilgub->namaprovinsi }}</td>
-                          
+
                           <td class="text-center">
-                            <a href="{{ url('admin/pendukungpilgub/ubah/'.$pendukungpilgub->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{{ url('admin/pendukungpilgub/hapus/'.$pendukungpilgub->id) }}" class="btn btn-sm btn-danger">Hapus</a>
                           </td>
                         </tr>
@@ -62,7 +64,7 @@
           </div>
         </div>
       </div>
-   
+
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -122,7 +124,7 @@
 
     window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
+        $(this).remove();
     });
     }, 2000);
 </script>

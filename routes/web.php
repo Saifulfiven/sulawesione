@@ -27,6 +27,8 @@ Route::get('/detail', 'App\Http\Controllers\BeritaPageController@index');
 
 //Controller DataFormPageController
 Route::get('/dataform', 'App\Http\Controllers\DataFormPageController@index');
+Route::get('/tambahpendukung', 'App\Http\Controllers\DataFormPageController@tambahpendukung');
+Route::get('/tambahpendukungpilgub', 'App\Http\Controllers\DataFormPageController@showFormpilgubpendukung');
 Route::post('/dataform/pengguna-register', 'App\Http\Controllers\DataFormPageController@penggunastore');
 Route::post('/dataform/pemilih-register', 'App\Http\Controllers\DataFormPageController@pemilihstore');
 Route::get('/dataform/sukses', 'App\Http\Controllers\DataFormPageController@sukses');
@@ -80,6 +82,7 @@ Route::get('/admin/caleg', 'App\Http\Controllers\MasterPageController@caleg');
 //combobox realtime bertingkat
 Route::post('/admin/searchkabupaten', 'App\Http\Controllers\MasterPageController@searchkabupaten');
 Route::post('/admin/searchkecamatan', 'App\Http\Controllers\MasterPageController@searchkecamatan');
+Route::post('/admin/searchdesa', 'App\Http\Controllers\MasterPageController@searchdesa');
 Route::post('/admin/searchpemilih', 'App\Http\Controllers\MasterPageController@searchpemilih');
 
 
@@ -116,7 +119,7 @@ Route::get('/admin/provinsi/ubah/{id}', 'App\Http\Controllers\ProvinsiPageContro
 Route::post('/admin/provinsi/update', 'App\Http\Controllers\ProvinsiPageController@update');
 Route::get('/admin/provinsi/hapus/{id}', 'App\Http\Controllers\ProvinsiPageController@hapus');
 
-//Kabupaten 
+//Kabupaten
 Route::get('/admin/kabupaten', 'App\Http\Controllers\KabupatenPageController@home');
 Route::get('/admin/kabupaten/tambah', 'App\Http\Controllers\KabupatenPageController@tambah');
 Route::post('/admin/kabupaten/tambah', 'App\Http\Controllers\KabupatenPageController@simpan');
@@ -131,6 +134,15 @@ Route::post('/admin/kecamatan/tambah', 'App\Http\Controllers\KecamatanPageContro
 Route::get('/admin/kecamatan/ubah/{id}', 'App\Http\Controllers\KecamatanPageController@ubah');
 Route::post('/admin/kecamatan/update', 'App\Http\Controllers\KecamatanPageController@update');
 Route::get('/admin/kecamatan/hapus/{id}', 'App\Http\Controllers\KecamatanPageController@hapus');
+
+
+//Desa
+Route::get('/admin/desa', 'App\Http\Controllers\DesaPageController@home');
+Route::get('/admin/desa/tambah', 'App\Http\Controllers\DesaPageController@tambah');
+Route::post('/admin/desa/tambah', 'App\Http\Controllers\DesaPageController@simpan');
+Route::get('/admin/desa/ubah/{id}', 'App\Http\Controllers\DesaPageController@ubah');
+Route::post('/admin/desa/update', 'App\Http\Controllers\DesaPageController@update');
+Route::get('/admin/desa/hapus/{id}', 'App\Http\Controllers\DesaPageController@hapus');
 
 // Route::get('/admin/pengalaman/home', 'App\Http\Controllers\pengalamanPageController@home');
 // Route::get('/admin/pengalaman/tambah', 'App\Http\Controllers\pengalamanPageController@tambah');

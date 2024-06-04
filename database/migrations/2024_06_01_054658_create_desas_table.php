@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('timpenggunas', function (Blueprint $table) {
+        Schema::create('desas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama',255);
-            $table->string('ktp',20);
-            $table->integer('id_desa');
-            $table->integer('id_kecamatan');
-            $table->integer('id_kabupaten');
-            $table->integer('id_provinsi');
-            $table->string('jumlahpemilihrumahtangga', 10);
+            $table->string('namadesa',250);
+            $table->string('id_kecamatan', 20);
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timpenggunas');
+        Schema::dropIfExists('desas');
     }
 };

@@ -11,10 +11,9 @@ use Faker\Factory as Faker;
 class pemilihs extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'nama',
-        'desa',
         'kontak',
         'id_kabupaten',
         'id_timpengguna',
@@ -22,6 +21,8 @@ class pemilihs extends Model
         'id_dapil',
         'id_kecamatan',
         'id_kabupaten',
-        'id_provinsi'
+        'id_provinsi',
+        'id_desa',
+        'alamat'
     ];
 }

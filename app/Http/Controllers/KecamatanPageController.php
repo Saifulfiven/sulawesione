@@ -11,9 +11,9 @@ class KecamatanPageController extends Controller
     //Dashboard
     public function home()
     {
-        $toptitle = "PILKADA 2024:. Dashboard - kecamatan";
+        $toptitle = "Dashboard - kecamatan";
         $header = false;
-        $kecamatans = kecamatan::join('kabupatens', 
+        $kecamatans = kecamatan::join('kabupatens',
                       'kecamatans.id_kabupaten', '=', 'kabupatens.id')->get();
         return view('kecamatan.tabel', compact('header','toptitle','kecamatans'));
         //return view('landingpage.layout');
@@ -21,7 +21,7 @@ class KecamatanPageController extends Controller
 
     public function tambah()
     {
-        $toptitle = "PILKADA 2024:. Tambah Data kecamatan";
+        $toptitle = "Tambah Data kecamatan";
         $header = false;
         $kabupaten = kabupaten::get();
         return view('kecamatan.tambah', compact('header','toptitle','kabupaten'));
@@ -32,12 +32,14 @@ class KecamatanPageController extends Controller
     {
         $this->validate($request,[
             'namakecamatan' => 'required',
+            'slug'          => 'required',
             'id_kabupaten'  => 'required'
         ]);
-        
+
         $simpan = kecamatan::create([
             'namakecamatan' => $request->namakecamatan,
-            'id_kabupaten' => $request->id_kabupaten
+            'id_kabupaten'  => $request->id_kabupaten,
+            'slug'          => $request->slug
         ]);
 
         if($simpan){
@@ -48,12 +50,12 @@ class KecamatanPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
         $kecamatan = kecamatan::find($id);
         $kabupaten = kabupaten::pluck('namakabupaten','id');
-        $toptitle = "PILKADA 2024:. Ubah Data kecamatan";
+        $toptitle = "Ubah Data kecamatan";
         return view('kecamatan.ubah', ['dataubah' => $kecamatan,'toptitle' => $toptitle,'kabupaten' => $kabupaten]);
     }
 
@@ -62,6 +64,7 @@ class KecamatanPageController extends Controller
     {
         $this->validate($request,[
             'namakecamatan' => 'required',
+            'slug'          => 'required',
             'id_kabupaten'  => 'required'
         ]);
 
@@ -70,7 +73,8 @@ class KecamatanPageController extends Controller
 
         kecamatan::whereId($id)->update([
             'namakecamatan' => $request->namakecamatan,
-            'id_kabupaten' => $request->id_kabupaten,
+            'id_kabupaten'  => $request->id_kabupaten,
+            'slug'          => $request->slug,
         ]);
 
         return redirect('admin/kecamatan')->with('success','Data berhasil diubah');

@@ -10,7 +10,7 @@ use session;
 
 class DtdPageController extends Controller
 {
-    
+
     public function index()
     {
         $toptitle = "Survey Pemilu 2024";
@@ -23,16 +23,16 @@ class DtdPageController extends Controller
                                  'timpenggunas.id as id_timpengguna')
                         ->Where('timpenggunas.id', '=' , $id_timpengguna)
                         ->first();
-                        
-        
+
+
         $provinsi = Provinsi::all();
-        return view('dataform.pemilih-register', 
+        return view('dataform.pemilih-register',
                compact('header','toptitle','provinsi','jeniskandidatx','dapatkandapil'));
     }
-    
+
     public function pemilihstore(Request $request)
     {
-        
+
         $this->validate($request,[
             'id_kabupaten'     => 'required',
             'nama'             => 'nullable',
@@ -40,6 +40,7 @@ class DtdPageController extends Controller
             'id_kecamatan'     => 'nullable',
             'id_kabupaten'     => 'nullable',
             'id_provinsi'      => 'nullable',
+            'desa'             => 'nullable',
             'kontak'           => 'nullable',
             'jenispilihan'     => 'nullable',
         ]);
@@ -53,7 +54,8 @@ class DtdPageController extends Controller
             'id_kecamatan'    => $request->kecamatan,
             'id_kabupaten'    => $request->kabupaten,
             'id_provinsi'     => $request->provinsi,
-            'desa'            => $request->desa,
+            'id_desa'         => $request->desa,
+            'alamat'          => $request->alamat,
             'kontak'          => $request->kontak,
             'jenispilihan'    => $request->jenispilihan, // Isi Survey
         ]);
@@ -72,7 +74,7 @@ class DtdPageController extends Controller
         $header = false;
         return view('dataform.sukses-dtd', compact('header','toptitle'));
     }
-    
+
     // Search Kabupaten
     public function searchkabupaten(Request $request)
     {
@@ -89,7 +91,7 @@ class DtdPageController extends Controller
         return response()->json($kecamatan);
     }
 
-    
-    
+
+
 
 }

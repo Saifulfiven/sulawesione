@@ -15,29 +15,24 @@
             @endif
             <div class="card">
                 <div class="card-header d-flex justify-content-between bg-info">
-                    <strong style="color:white">Tambah Kecamatan</strong>
-                    <a href="/admin/kecamatan" class="btn btn-sm btn-info">
+                    <strong style="color:white">Tambah Desa</strong>
+                    <a href="/admin/desa" class="btn btn-sm btn-info">
                         <i class="fas fa-arrow-left"></i> Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="/admin/kecamatan/tambah" method="post" enctype="multipart/form-data">
+                    <form action="/admin/desa/tambah" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="namakecamatan" class="col-sm-2 col-form-label">Nama kecamatan</label>
-                            <input type="text" name="namakecamatan" class="form-control" required>
+                            <label for="namadesa" class="col-sm-2 col-form-label">Nama desa</label>
+                            <input type="text" name="namadesa" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="slug" class="col-sm-2 col-form-label">Slug</label>
-                            <input type="text" name="slug" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="id_kabupaten" class="col-sm-2 col-form-label">Nama Kabupaten</label>
-                            <select name="id_kabupaten" class="form-control" required>
-                                <option value="">--Pilih Kabupaten--</option>
-                                @foreach ($kabupaten as $kab)
-                                    <option value="{{ $kab->id }}">{{ $kab->namakabupaten }}</option>
+                            <label for="id_kecamatan" class="col-sm-2 col-form-label">Nama Kecamatan</label>
+                            <select name="id_kecamatan" class="form-control" required>
+                                <option value="">--Pilih Kecamatan--</option>
+                                @foreach ($kecamatan as $kec)
+                                    <option value="{{ $kec->id }}">{{ $kec->namakecamatan }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -30,7 +30,7 @@ class DataFormPageController extends Controller
 
     public function showDataKab($value)
     {
-        
+
         $toptitle = "List Kabupaten dari Prov. $value";
         $header = false;
         $data = DB::table('provinsis')
@@ -44,7 +44,7 @@ class DataFormPageController extends Controller
         return view('dataform.component-kabupaten', compact('data','header','toptitle'));
     }
 
-    
+
     // Search Kabupaten
     public function searchkabupaten(Request $request)
     {
@@ -60,35 +60,32 @@ class DataFormPageController extends Controller
                                 ->where('id_kabupaten',$request->id_kabupaten)->get();
         return response()->json($kecamatan);
     }
-    
+
 
 // + Tim Inti Pilkab
     public function tambahpendukung()
     {
         $toptitle = "Tambah Pendukung";
         $header = false;
-        
+
         $id_timinti = session('id_timpengguna');
 
         $datadapils = DB::table('dapils')
+            ->join('timpenggunas', 'dapils.id', '=', 'timpenggunas.id_dapil')
             ->join('kabupatens', 'dapils.id_kabupaten', '=', 'kabupatens.id')
             ->select('dapils.id','kabupatens.id as id_kabupaten','kabupatens.namakabupaten')
             ->where('timpenggunas.id', $id_timinti)
             ->first();
-        $jeniskandidat = "DATA TIM PENDUKUNG PEMENANGAN CALON $datadapils->namakabupaten";
-       
-        
+        //$jeniskandidat = "DATA TIM PENDUKUNG PEMENANGAN CALON $datadapils->namakabupaten";
+
             $provinsi = provinsi::select('id','namaprovinsi')->get();
             $kecamatans = kecamatan::all();
 
-         if(session('berhasil_login')){
-            $judultim = "Tim Pendukung Pemenangan Calon Walikota $value";
-        }else{
-            $judultim = "Tim Inti Pemenangan Calon Walikota $value";
-        }
+            $judultim = "Tim Pendukung Pemenangan Calon Walikota Gorontalo ";
 
-        return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
-                    'datadapils','jeniskandidat','kecamatans','provinsi','judultim'));
+
+        return view('dataform.pengguna-pilkab-register', compact('header','toptitle',
+                    'datadapils','kecamatans','provinsi','judultim'));
     }
 
     public function showFormpilkab($value)
@@ -96,15 +93,19 @@ class DataFormPageController extends Controller
         $toptitle = "List Kabupaten dari Prov. $value";
         $header = false;
         $data = $value;
-        $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON WALIKOTA GORONTALO";
-        
+        if ($value == "kota-gorontalo"){
+            $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON WALIKOTA Gorontalo";
+        }else{
+            $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON Bupati $value";
+        }
+
         $datadapils = DB::table('dapils')
             ->join('kabupatens', 'dapils.id_kabupaten', '=', 'kabupatens.id')
             ->select('dapils.id','kabupatens.id as id_kabupaten')
             ->where('kabupatens.slug', $value)
             ->first();
 
-        
+
             $provinsi = provinsi::select('id','namaprovinsi')->get();
             $kecamatans = kecamatan::all();
 
@@ -116,9 +117,13 @@ class DataFormPageController extends Controller
 
          // insert data ke tabel kedua
          if(session('berhasil_login')){
-            $judultim = "Tim Pendukung Pemenangan Calon Walikota $value";
+            $judultim = "Tim Pendukung Pemenangan Calon Walikota/Bupati $value";
         }else{
-            $judultim = "Tim Inti Pemenangan Calon Walikota $value";
+             if ($value == "kota-gorontalo"){
+                 $judultim = "Tim Inti Pemenangan Calon Walikota GORONTALO";
+             }else{
+                 $judultim = "Tim Inti Pemenangan Calon Bupati $value";
+             }
         }
 
         return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
@@ -128,7 +133,7 @@ class DataFormPageController extends Controller
 
     public function showFormpilgub($value)
     {
-        $toptitle = "List Kabupaten dari Prov. $value";
+        $toptitle = "Calon Anggota Tim Inti dari Prov. $value";
         $header = false;
         $data = $value;
         $jeniskandidat = "PILGUB";
@@ -139,7 +144,7 @@ class DataFormPageController extends Controller
             ->select('dapils.id','provinsis.id as id_provinsi')
             ->where('provinsis.slug', $value)
             ->first();
-        
+
         // foreach ($datadapils as $dapil) {
         //     $id_dapils[] = $dapil->id;
         // }
@@ -151,15 +156,48 @@ class DataFormPageController extends Controller
         //     ->select('kecamatans.namakecamatan','kecamatans.id')
         //     ->where('kabupatens.slug', $value)
         //     ->get();
-        
+
+        $provinsi = provinsi::select('id','namaprovinsi')->get();
         $kecamatans = kecamatan::all();
 
-        return view('dataform.pengguna-pilgub-register', compact('data','header','toptitle','jeniskandidat','kecamatans','datadapils'));
+        // insert data ke tabel kedua
+        if(session('berhasil_login')){
+            $judultim = "Tim Pendukung Pemenangan Calon Gubernur $value";
+        }else{
+            $judultim = "Tim Inti Pemenangan Calon Gubernur $value";
+        }
+
+        return view('dataform.pengguna-pilgub-register',
+            compact('data','header','toptitle','jeniskandidat','kecamatans','datadapils','provinsi','judultim'));
     }
-    
+
+
+    public function showFormpilgubpendukung()
+    {
+
+        $id_timinti = session('id_timpengguna');
+        $datadapils = DB::table('timpenggunas')
+            ->join('provinsis', 'timpenggunas.id_provinsi', '=', 'provinsis.id')
+            ->select('provinsis.id as id_provinsi','provinsis.namaprovinsi','timpenggunas.id_dapil')
+            ->where('timpenggunas.id', $id_timinti)
+            ->first();
+
+        $provinsi = provinsi::select('id','namaprovinsi')->get();
+        $kecamatans = kecamatan::all();
+
+
+        $toptitle = "Calon Anggota Tim Inti dari Prov";
+        $header = false;
+        $jeniskandidat = "PILGUB";
+        $judultim = "Tim Pendukung Pemenangan Calon Gubernur Provinsi ".$datadapils->namaprovinsi;
+
+        return view('dataform.pengguna-pilgub-register',
+            compact('header','toptitle','jeniskandidat','kecamatans','datadapils','provinsi','judultim'));
+    }
+
     public function penggunastore(Request $request)
     {
-        
+
         $this->validate($request,[
             'id_dapil'   => 'required',
             'nama'       => 'required',
@@ -169,6 +207,7 @@ class DataFormPageController extends Controller
             'provinsi'   => 'nullable',
             'kabupaten'  => 'nullable',
             'kecamatan'  => 'nullable',
+            'desa'       => 'nullable',
             'kontak'     => 'nullable',
             'foto'       => 'nullable|image|mimes:jpeg,jpg,png'
         ]);
@@ -186,12 +225,12 @@ class DataFormPageController extends Controller
            }else{
                 $namafile = "pengguna.png";
            }
-           
+
         // insert data ke tabel kedua
         if(session('berhasil_login')){
-            
+
             $id_timinti = session('id_timpengguna');
-            $jenistim  = "B";   
+            $jenistim  = "B";
         }else{
             $id_timinti = "0";
             $jenistim  = "A";
@@ -209,15 +248,17 @@ class DataFormPageController extends Controller
             'id_kabupaten'              => $request->kabupaten,
             'id_provinsi'               => $request->provinsi,
             'alamat'                    => $request->alamat,
-            'id_desa'                   => $request->id_desa,
+            'id_desa'                   => $request->desa,
             'kontak'                    => $request->kontak,
+            'jumlahpemilihrumahtangga'  => '4',
+            'nomortps'                  => '01',
             'foto'                      => $namafile,
             'remember_token'            => 0,
             'latitude'                  => 'latitude',
             'longitude'                 => 'longitude',
         ]);
 
-        
+
         if($pengguna){
             return redirect('dataform/sukses')->with('success','Data berhasil disimpan');
         }
@@ -225,12 +266,12 @@ class DataFormPageController extends Controller
             return redirect()->back()->withInput()->withErrors($request->all())->with('error','Data gagal disimpan, cek kembali form anda');
         }
     }
-    
+
     public function sukses()
     {
         $toptitle = "Berhasil Mendaftar Sebagai TIM";
         $header = false;
-        
+
         return view('dataform.sukses', compact('header','toptitle'));
     }
 

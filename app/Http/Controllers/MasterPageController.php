@@ -10,6 +10,7 @@ use App\Models\provinsi;
 use App\Models\kandidat;
 use App\Models\kabupaten;
 use App\Models\kecamatan;
+use App\Models\Desa;
 use App\Models\timpenggunas;
 use Illuminate\Support\Facades\DB; // Import DB class
 
@@ -35,14 +36,15 @@ class MasterPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$master = master::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "Dashboard - Tim Inti";
+        $toptitle = "Tim Inti";
         $header = false;
-        
+
         $timintis = timpenggunas::where('timpenggunas.jenistim', 'A')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('kabupatens', 'kabupatens.id', '=', 'dapils.id_kabupaten')
-                                ->select('timpenggunas.nama','timpenggunas.kontak','kandidats.namakandidat','kabupatens.namakabupaten')->get();
+                                ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.email',
+                                         'kandidats.namakandidat','kabupatens.namakabupaten')->get();
         return view('master.timinti', compact('header','toptitle','timintis'));
         //return view('landingpage.layout');
     }
@@ -52,15 +54,16 @@ class MasterPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$master = master::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "Dashboard - Pendukung";
+        $toptitle = "Pendukung";
         $header = false;
-        
-        
+
+
         $pendukungs = timpenggunas::where('timpenggunas.jenistim', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('kabupatens', 'kabupatens.id', '=', 'dapils.id_kabupaten')
-                                ->select('timpenggunas.nama','timpenggunas.kontak','kandidats.namakandidat','kabupatens.namakabupaten')->get();
+                                ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.email',
+                                    'kandidats.namakandidat','kabupatens.namakabupaten')->get();
        return view('master.pendukung', compact('header','toptitle','pendukungs'));
         //return view('landingpage.layout');
     }
@@ -72,14 +75,15 @@ class MasterPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$master = master::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "Dashboard - Tim Inti";
+        $toptitle = "Tim Inti";
         $header = false;
-        
+
         $timintipilgubs = timpenggunas::where('timpenggunas.jenistim', 'A')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinsis', 'provinsis.id', '=', 'dapils.id_provinsi')
-                                ->select('timpenggunas.nama','timpenggunas.kontak','kandidats.namakandidat','provinsis.namaprovinsi')->get();
+                                ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.email','kandidats.namakandidat',
+                                    'provinsis.namaprovinsi')->get();
         return view('master.timintipilgub', compact('header','toptitle','timintipilgubs'));
         //return view('landingpage.layout');
     }
@@ -89,10 +93,10 @@ class MasterPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$master = master::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "Dashboard - Pendukung";
+        $toptitle = "Tim Pendukung Pilgub";
         $header = false;
-        
-        
+
+
         $pendukungpilgubs = timpenggunas::where('timpenggunas.jenistim', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
@@ -119,119 +123,106 @@ class MasterPageController extends Controller
         return response()->json($kecamatan);
     }
 
-    
+    // Search Desa
+    public function searchdesa(Request $request)
+    {
+        $desa = Desa::select('id','namadesa')
+            ->where('id_kecamatan',$request->id_kecamatan)->get();
+        return response()->json($desa);
+    }
+
+
     public function searchpemilih(Request $request)
     {
         $id_provinsi = $request->id_provinsi;
         $id_kabupaten = $request->id_kabupaten;
         $id_kecamatan = $request->id_kecamatan;
-        $id_kandidat = $request->id_kandidat;
+        $id_dapil     = $request->id_kandidat;
 
-        
-        $pemilihs = Pemilihs::where('id_kabupaten', $id_kabupaten)
-                            ->orWhere('id_kecamatan', $id_kecamatan)->get();
+//
+//        $pemilihs = Pemilihs::where('id_provinsi', $id_provinsi)
+//            ->Where('id_kabupaten', $id_kabupaten)
+//            ->Where('id_kecamatan', $id_kecamatan)
+//            ->Where('id_dapil', $id_kandidat)->get();
 
-        $callback = "<thead>
-        <tr>
-          <th>No</th>
-          <th>Nama</th>
-          <th>Kontak</th>
-          <th>Jenis Pilihan</th>
-          <th>Kandidat</th>
-          <th>Provinsi</th>
-          <th>Kabupaten</th>
-          <th>Kecamatan</th>
-          <th>Pengguna</th>
-        </tr>
-      </thead>
-        <tbody>";
-        if ($pemilihs) {
-            foreach($pemilihs as $data){
-                
-            $callback .= "<tr>";
-                $callback .= "<td>".$data->nama."</td>";
-                $callback .= "<td>".$data->kontak."</td>";
-                $callback .= "<td>".$data->jenispilihan."</td>";
-                $callback .= "<td>".$data->id_kecamatan."</td>";
-                $callback .= "<td>".$data->id_kabupaten."</td>";
-                $callback .= "<td>".$data->id_timpengguna."</td>";
-                $callback .= "<td>".$data->kontak."</td>";
-                $callback .= "<td>".$data->kontak."</td>";
-                $callback .= "<td>".$data->nama."</td>"; // Tambahkan tag option ke variabel $lists
-                
-            $callback .= "</tr>";
-            }
 
-        } else {
-            $callback = "<tr>
-                         <td colspan='4' align='center' style='color:red'>Data tidak ditemukan</td>
-                         </tr>";
-        }
-    
-        $callback .= "</tbody>";
-        $callbacks = array($callback); // Masukan variabel lists tadi ke dalam array $callback dengan index array : list_kota
+        $pemilihs = DB::table('pemilihs')
+            ->join('provinsis', 'pemilihs.id_provinsi', '=', 'provinsis.id')
+            ->join('kabupatens', 'pemilihs.id_kabupaten', '=', 'kabupatens.id')
+            ->join('kecamatans', 'pemilihs.id_kecamatan', '=', 'kecamatans.id')
+            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+            ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+            ->join('desas', 'pemilihs.id_desa', '=', 'desas.id')
+            ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
+                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','desas.namadesa',
+                'kecamatans.namakecamatan','kabupatens.namakabupaten','provinsis.namaprovinsi',
+                'kandidats.namakandidat',
+                'timpenggunas.nama as namapengguna')
+            ->where('pemilihs.id_provinsi', '=', $id_provinsi)
+            ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
+            ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+            ->Where('pemilihs.id_dapil', '=', $id_dapil)
+            ->Where('dapils.jeniskandidat','=','pilkab')->get();
 
-        echo json_encode($callbacks);
-        //echo json_encode($callbacks);
-        // $callback = "<tr>
-        //              <td> $id_provinsi</td><td> $id_kabupaten</td>
-        //              <td> $id_kecamatan</td><td> $id_kandidat</td></tr>";
-        // echo json_encode($callback);
-        // return response()->json([
-        //     'id_provinsi' => $id_provinsi,
-        //     'id_kabupaten' => $id_kabupaten,
-        //     'id_kecamatan' => $id_kecamatan,
-        //     'id_kandidat' => $id_kandidat,
-        // ]);
+        return response()->json($pemilihs);
+
     }
 
     public function pemilihpilkab()
     {
-        $toptitle = "Dashboard - Pemilih Pilkab";
+        $toptitle = "Pemilih Pilkab";
         $header = false;
 
         $provinsi = provinsi::select('id','namaprovinsi')->get();
-        $kandidats = kandidat::select('id','namakandidat')->get();
+        $dapils = DB::table('dapils')
+            ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+            ->select('kandidats.namakandidat','dapils.id')
+            ->where('dapils.jeniskandidat', 'pilkab')->get();
 
         $pemilihs = DB::table('pemilihs')
-        ->join('kecamatans', 'pemilihs.id_kecamatan', '=', 'kecamatans.id')
+            ->join('desas', 'pemilihs.id_desa', '=', 'desas.id')
+            ->join('kecamatans', 'pemilihs.id_kecamatan', '=', 'kecamatans.id')
         ->join('kabupatens', 'pemilihs.id_kabupaten', '=', 'kabupatens.id')
         ->join('provinsis', 'kabupatens.id_propinsi', '=', 'provinsis.id')
         ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
         ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
         ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
-        ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.desa',
+        ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','desas.namadesa',
                  'kecamatans.namakecamatan','kabupatens.namakabupaten','provinsis.namaprovinsi',
                  'kandidats.namakandidat',
                  'timpenggunas.nama as namapengguna')
         ->Where('dapils.jeniskandidat','=','pilkab')->get();
-        
-        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','kandidats'));
+
+        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils'));
         //return view('landingpage.layout');
     }
 
     public function pemilihpilgub()
     {
-        $toptitle = "Dashboard - Pemilih Pilgub";
+        $toptitle = "Pemilih Pilgub";
         $header = false;
 
         $provinsi = provinsi::select('id','namaprovinsi')->get();
-        $kandidats = kandidat::select('id','namakandidat')->get();
+        $dapils = DB::table('dapils')
+            ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+            ->select('kandidats.namakandidat','dapils.id')
+            ->where('dapils.jeniskandidat', 'pilkab')->get();
 
         $pemilihs = DB::table('pemilihs')
-        ->join('kecamatans', 'pemilihs.id_kecamatan', '=', 'kecamatans.id')
-        ->join('kabupatens', 'pemilihs.id_kabupaten', '=', 'kabupatens.id')
-        ->join('provinsis', 'kabupatens.id_propinsi', '=', 'provinsis.id')
-        ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-        ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
-        ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
-        ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.desa',
-                 'kecamatans.namakecamatan','kabupatens.namakabupaten','provinsis.namaprovinsi',
-                 'kandidats.namakandidat',
-                 'timpenggunas.nama as namapengguna')
-        ->Where('dapils.jeniskandidat','=','pilgub')->get();
-        
-        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','kandidats'));
+            ->join('desas', 'pemilihs.id_desa', '=', 'desas.id')
+            ->join('kecamatans', 'pemilihs.id_kecamatan', '=', 'kecamatans.id')
+            ->join('kabupatens', 'pemilihs.id_kabupaten', '=', 'kabupatens.id')
+            ->join('provinsis', 'kabupatens.id_propinsi', '=', 'provinsis.id')
+            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+            ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+            ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
+            ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','desas.namadesa',
+                'kecamatans.namakecamatan','kabupatens.namakabupaten','provinsis.namaprovinsi',
+                'kandidats.namakandidat',
+                'timpenggunas.nama as namapengguna')
+            ->Where('dapils.jeniskandidat','=','pilgub')->get();
+
+        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils'));
         //return view('landingpage.layout');
     }
 
@@ -259,7 +250,7 @@ class MasterPageController extends Controller
             'detail' => 'required',
             'foto' => 'required|image|mimes:jpeg,jpg,png'
         ]);
-        
+
         //upload foto
         $foto = $request->foto;
         $namafile = time()."_".$foto->getClientOriginalName();
@@ -288,7 +279,7 @@ class MasterPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
         $masters = masters::find($id);

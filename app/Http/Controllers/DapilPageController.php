@@ -17,18 +17,18 @@ class DapilPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$Dapil = Dapils::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "SulawesiOne :. Dashboard - Dapil";
+        $toptitle = "Dashboard - Dapil";
         $header = false;
         //$Dapils = Dapils::latest()->paginate(5);
         $Dapilkab = DB::table('dapils')
                         ->join('kabupatens','dapils.id_kabupaten', '=' ,'kabupatens.id')
                         ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
                         ->where('dapils.jeniskandidat','=','pilkab')
-                      //->join('provinsis','Dapils.id_propinsi', '=' ,'provinsis.id')
+                      //->join('provinsis','Dapils.id_provinsi', '=' ,'provinsis.id')
                       ->select('kandidats.namakandidat','kabupatens.namakabupaten',
                                 'dapils.created_at','dapils.updated_at','dapils.id')->get();
 
-        
+
         $Dapilprov = DB::table('dapils')
         ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
         ->join('provinsis','dapils.id_provinsi', '=' ,'provinsis.id')
@@ -41,7 +41,7 @@ class DapilPageController extends Controller
 
     public function tambah()
     {
-        $toptitle = "SulawesiOne :. Tambah Data Dapil";
+        $toptitle = "Tambah Data Dapil";
         $header = false;
         $provinsi = provinsi::get();
         $kandidat = Kandidat::get();
@@ -57,16 +57,16 @@ class DapilPageController extends Controller
         $this->validate($request,[
             'id_kandidat'   => 'required',
             'id_kabupaten'  => 'nullable',
-            'id_propinsi'   => 'nullable',
+            'id_provinsi'   => 'nullable',
             'jeniskandidat' => 'nullable'
         ]);
-        
+
         $namaDapilnya = $request->namaDapil;
         //SlugService::createSlug(Post::class, 'slug', $post->title);
 
         $jenis = $request->jeniskandidat;
         if($jenis == "pilgub"){
-            $prov = $request->id_propinsi;
+            $prov = $request->id_provinsi;
             $kab  = 0;
         }else{
             $kab = $request->id_kabupaten;
@@ -75,7 +75,7 @@ class DapilPageController extends Controller
         $kab = Dapils::create([
             'id_kandidat'   => $request->id_kandidat,
             'id_kabupaten'  => $kab,
-            'id_propinsi'   => $prov,
+            'id_provinsi'   => $prov,
             'jeniskandidat' => $request->jeniskandidat
         ]);
 
@@ -87,12 +87,12 @@ class DapilPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
         $Dapil      = Dapils::find($id);
-        $toptitle   = "SulawesiOne :. Ubah Data Dapil";
-        
+        $toptitle   = "Ubah Data Dapil";
+
         $provinsi   = provinsi::get();
         $kandidat   = Kandidat::get();
         $kabupaten  = kabupaten::get();
@@ -110,17 +110,19 @@ class DapilPageController extends Controller
     {
         $this->validate($request,[
             'id_kandidat' => 'required',
-            'id_kabupaten' => 'required',
-            'id_propinsi' => 'required'
+            'id_kabupaten' => 'nullable',
+            'id_provinsi' => 'nullable'
         ]);
 
         $id = $request->id;
         $Dapils = Dapils::find($id);
 
+        $prov = 0;
+
         Dapils::whereId($id)->update([
             'id_kandidat' => $request->id_kandidat,
             'id_kabupaten' => $request->id_kabupaten,
-            'id_propinsi' => $request->id_propinsi
+            'id_provinsi' => $prov
         ]);
 
         return redirect('admin/dapil')->with('success','Data berhasil diubah');

@@ -19,13 +19,13 @@
               </style>
 <!-- CONTAINER -->
 <div class="container">
-    
+
    <div class="row">
-      
+
 
         <div class="col-lg-12">
         <br><br>
-                
+
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100" style="background-color: #007bff;" id="pilgub"  onclick="showAjaxContent('pilgub')">
@@ -36,16 +36,18 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100" style="background-color: #007bff;" id="pilwalkot"  onclick="showAjaxContent('pilkab')">
+                    <a href="/dataform/gorontalo/">
+                    <div class="card h-100" style="background-color: #007bff;" id="pilwalkot" >
                         <div class="card-body text-center" style="transition: all 0.3s ease; background: linear-gradient(1b8bd6, #6abbf2, #bbe1fa); color: white !important;">
-                            PILWALKOT
+                            PILKADA
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
 
-            <div class="row">
-                <span id="pilih-provinsi" style="display:none">
+            <div id="pilih-provinsi" style="display:none">
+                <div class="row">
                 @foreach($provinsis as $provinsi)
                     <div class="col-lg-4 col-md-4 col-xs-6 mb-4">
                         <div class="card h-100" style="background-color: #007bff;">
@@ -57,12 +59,11 @@
                         </div>
                     </div>
                 @endforeach
-                </span>
+                </div>
             </div>
 
-            
-            <div class="row">
-             <span id="pilih-pilkab" style="display:none">
+            <div id="pilih-pilkab"  style="display:none">
+                <div class="row">
                 @foreach($provinsis as $provinsi)
                     <div class="col-lg-4 col-md-4 col-xs-6 mb-4">
                         <div class="card h-100" style="background-color: #007bff;">
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                 @endforeach
-                </span>
+                </div>
             </div>
 
 

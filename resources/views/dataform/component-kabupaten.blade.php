@@ -14,24 +14,25 @@
 <div class="container">
    <div class="row">
         <div class="col-lg-12">
-        <br><br>
-                
+            <br>
+            <a class="back-link btn btn-primary" href="javascript:history.back()"><i class="fas fa-arrow-left"></i> Kembali</a>
+<br><br>
             <div class="row text-center">
-           
+
             <!-- Baris Pertama -->
             @foreach($data as $kabupaten)
             <div class="col-lg-4  col-md-4 col-xs-6">
                 <div class="card mb-3" >
                     <a href="/dataform/kab/{{ $kabupaten->slug }}" class="stretched-link">
                         <img src="/images/kandidat/{{ $kabupaten->foto }}" class="card-img-top" alt="...">
-                        <div class="card-body">  
-                            <p class="card-text">{{ $kabupaten->namakabupaten }}</p>  
+                        <div class="card-body">
+                            <p class="card-text">{{ $kabupaten->namakabupaten }}</p>
                         </div>
                     </a>
                 </div>
             </div>
             @endforeach
-            
+
             </div>
 
         </div>
