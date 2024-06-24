@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <a href="/dataform/gorontalo/">
+                    <a href="/dataform/pilkab">
                     <div class="card h-100" style="background-color: #007bff;" id="pilwalkot" >
                         <div class="card-body text-center" style="transition: all 0.3s ease; background: linear-gradient(1b8bd6, #6abbf2, #bbe1fa); color: white !important;">
                             PILKADA
@@ -47,15 +47,18 @@
             </div>
 
             <div id="pilih-provinsi" style="display:none">
-                <div class="row">
+                <div class="row justify-content-center">
                 @foreach($provinsis as $provinsi)
-                    <div class="col-lg-4 col-md-4 col-xs-6 mb-4">
+                    <div class="col-lg-4 col-md-6 col-xs-6 mb-4">
                         <div class="card h-100" style="background-color: #007bff;">
-                            <a href="/dataform/prov/{{ $provinsi->slug }}/">
-                                <div class="card-body text-center" style="transition: all 0.3s ease; background: linear-gradient(1b8bd6, #6abbf2, #bbe1fa); color: white !important;">
-                                    <h5 class="card-title">Provinsi {{ $provinsi->namaprovinsi }}</h5>
-                                </div>
-                            </a>
+                                <a href="/dataform/prov/{{ $provinsi->slug }}/">
+                                <img src="/images/kandidat/{{ $provinsi->foto }}" class="card-img-top mx-auto d-block" alt="...">
+                                    <div class="card-body text-center" style="transition: all 0.3s ease; background: linear-gradient(1b8bd6, #6abbf2, #bbe1fa); color: white !important;">
+                                        <h5 class="card-title">Provinsi {{ $provinsi->namaprovinsi }}
+                                        </h5>
+                                    </div>
+                                </a>
+
                         </div>
                     </div>
                 @endforeach

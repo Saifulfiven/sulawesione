@@ -8,8 +8,10 @@ use App\Models\StepDua;
 use App\Models\StepTigas;
 use App\Models\StepTigaDua;
 use App\Models\timintis;
-use App\Models\provinsi;
-use App\Models\kecamatan;
+use App\Models\Provinces;
+use App\Models\Regencies;
+use App\Models\Districts;
+use App\Models\Villages;
 use App\Models\Timpenggunas;
 use App\Models\pemilihs;
 use App\Models\Dapils;
@@ -24,21 +26,29 @@ class DataFormPageController extends Controller
     {
         $toptitle = "Data Form List Provinsi";
         $header = false;
-        $provinsis = Provinsi::all();
+        //$provinsis = Provinces::where('aktif', '=', '1')->get();
+
+
+        $provinsis = DB::table('dapils')
+        ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
+        ->join('provinces','dapils.id_provinsi', '=','provinces.id')
+        ->where('dapils.jeniskandidat','=','pilgub')
+        ->select('kandidats.namakandidat','kandidats.foto','provinces.name as namaprovinsi',
+                'provinces.slug')->get();
+        //return $provinsis;
         return view('dataform.index', compact('header','toptitle','provinsis'));
     }
 
-    public function showDataKab($value)
+    public function showDataKab()
     {
 
-        $toptitle = "List Kabupaten dari Prov. $value";
+        $toptitle = "List Kabupaten";
         $header = false;
-        $data = DB::table('provinsis')
-        ->join('kabupatens', 'provinsis.id', '=', 'kabupatens.id_propinsi')
-        ->join('dapils', 'kabupatens.id', '=', 'dapils.id_kabupaten')
+        $data = DB::table('provinces')
+        ->join('regencies', 'provinces.id', '=', 'regencies.province_id')
+        ->join('dapils', 'regencies.id', '=', 'dapils.id_kabupaten')
         ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id') // Added join to table kandidats
-        ->select('kabupatens.namakabupaten','kabupatens.slug','kandidats.foto')
-        ->where('provinsis.slug', $value)
+        ->select('regencies.name as namakabupaten','regencies.slug','kandidats.foto')
         ->get();
 
         return view('dataform.component-kabupaten', compact('data','header','toptitle'));
@@ -48,16 +58,18 @@ class DataFormPageController extends Controller
     // Search Kabupaten
     public function searchkabupaten(Request $request)
     {
-        $kabupatens = kabupaten::select('id','namakabupaten')
-                                ->where('id_propinsi',$request->id_provinsi)->get();
+        $kabupatens = Regencies::select('id','name as namakabupaten')
+                                ->where('province_id',$request->id_provinsi)->get();
+
+        return 'kucing';
         return response()->json($kabupatens);
     }
 
     // Search Kecamatan
     public function searchkecamatan(Request $request)
     {
-        $kecamatan = kecamatan::select('id','namakecamatan')
-                                ->where('id_kabupaten',$request->id_kabupaten)->get();
+        $kecamatan = Districts::select('id','name')
+                                ->where('regency_id',$request->id_kabupaten)->get();
         return response()->json($kecamatan);
     }
 
@@ -70,27 +82,41 @@ class DataFormPageController extends Controller
 
         $id_timinti = session('id_timpengguna');
 
-        $datadapils = DB::table('dapils')
-            ->join('timpenggunas', 'dapils.id', '=', 'timpenggunas.id_dapil')
-            ->join('kabupatens', 'dapils.id_kabupaten', '=', 'kabupatens.id')
-            ->select('dapils.id','kabupatens.id as id_kabupaten','kabupatens.namakabupaten')
+        $datadapils = DB::table('timpenggunas')
+        ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
+        ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+        ->join('provinces', 'timpenggunas.id_provinsi', '=', 'provinces.id')
+            ->select('dapils.id as id_dapil','provinces.id as id_provinsi','regencies.id as id_kabupaten','regencies.name as namakabupaten')
             ->where('timpenggunas.id', $id_timinti)
             ->first();
         //$jeniskandidat = "DATA TIM PENDUKUNG PEMENANGAN CALON $datadapils->namakabupaten";
 
-            $provinsi = provinsi::select('id','namaprovinsi')->get();
-            $kecamatans = kecamatan::all();
+            // $provinsi = Provinces::select('id','name as namaprovinsi')->get();
+            // $kecamatans = Districts::all();
+        
+            $tampilkankec = DB::table('regencies')
+            ->join('timpenggunas', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+            ->join('districts', 'regencies.id', '=', 'districts.regency_id')
+            ->select('districts.id','districts.name as namakecamatan')
+            ->where('timpenggunas.id', $id_timinti)
+            ->get();
 
-            $judultim = "Tim Pendukung Pemenangan Calon Walikota Gorontalo ";
+            $namaKabupaten = $datadapils->namakabupaten;
+            if($datadapils->namakabupaten == "KOTA GORONTALO"){
+
+                $judultim = "Tim Pendukung Calon Walikota";
+            }else{
+                $judultim = "Tim Pendukung Calon Bupati ";
+            }
+
 
 
         return view('dataform.pengguna-pilkab-register', compact('header','toptitle',
-                    'datadapils','kecamatans','provinsi','judultim'));
+                    'datadapils','tampilkankec','judultim','namaKabupaten','judultim'));
     }
 
     public function showFormpilkab($value)
     {
-        $toptitle = "List Kabupaten dari Prov. $value";
         $header = false;
         $data = $value;
         if ($value == "kota-gorontalo"){
@@ -100,34 +126,53 @@ class DataFormPageController extends Controller
         }
 
         $datadapils = DB::table('dapils')
-            ->join('kabupatens', 'dapils.id_kabupaten', '=', 'kabupatens.id')
-            ->select('dapils.id','kabupatens.id as id_kabupaten')
-            ->where('kabupatens.slug', $value)
+            ->join('regencies', 'dapils.id_kabupaten', '=', 'regencies.id')
+            ->select('dapils.id as id_dapil','regencies.id as id_kabupaten','regencies.province_id as id_provinsi')
+            ->where('regencies.slug', $value)
             ->first();
 
+        
+            $tampilkankec = DB::table('regencies')
+            ->join('districts', 'regencies.id', '=', 'districts.regency_id')
+            ->select('districts.id','districts.name as namakecamatan')
+            ->where('regencies.slug', $value)
+            ->get();
 
-            $provinsi = provinsi::select('id','namaprovinsi')->get();
-            $kecamatans = kecamatan::all();
+
+            $provinsi = Provinces::select('id','name as namaprovinsi')->get();
+            $kecamatans = Districts::all();
 
         // $kecamatans = DB::table('kecamatans')
         //     ->join('kabupatens', 'kecamatans.id_kabupaten', '=', 'kabupatens.id')
         //     ->select('kecamatans.namakecamatan','kecamatans.id')
         //     ->where('kabupatens.slug', $value)
         //     ->get();
+        
+        $namaKabupaten = Regencies::select('name')->where('slug', $value)->first();
+        $namaKabupaten = $namaKabupaten->name;
 
-         // insert data ke tabel kedua
-         if(session('berhasil_login')){
-            $judultim = "Tim Pendukung Pemenangan Calon Walikota/Bupati $value";
+        if(session('berhasil_login')){
+            if ($namaKabupaten == "kota gorontalo"){
+                $judultim = "Tim Pendukung  Calon Walikota ";
+            }else{
+                $judultim = "Tim Pendukung  Calon Bupati ";
+            }
         }else{
-             if ($value == "kota-gorontalo"){
-                 $judultim = "Tim Inti Pemenangan Calon Walikota GORONTALO";
+             if ($namaKabupaten == "kota gorontalo"){
+                 $judultim = "Tim Inti  Calon Walikota ";
              }else{
-                 $judultim = "Tim Inti Pemenangan Calon Bupati $value";
+                 $judultim = "Tim Inti  Calon Bupati ";
              }
+
         }
 
+
+        $toptitle = $judultim;
+
+         
+
         return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
-                    'datadapils','jeniskandidat','kecamatans','provinsi','judultim'));
+                    'datadapils','jeniskandidat','kecamatans','tampilkankec','namaKabupaten','judultim'));
     }
 
 
@@ -140,11 +185,17 @@ class DataFormPageController extends Controller
 
 
         $datadapils = DB::table('dapils')
-            ->join('provinsis', 'dapils.id_provinsi', '=', 'provinsis.id')
-            ->select('dapils.id','provinsis.id as id_provinsi')
-            ->where('provinsis.slug', $value)
+            ->join('provinces', 'dapils.id_provinsi', '=', 'provinces.id')
+            ->join('regencies', 'provinces.id', '=', 'regencies.province_id')
+            ->select('dapils.id as id_dapil','provinces.id as id_provinsi','provinces.name as namaprovinsi')
+            ->where('provinces.slug', $value)
             ->first();
 
+            $tampilkankab = DB::table('provinces')
+            ->join('regencies', 'provinces.id', '=', 'regencies.province_id')
+            ->select('regencies.id','regencies.name as namakabupaten')
+            ->where('provinces.slug', $value)
+            ->get();
         // foreach ($datadapils as $dapil) {
         //     $id_dapils[] = $dapil->id;
         // }
@@ -157,8 +208,8 @@ class DataFormPageController extends Controller
         //     ->where('kabupatens.slug', $value)
         //     ->get();
 
-        $provinsi = provinsi::select('id','namaprovinsi')->get();
-        $kecamatans = kecamatan::all();
+        $provinsi = Provinces::select('id','name as namaprovinsi')->get();
+        $kecamatans = Districts::all();
 
         // insert data ke tabel kedua
         if(session('berhasil_login')){
@@ -168,7 +219,7 @@ class DataFormPageController extends Controller
         }
 
         return view('dataform.pengguna-pilgub-register',
-            compact('data','header','toptitle','jeniskandidat','kecamatans','datadapils','provinsi','judultim'));
+            compact('data','header','toptitle','jeniskandidat','kecamatans','datadapils','tampilkankab','judultim'));
     }
 
 
@@ -176,23 +227,36 @@ class DataFormPageController extends Controller
     {
 
         $id_timinti = session('id_timpengguna');
+
+        
         $datadapils = DB::table('timpenggunas')
-            ->join('provinsis', 'timpenggunas.id_provinsi', '=', 'provinsis.id')
-            ->select('provinsis.id as id_provinsi','provinsis.namaprovinsi','timpenggunas.id_dapil')
+            ->join('provinces', 'timpenggunas.id_provinsi', '=', 'provinces.id')
+            ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+            ->select('provinces.id as id_provinsi','provinces.name as namaprovinsi',
+              'regencies.id as id_kabupaten','regencies.name as namakabupaten','timpenggunas.id_dapil')
             ->where('timpenggunas.id', $id_timinti)
             ->first();
+            // $jeniskandidat = "DATA TIM PENDUKUNG PEMENANGAN CALON $datadapils->namakabupaten";
 
-        $provinsi = provinsi::select('id','namaprovinsi')->get();
-        $kecamatans = kecamatan::all();
+            $tampilkankec = DB::table('regencies')
+            ->join('timpenggunas', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+            ->join('districts', 'regencies.id', '=', 'districts.regency_id')
+            ->select('districts.id','districts.name as namakecamatan')
+            ->where('timpenggunas.id', $id_timinti)
+            ->get();
+            
+
+        $provinsi = Provinces::select('id','name as namaprovinsi')->get();
+        $kecamatans = Districts::all();
 
 
         $toptitle = "Calon Anggota Tim Inti dari Prov";
         $header = false;
         $jeniskandidat = "PILGUB";
-        $judultim = "Tim Pendukung Pemenangan Calon Gubernur Provinsi ".$datadapils->namaprovinsi;
+        $judultim = "Tim Pendukung Pemenangan Calon Gubernur Provinsi ".$datadapils->namaprovinsi.", ".$datadapils->namakabupaten;
 
-        return view('dataform.pengguna-pilgub-register',
-            compact('header','toptitle','jeniskandidat','kecamatans','datadapils','provinsi','judultim'));
+        return view('dataform.pengguna-pilgub-register-pendukung',
+            compact('header','toptitle','jeniskandidat','kecamatans','datadapils','tampilkankec','judultim'));
     }
 
     public function penggunastore(Request $request)
@@ -201,8 +265,8 @@ class DataFormPageController extends Controller
         $this->validate($request,[
             'id_dapil'   => 'required',
             'nama'       => 'required',
-            'email'      => 'required',
-            'password'   => 'required',
+            'username'   => 'nullable',
+            'password'   => 'nullable',
             'ktp'        => 'nullable',
             'provinsi'   => 'nullable',
             'kabupaten'  => 'nullable',
@@ -215,11 +279,17 @@ class DataFormPageController extends Controller
            //upload gambar
            $namafile = "pengguna.png";
            if($request->jenistim == "A"){
+            $foto = $request->foto;
+            $namafile = time()."_".$foto->getClientOriginalName();
+            $tujuan_upload = 'images/timpengguna';
+            $foto->move($tujuan_upload,$namafile);
+            }else if($request->jenistim == "B"){
                 $foto = $request->foto;
                 $namafile = time()."_".$foto->getClientOriginalName();
                 $tujuan_upload = 'images/timpengguna';
                 $foto->move($tujuan_upload,$namafile);
-           }
+            }
+            
            if($namafile != ""){
                 $namafile = $namafile;
            }else{
@@ -240,7 +310,7 @@ class DataFormPageController extends Controller
             'id_dapil'                  => $request->id_dapil,
             'id_timinti'                => $id_timinti,
             'jenistim'                  => $jenistim,
-            'email'                     => $request->email,
+            'username'                  => $request->username,
             'password'                  => $request->password,
             'nama'                      => $request->nama,
             'ktp'                       => $request->ktp,

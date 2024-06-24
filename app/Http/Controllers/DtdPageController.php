@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\provinsi;
 use App\Models\pemilihs;
 use Illuminate\Support\Facades\DB;
+
+use App\Models\Provinces;
+use App\Models\Regencies;
+use App\Models\Districts;
+use App\Models\Villages;
+
 use session;
 
 class DtdPageController extends Controller
@@ -17,17 +23,26 @@ class DtdPageController extends Controller
         $header = false;
         $jeniskandidatx = "Pemilih";
         $id_timpengguna = session('id_timpengguna');
-        $dapatkandapil  = DB::table('timpenggunas')
-                        ->join('dapils','timpenggunas.id_dapil','=','dapils.id')
-                        ->select('dapils.jeniskandidat','dapils.id as id_dapil',
-                                 'timpenggunas.id as id_timpengguna')
-                        ->Where('timpenggunas.id', '=' , $id_timpengguna)
-                        ->first();
+        
+        
+        $datadapils = DB::table('timpenggunas')
+        ->join('provinces', 'timpenggunas.id_provinsi', '=', 'provinces.id')
+        ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+        ->select('provinces.id as id_provinsi','provinces.name as namaprovinsi',
+            'regencies.id as id_kabupaten','regencies.name as namakabupaten','timpenggunas.id_dapil')
+        ->where('timpenggunas.id', $id_timpengguna)
+        ->first();
 
 
-        $provinsi = Provinsi::all();
+        $tampilkankec = DB::table('regencies')
+        ->join('timpenggunas', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+        ->join('districts', 'regencies.id', '=', 'districts.regency_id')
+        ->select('districts.id','districts.name as namakecamatan')
+        ->where('timpenggunas.id', $id_timpengguna)
+        ->get();
+
         return view('dataform.pemilih-register',
-               compact('header','toptitle','provinsi','jeniskandidatx','dapatkandapil'));
+               compact('header','toptitle','jeniskandidatx','datadapils','tampilkankec'));
     }
 
     public function pemilihstore(Request $request)

@@ -28,8 +28,8 @@
 
                     <div class="form-group">
                             <label for="namakabupaten" class="col-sm-2 col-form-label">Nama Kabupaten</label>
-                            <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
-                            <input type="text" name="namakabupaten" class="form-control"  value="<?php echo $dataubah->namakabupaten ?>">
+                            <input type="text" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
+                            <input type="text" name="namakabupaten" class="form-control"  value="<?php echo $dataubah->name ?>">
                         </div>
                         
                         <div class="form-group">
@@ -44,7 +44,7 @@
                         
                         <div class="form-group">
                             <label for="id_provinsi" class="col-sm-2 col-form-label">Nama Provinsi</label>
-                            <select name="id_propinsi" class="form-control" required>
+                            <select name="id_propinsixx" class="form-control" required>
                                 <option value="" disabled>--Pilih Provinsi--</option>
                                 @foreach ($provinsi as $prov)
                                 <option value="{{ $prov->id }}" {{ $prov->id == $selectedidprovinsi ? 'selected' : '' }}>{{ $prov->namaprovinsi }}</option>

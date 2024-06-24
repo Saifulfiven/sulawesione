@@ -20,59 +20,57 @@
                 </div>
 
                 <div class="card-body">
-
-                    <form action="/admin/dapil/update" method="post">
+                    <form action="/admin/dapil/update/" method="post">
                     @csrf
-
-                    <div class="row">
-
-                        <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
-
-                        <?php
-                           // $selectedidkandidat = $dataubah->id_kandidat;
-                            $selectedidkandidat = $dataubah->id_kandidat;
-                            $selectedidkabupaten = $dataubah->id_kabupaten;
-                        ?>
-
+                    <input type="hidden" name="id" value="{{ $dapils->id }}">
                         <div class="form-group">
-                            <label for="id_kandidat" class="col-sm-2 col-form-label">Nama kandidat</label>
-                            <select name="id_kandidat" class="form-control" required>
-                                <option value="" disabled>--Pilih kandidat--</option>
-                                @foreach ($kandidat as $kandidat)
-                                <option value="{{ $kandidat->id }}" {{ $kandidat->id == $selectedidkandidat ? 'selected' : '' }}>{{ $kandidat->namakandidat }}</option>
+                            <label for="id_kandidat">Nama Kandidat</label>
+                            <select name="id_kandidat" id="id_kandidat" class="form-control">
+                                @foreach ($kandidat as $kand)
+                                <option value="{{ $kand->id }}" {{ $kand->id == $dapils->id_kandidat ? 'selected' : '' }}>{{ $kand->namakandidat }}</option>
                                 @endforeach
                             </select>
                         </div>
-
-
-{{--                        <div class="form-group">--}}
-{{--                            <label for="options">Pilih Jenis:</label>--}}
-{{--                            <select id="options" onchange="showTextBoxes()" class="form-control" name="jeniskandidat">--}}
-{{--                                <option value="" disabled>Pilih...</option>--}}
-{{--                                <option value="pilkab">Pemilihan Walikota/Bupati</option>--}}
-{{--                                <option value="pilgub">Pemilihan Gubernur</option>--}}
-{{--                            </select>--}}
-{{--                        </div>--}}
-
                         <div class="form-group">
-                            <label for="id_kabupaten" class="col-sm-2 col-form-label">Nama kabupaten</label>
-                            <select name="id_kabupaten" class="form-control" required>
-                                <option value="" disabled>--Pilih kabupaten--</option>
-                                @foreach ($kabupaten as $kab)
-                                <option value="{{ $kab->id }}" {{ $kab->id == $selectedidkabupaten ? 'selected' : '' }}>{{ $kab->namakabupaten }}</option>
-
-                                @endforeach
+                            <label for="jeniskandidat">Jenis Kandidat</label>
+                            <select name="jeniskandidat" id="jeniskandidat" class="form-control" onchange="showTextBoxes()">
+                                <option value="pilgub" {{ $dapils->jeniskandidat == 'pilgub' ? 'selected' : '' }}>Pilgub</option>
+                                <option value="pilkab" {{ $dapils->jeniskandidat == 'pilkab' ? 'selected' : '' }}>Pilkab</option>
                             </select>
                         </div>
-
-
-                        <div class="form-group">
-                            <div class="col-sm-2">
-                                <button class="btn btn-info">Ubah</button>
+                        <div id="pilih-provinsi" style="display: {{ $dapils->jeniskandidat == 'pilgub' ? 'block' : 'none' }}">
+                            <div class="form-group">
+                                <label for="id_provinsi">Nama Provinsi</label>
+                                <select name="id_provinsi" id="id_provinsi" class="form-control">
+                                    @foreach ($provinsi as $prov)
+                                    <option value="{{ $prov->id }}" {{ $prov->id == $dapils->id_provinsi ? 'selected' : '' }}>{{ $prov->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+                        <div id="pilih-pilkab" style="display: {{ $dapils->jeniskandidat == 'pilkab' ? 'block' : 'none' }}">
+                            <div class="form-group">
+                                <label for="id_kabupaten">Nama Kabupaten/Kota</label>
+                                <select name="id_kabupaten" id="id_kabupaten" class="form-control">
+                                    @foreach ($kabupaten as $kab)
+                                    <option value="{{ $kab->id }}" {{ $kab->id == $dapils->id_kabupaten ? 'selected' : '' }}>{{ $kab->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" value="{{ $dapils->username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info">Ubah</button>
+                        </div>
                     </form>
-                    </div>
+                </div>
             </div>
         </div>
     </div>

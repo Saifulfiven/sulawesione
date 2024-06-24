@@ -25,17 +25,30 @@
 
                 <div class="col-lg-6 mx-auto">
 
-                <h3>Survey Data {{ $jeniskandidatx }}</h3>
-                <span>Jenis Pemilihan : {{ $dapatkandapil->jeniskandidat }}</span>
+                <h3> Door to Door  {{ $jeniskandidatx }} </h3>
+
+                @if(session('jeniskandidat') == 'pilgub')                
+                    <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
+                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                @else
+                    <h6>Calon Bupati {{ $datadapils->namakabupaten }}</h6>
+                @endif
+                <br>
 
                 <div id="nama" class="form-group">
                     <label for="nama">Nama:</label>
-                    <input type="hidden" name="id_dapil" value="{{ $dapatkandapil->id_dapil }}">
+                    <input type="hidden" name="id_dapil" value="{{ $datadapils->id_dapil }}">
+                    <input type="hidden" name="provinsi" value="{{ $datadapils->id_provinsi }}">
+                    <input type="hidden" name="kabupaten" value="{{ $datadapils->id_kabupaten }}">
                     <input type="text" id="nama" name="nama" class="form-control">
 
                 </div>
 
-                @include('master.wilayah')
+                @if(session('jeniskandidat') == 'pilgub')
+                    @include('master.wilayah-pilgub-pendukung')
+                @else
+                    @include('master.wilayah-pilkab')
+                @endif
 
                 <div id="desa" class="form-group">
                     <label for="kontak">Alamat</label>
@@ -53,10 +66,11 @@
 
                         <select id="jenispilihan" name="jenispilihan" class="form-control">
                             <option value="" disabled>Pilih...</option>
-                            <option value="1">1. Pemilih Lain tapi Setia</option>
-                            <option value="2">2. Pemilih Lain tapi masih ragu</option>
-                            <option value="3">3. Pemilih kita tapi pemilih biasa</option>
-                            <option value="4">4. Pemilih Kita dan setia</option>
+                            <option value="1">1. Memilih calon lain dan bersedia menjadi relawan tim sukses calon lain itu.</option>
+                            <option value="2">2. Memilih calon lain tapi tidak bersedia menjadi relawan tim sukses calon lain itu.</option>
+                            <option value="3">3. Tidak tahu memilih siapa, belum memutuskan, atau merahasiakan pilihan.</option>
+                            <option value="4">4. Memilih  tapi tidak bersedia jadi relawan tim sukses.</option>
+                            <option value="4">5. Memilih  dan bersedia jadi relawan tim sukses.</option>
                         </select>
 
                 </div>

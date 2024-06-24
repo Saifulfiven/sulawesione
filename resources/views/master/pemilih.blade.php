@@ -22,137 +22,23 @@
             @endif
 
             <div class="card-header pb-0 position-relative mb-5">
-              <h6>Data pemilih</h6>
+              <h6>{{ $toptitle }}</h6>
+            @if(session('berhasil_login_operator'))
+              <a href="{{ url('admin/pemilih/pilkab') }}" class="btn {{ $primary }}  position-absolute end-8 top-0 mt-3 me-3">Kabupaten</a>
+            <a href="{{ url('admin/pemilih/pilgub') }}" class="btn {{ $success }}  position-absolute end-0 top-0 mt-3 me-3">Provinsi</a>
+            @endif
+           
+<br>
 
-              <form action="" method="get" class="row mt-3" id="form-cari" onsubmit="event.preventDefault(); searchData()">
-                <div class="col-md-2">
-                  <select class="form-select" name="provinsi" id="filter-provinsi" aria-label="Default select example">
-                    <option value="" selected>Pilih Provinsi</option>
-                    @foreach ($provinsi as $item)
-                    <option value="{{ $item->id }}" {{ request()->get('provinsi') == $item->id ? 'selected' : '' }}>{{ $item->namaprovinsi }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select class="form-select" name="kabupaten" id="filter-kabupaten" aria-label="Default select example">
-                    <option value="" selected>Pilih Kabupaten</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example">
-                    <option value="" selected>Pilih Kecamatan</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select class="form-select" name="kandidat" id="filter-dapil" aria-label="Default select example">
-                    <option value="" selected>Pilih Nama Kandidat</option>
-                    @foreach ($dapils as $item)
-                    <option value="{{ $item->id }}" {{ request()->get('dapils') == $item->id ? 'selected' : '' }}>{{ $item->namakandidat }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="col-md-1">
-                  <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
-              </form>
-              <script>
-              function searchData() {
-                  $('#tblsearchpemilih').empty();
+            @if(session('berhasil_login_operator'))
+              @include('master.wilayahpilkaboperator')
+            @elseif(session('berhasil_login_admins')) 
+              @include('master.wilayahpilkabadmin')
+            @endif
 
-                let province = $('#filter-provinsi').val();
-                let district = $('#filter-kabupaten').val();
-                let subDistrict = $('#filter-kecamatan').val();
-                let candidate = $('#filter-dapil').val();
-                //let url = `{{ url('admin/master/pemilih?provinsi=') }}${province}&kabupaten=${district}&kecamatan=${subDistrict}&kandidat=${candidate}`;
-                $.ajax(
-                  {
-                    url: '/admin/searchpemilih',
-                    type: "post",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id_provinsi: province,
-                        id_kabupaten: district,
-                        id_kecamatan: subDistrict,
-                        id_kandidat: candidate,
-                    },
-                  success: function(response) {
-                    console.log(response);
-                    let no = 1;
-                    response.forEach(function(objek, indeks) {
-                          $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'+'<td>'
-                              + objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
-                              + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                              + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
-                      });
-                  },
-                  error: function(error) {
-                    console.log(error);
-                  }
-                });
-              }
-              </script>
-
-            </div>
-
-              <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-              <script>
-                $(document).ready(function(){
-                  $('#filter-provinsi').on('change', function(){
-                    let id_provinsi = $(this).val();
-                    if(id_provinsi){
-                      jQuery.ajax({
-                        url: '/admin/searchkabupaten',
-                        type: "post",
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            id_provinsi: id_provinsi
-                        },
-                        success: function(res){
-                          console.log(res);
-                           $('#filter-kabupaten').empty();
-                           $('#filter-kabupaten').append('<option value="" selected>Pilih Kabupaten</option>');
-                          res.forEach(function(objek, indeks) {
-                              console.log("Objek ke-" + (indeks + 1) + ":");
-                              console.log(objek.id);console.log(objek.namakabupaten);
-                              $('#filter-kabupaten').append('<option value="'+ objek.id +'">'+ objek.namakabupaten +'</option>');
-                          });
-                        }
-                      });
-                    }else{
-                      $('#filter-kabupaten').empty();
-                    }
-                  });
-                  $('#filter-kabupaten').on('change', function(){
-                    let id_kabupaten = $(this).val();
-                    if(id_kabupaten){
-                      jQuery.ajax({
-                        url: '/admin/searchkecamatan',
-                        type: "post",
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            id_kabupaten: id_kabupaten
-                        },
-                        success: function(res){
-                          console.log(res);
-                          $('#filter-kecamatan').empty();
-                          $('#filter-kecamatan').append('<option value="" selected>Pilih Kecamatan</option>');
-                          res.forEach(function(objek, indeks) {
-                            $('#filter-kecamatan').append('<option value="'+ objek.id +'">'+ objek.namakecamatan +'</option>');
-                          });
-                        }
-                      });
-                    }else{
-                      $('#filter-kecamatan').empty();
-                    }
-                  });
-                });
-              </script>
-
-            <div class="card-body px-0 pt-0 pb-2">
+             
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0" id="tabel-data">
-                  <thead>
-                    <tr>
                         <thead>
                     <tr>
 
@@ -234,6 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
 <!--   Core JS Files   -->
     <script src="{{ asset('assetsadmin/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('assetsadmin/js/core/bootstrap.min.js') }}"></script>
@@ -260,6 +147,193 @@
     });
     }, 2000);
 </script>
+
+
+<!-- Filter Searching -->
+<script>
+
+// Searching Jumlah Suara
+$(document).ready(function(){
+  $('#filter-provinsi').on('change', function(){
+    let id_provinsi = $(this).val();
+    if(id_provinsi){
+      jQuery.ajax({
+        url: '/admin/searchkabupaten',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_provinsi: id_provinsi
+        },
+        success: function(res){
+          console.log(res);
+           $('#filter-kabupaten').empty();
+           $('#filter-kabupaten').append('<option value="" selected>Pilih Kabupaten</option>');
+          res.forEach(function(objek, indeks) {
+              console.log("Objek ke-" + (indeks + 1) + ":");
+              console.log(objek.id);console.log(objek.namakabupaten);
+              $('#filter-kabupaten').append('<option value="'+ objek.id +'">'+ objek.namakabupaten +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-kabupaten').empty();
+    }
+  });
+
+  $('#filter-kabupaten').on('change', function(){
+    let id_kabupaten = $(this).val();
+    if(id_kabupaten){
+      jQuery.ajax({
+        url: '/admin/searchkecamatan',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_kabupaten: id_kabupaten
+        },
+        success: function(res){
+          console.log(res);
+          $('#filter-kecamatan').empty();
+          $('#filter-kecamatan').append('<option value="0" selected>Pilih Kecamatan</option>');
+          res.forEach(function(objek, indeks) {
+            $('#filter-kecamatan').append('<option value="'+ objek.id +'">'+ objek.namakecamatan +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-kecamatan').empty();
+    }
+  });
+
+  $('#filter-kecamatan').on('change', function(){
+    let id_kecamatan = $(this).val();
+    if(id_kecamatan){
+      jQuery.ajax({
+        url: '/admin/searchdesa',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_kecamatan: id_kecamatan
+        },
+        success: function(res){
+          console.log(res);
+          $('#filter-desa').empty();
+          $('#filter-desa').append('<option value="0" selected>Pilih Desa</option>');
+          res.forEach(function(objek, indeks) {
+            $('#filter-desa').append('<option value="'+ objek.id +'">'+ objek.namadesa +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-desa').empty();
+    }
+  });
+});
+
+
+// Searching Jumlah Suara BOBOT
+$(document).ready(function(){
+  $('#filter-provinsi-bobot').on('change', function(){
+    let id_provinsi = $(this).val();
+    if(id_provinsi){
+      jQuery.ajax({
+        url: '/admin/searchkabupatenbobot',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_provinsi: id_provinsi
+        },
+        success: function(res){
+          console.log(res);
+           $('#filter-kabupaten-bobot').empty();
+           $('#filter-kabupaten-bobot').append('<option value="" selected>Pilih Kabupaten</option>');
+          res.forEach(function(objek, indeks) {
+              console.log("Objek ke-" + (indeks + 1) + ":");
+              console.log(objek.id);console.log(objek.namakabupaten);
+              $('#filter-kabupaten-bobot').append('<option value="'+ objek.id +'">'+ objek.namakabupaten +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-kabupaten-bobot').empty();
+    }
+  });
+  $('#filter-kabupaten-bobot').on('change', function(){
+    let id_kabupaten = $(this).val();
+    if(id_kabupaten){
+      jQuery.ajax({
+        url: '/admin/searchkecamatanbobot',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_kabupaten: id_kabupaten
+        },
+        success: function(res){
+          console.log(res);
+          $('#filter-kecamatan-bobot').empty();
+          $('#filter-kecamatan-bobot').append('<option value="0" selected>Pilih Kecamatan</option>');
+          res.forEach(function(objek, indeks) {
+            $('#filter-kecamatan-bobot').append('<option value="'+ objek.id +'">'+ objek.namakecamatan +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-kecamatan-bobot').empty();
+    }
+  });
+
+  $('#filter-kecamatan-bobot').on('change', function(){
+    let id_kecamatan = $(this).val();
+    if(id_kecamatan){
+      jQuery.ajax({
+        url: '/admin/searchdesabobot',
+        type: "post",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id_kecamatan: id_kecamatan
+        },
+        success: function(res){
+          console.log(res);
+          $('#filter-desa-bobot').empty();
+          $('#filter-desa-bobot').append('<option value="0" selected>Pilih desa</option>');
+          res.forEach(function(objek, indeks) {
+            $('#filter-desa-bobot').append('<option value="'+ objek.id +'">'+ objek.namadesa +'</option>');
+          });
+        }
+      });
+    }else{
+      $('#filter-desa-bobot').empty();
+    }
+  });
+
+
+});
+</script>
+
+
+<script>
+function showHideContent() {
+var content = document.getElementById("content-toggle");
+var contentbobot = document.getElementById("content-toggle-bobot");
+content.style.display = "block";
+contentbobot.style.display = "none";
+
+document.getElementById("tombolsuara").style.backgroundColor = "blue";
+document.getElementById("tombolbobot").style.backgroundColor = "#82d616";
+}
+
+function showHideContentBobot() {
+var content = document.getElementById("content-toggle");
+var contentbobot = document.getElementById("content-toggle-bobot");
+content.style.display = "none";
+contentbobot.style.display = "block";
+document.getElementById("tombolsuara").style.backgroundColor = "#82d616";
+document.getElementById("tombolbobot").style.backgroundColor = "blue";
+}
+</script>
+
+
+<!-- Hasil Filter -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 @endsection
 

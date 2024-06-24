@@ -1,17 +1,12 @@
-<div id="provinsi" class="form-group">
-                    <label for="textbox3">Provinsi:</label>
-      <select class="form-select" name="provinsi" id="filter-provinsi" aria-label="Default select example">
-        <option value="" selected>Pilih Provinsi</option>
-        @foreach ($provinsi as $item)
-        <option value="{{ $item->id }}" {{ request()->get('provinsi') == $item->id ? 'selected' : '' }}>{{ $item->namaprovinsi }}</option>
-        @endforeach
-      </select>
-    </div>
+
 
     <div id="kabupaten" class="form-group">
                     <label for="textbox3">Kabupaten:</label>
       <select class="form-select" name="kabupaten" id="filter-kabupaten" aria-label="Default select example">
         <option value="" selected>Pilih Kabupaten</option>
+        @foreach ($tampilkankab as $item)
+        <option value="{{ $item->id }}" {{ request()->get('regencies') == $item->id ? 'selected' : '' }}>{{ $item->namakabupaten }}</option>
+        @endforeach
       </select>
     </div>
 
@@ -37,6 +32,7 @@
           $(document).ready(function(){
             $('#filter-provinsi').on('change', function(){
               let id_provinsi = $(this).val();
+              console.log(id_provinsi);
               if(id_provinsi){
                 jQuery.ajax({
                   url: '/admin/searchkabupaten',
@@ -46,7 +42,8 @@
                       id_provinsi: id_provinsi
                   },
                   success: function(res){
-                    console.log(res);
+                    console.log('Response : '+res);
+                      console.log('id Provinsi : '+id_provinsi);
                       $('#filter-kabupaten').empty();
                       $('#filter-kabupaten').append('<option value="" selected>Pilih Kabupaten</option>');
                     res.forEach(function(objek, indeks) {

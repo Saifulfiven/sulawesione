@@ -8,8 +8,9 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Tim Inti</p>
                     <h5 class="font-weight-bolder mb-0">
-                      58
-                      <span class="text-success text-sm font-weight-bolder">+4</span>
+                      {{ $data['jumlahtiminti']}}
+                      <span class="text-success text-sm font-weight-bolder">+ 
+                      {{ $data['jumlahtimintihariini']}}</span>
                     </h5>
                   </div>
                 </div>
@@ -30,8 +31,8 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Pendukung</p>
                     <h5 class="font-weight-bolder mb-0">
-                      23.459
-                      <span class="text-success text-sm font-weight-bolder">+8800</span>
+                    {{ $data['jumlahtimpendukung'] }}
+                      <span class="text-success text-sm font-weight-bolder">+ {{ $data['jumlahtimpendukunghariini'] }}</span>
                     </h5>
                   </div>
                 </div>
@@ -52,8 +53,9 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Pemilih</p>
                     <h5 class="font-weight-bolder mb-0">
-                      962.400
-                      <span class="text-danger text-sm font-weight-bolder">+45.288</span>
+                    {{ $data['totalPemilih'] }}
+                      <span class="text-danger text-sm font-weight-bolder">+
+                    {{ $data['pemilihHariIni'] }}</span>
                     </h5>
                   </div>
                 </div>
@@ -67,43 +69,97 @@
           </div>
         </div>
       </div>
+
+
       <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
-          <div class="card">
+        <div class="col-lg-6 mb-lg-0 mb-4">
+        <div class="card">
             <div class="card-body p-3">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="d-flex flex-column h-100">
-                    <p class="mb-1 pt-2 text-bold">Selamat Datang</p>
-                    <h5 class="font-weight-bolder">Dashboard</h5>
-                    <p class="mb-5">Keamanan Sistem Website terjaga dan terpantau 24 Jam.</p>
-                    
-                  </div>
-                </div>
-                <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                  <div class="bg-gradient-primary border-radius-lg h-100">
-                    <img src="{{ asset('assetsadmin/img/shapes/waves-white.svg') }}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
-                    <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                      <img class="w-100 position-relative z-index-2 pt-4" src="{{ asset('assetsadmin/img/illustrations/rocket-white.png') }}" alt="rocket">
-                    </div>
+                    <h5 class="font-weight-bolder">Jumlah Suara Masing-masing</h5>
+                    <br>
+                    <canvas id="barChart" width="400" height="200"></canvas>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        
+
+
         </div>
-        <div class="col-lg-5">
+
+
+        <div class="col-lg-6">
           <div class="card h-100 p-3">
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('assetsadmin/img/ivancik.jpg') }}');">
               <span class="mask bg-gradient-dark"></span>
               <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
                 <h5 class="text-white font-weight-bolder mb-4 pt-2">Suara Pemilih</h5>
                 <p class="text-white">Data Suara Pemilih .</p>
+                <ul class="text-white">
+                  @if(session('berhasil_login_admins'))
+                  
+                  <?php 
+                  $dataPemilihDapil = []; 
+                  foreach ($pemilihDapil as $data){
+                    echo "<li>Nama Wilayah: $data->name - Jumlah Pemilih: $data->jumlah_pemilih</li>";
+
+                    $dataPemilihDapil[] = ["namawilayah" => $data->name, "jumlah_pemilih" => $data->jumlah_pemilih];
+                  }
+
+                  ?>
+                  @elseif(session('berhasil_login_operator'))
+                  
+                  <?php 
+                  $dataPemilihDapil = []; 
+                  foreach ($pemilihDapil as $data){
+                    echo "<li>Nama Wilayah: $data->name - Jumlah Pemilih: $data->jumlah_pemilih</li>";
+
+                    $dataPemilihDapil[] = ["namawilayah" => $data->name, "jumlah_pemilih" => $data->jumlah_pemilih];
+
+                  }
+
+                  ?>
+                  @endif
+
+                  
+                  
+                </ul>
+ 
+              
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+
+      <div class="row mt-4">
+        
+        
+        <div class="col-lg-12 mb-lg-0 mb-4" style="display: none;">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex flex-column h-100">
+                    <h5 class="font-weight-bolder">Dashboard</h5>
+                    <canvas id="pieChart" width="400" height="200"></canvas>
+
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -137,3 +193,63 @@
         </div>
       </footer>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      dataPemilihDapil
+        var dataPemilihDapil = <?php echo json_encode($dataPemilihDapil) ?>;
+        const data = {
+            labels: dataPemilihDapil.map(item => item.namawilayah),
+            datasets: [{
+                label: 'Jumlah Suara',
+                data: dataPemilihDapil.map(item => item.jumlah_pemilih),
+                backgroundColor: ['blue', 'orange', 'green', 'red'],
+                borderColor: ['blue', 'orange', 'green', 'red'],
+                borderWidth: 1
+            }]
+        };
+
+        // Bar Chart
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 1 }).format(context.parsed / 650);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+ 

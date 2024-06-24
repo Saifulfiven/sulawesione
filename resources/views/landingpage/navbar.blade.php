@@ -15,17 +15,26 @@
                             <a href="/home" class="nav-item nav-link active">Home</a>
                             <a href="/#kandidat" class="nav-item nav-link">Kenali Kandidat</a>
                             <a href="/#fitur" class="nav-item nav-link">Fitur</a>
-                            <a href="/detail" class="nav-item nav-link">Berita</a>
+                            <a href="/#berita" class="nav-item nav-link">Berita</a>
                            
-                            @if (session('berhasil_login'))
-                            <a href="/tambahpendukung" class="nav-item nav-link">+ Pendukung</a>
-                                <a href="/dtd" class="nav-item nav-link">DTD</a>
-                                <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
-                                <span>{{ session('namapengguna') }}</span>
-                            @else
-                                <a href="/dataform" class="nav-item nav-link">+ Tim Inti</a>
-                                <a href="/pengguna/login" class="nav-item nav-link">Login</a>
-                            @endif
+                                @if (session('jeniskandidat') == 'pilgub')
+                                    @if(session('jenistim') == 'A')
+                                    <a href="/tambahpendukungpilgub" class="nav-item nav-link">Pendukung</a>
+                                    @endif
+                                    <a href="/dtd" class="nav-item nav-link">DTD</a>
+                                    <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                    <span>{{ session('namapengguna') }}</span>
+                                @elseif (session('jeniskandidat') == 'pilkab')
+                                    @if(session('jenistim') == 'A')
+                                    <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
+                                    @endif
+                                    <a href="/dtd" class="nav-item nav-link">DTD</a>
+                                    <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                    <span>{{ session('namapengguna') }}</span>
+                                @else                                
+                                    <a href="/dataform" class="nav-item nav-link">+ Tim Inti</a>
+                                    <a href="/pengguna/login" class="nav-item nav-link">Login</a>
+                                @endif
 
                         </div>
                     </div>

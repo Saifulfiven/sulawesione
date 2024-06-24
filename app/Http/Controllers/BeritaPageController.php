@@ -19,15 +19,13 @@ class BeritaPageController extends Controller
         //return view('landingpage.layout');
     }
 
-
     //Dashboard
-
     public function home()
     {
         //$products = Product::latest()->paginate(5);
         //$berita = Berita::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "STIE NOBEL :. Dashboard - Berita";
+        $toptitle = "Dashboard - Berita";
         $header = false;
         $beritas = beritas::latest()->paginate(5);
         return view('berita.tabel', compact('header','toptitle','beritas'));
@@ -39,7 +37,7 @@ class BeritaPageController extends Controller
         //$products = Product::latest()->paginate(5);
         //$berita = Berita::latest()->paginate(5);
         //$kegiatan = Kegiatan::latest()->paginate(5);
-        $toptitle = "STIE NOBEL :. Tambah Data berita";
+        $toptitle = "Tambah Data berita";
         $header = false;
         return view('berita.tambah', compact('header','toptitle'));
         //return view('landingpage.layout');..
@@ -53,7 +51,7 @@ class BeritaPageController extends Controller
             'deskripsi' => 'required',
             'gambar' => 'required|image|mimes:jpeg,jpg,png'
         ]);
-        
+
         //upload gambar
         $gambar = $request->gambar;
         $namafile = time()."_".$gambar->getClientOriginalName();
@@ -78,11 +76,11 @@ class BeritaPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
         $beritas = beritas::find($id);
-        $toptitle = "STIE NOBEL :. Ubah Data berita";
+        $toptitle = "Ubah Data berita";
         return view('berita.ubah', ['dataubah' => $beritas,'toptitle' => $toptitle]);
     }
 

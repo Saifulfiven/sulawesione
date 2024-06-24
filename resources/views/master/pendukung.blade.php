@@ -23,18 +23,23 @@
 
             <div class="card-header pb-0 position-relative mb-5">
               <h6>Data Pendukung Pilkab</h6>
-              <a href="{{ url('admin/pendukung/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah pendukung</a>
+              <a href="{{ url('admin/timinti') }}" class="btn btn-success  position-absolute end-10 top-0 mt-3 me-3">Tim Inti</a>
+            <a href="{{ url('admin/pendukung') }}" class="btn btn-primary  position-absolute end-0 top-0 mt-3 me-3">Pendukung</a>
+           
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0"><table class="table align-items-center mb-0" id="tabel-data">
+            <div class="card-body px-0 pt-0 pb-2 py-3">
+            &nbsp;&nbsp;&nbsp;<a href="{{ url('admin/pendukung/tambah') }}" class="btn btn-success" style="display:none">Tambah pendukung</a>
+
+              <div class="table-responsive p-3"><table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
                         <th class="text-secondary">Nama</th>
-                        <th class="text-secondary">Email</th>
+                        <th class="text-secondary">Username</th>
                       <th class="text-secondary">Kontak</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Kabupaten</th>
+                      <th class="text-secondary">Kecamatan</th>
                       <th class="text-secondary">Aksi</th>
                     </tr>
                   </thead>
@@ -44,10 +49,11 @@
                         <tr>
                           <td> {{ $no }}</td>
                             <td>{{ $pendukung->nama }}</td>
-                            <td>{{ $pendukung->email }}</td>
+                            <td>{{ $pendukung->username }}</td>
                           <td>{{ $pendukung->kontak }}</td>
                           <td>{{ $pendukung->namakandidat }}</td>
                           <td>{{ $pendukung->namakabupaten }}</td>
+                          <td>{{ $pendukung->namakecamatan }}</td>
 
                           <td class="text-center">
                             <a href="{{ url('admin/pendukung/ubah/'.$pendukung->id) }}" class="btn btn-sm btn-primary">Edit</a>

@@ -30,13 +30,13 @@
                             <label for="judul" class="col-sm-2 col-form-label">Slug</label>
                             <input type="text" name="slug" class="form-control" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="id_provinsi" class="col-sm-2 col-form-label">Nama Provinsi</label>
-                            <select name="id_propinsi" class="form-control" required>
+                            <select name="province_id" class="form-control" required>
                                 <option value="" disabled>--Pilih Provinsi--</option>
                                 @foreach ($provinsi as $prov)
-                                    <option value="{{ $prov->id }}">{{ $prov->namaprovinsi }}</option>
+                                    <option value="{{ $prov->id }}">{{ $prov->name }}</option>
                                 @endforeach
                             </select>
                         </div>

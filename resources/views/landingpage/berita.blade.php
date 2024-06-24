@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
 <div class="col-lg-8 col-md-9">
 <div class="section-heading text-center mb-5">
-<h2>Platform Calon Legislatif</h2>
+<h2>Platform Survey Pilkada</h2>
 <p class="lead">
 Berpengalaman dan professional.
 </p>
@@ -61,81 +61,36 @@ sangat mudah digunakan oleh semua kalangan tanpa batasan background pendidikan.
 
 
      <!-- Blog Start -->
-        <div class="container-fluid py-5  bg-pengalaman">
+        <div class="container-fluid py-5  bg-pengalaman" id="berita">
             <div class="container py-5">
                 <div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
                     <h1 class="display-5">{{ $berita }}</h1>
                 </div>
                 <div class="owl-carousel blog-carousel wow fadeInUp" data-wow-delay=".5s">
+                    @foreach($beritas as $item)
                     <div class="blog-item">
-                        <img src="img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                        <img src="images/berita/{{ $item->gambar }}" class="img-fluid w-100 rounded-top" alt="">
                          <div class="rounded-bottom bg-light">
                             <div class="d-flex justify-content-between p-4 pb-2">
                                 <span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By Admin</span>
                                 <span class="text-dark"><i class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
                             </div>
                             <div class="px-4 pb-0">
-                                <h4>How To Build A Cleaning Plan Data A</h4>
-                                <p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
+                                <h4>{{ $item->judul }}</h4>
+                                <?php
+                                    $deskrip = $item->deskripsi;
+                                    echo "<p>".substr($deskrip, 0, 350)."</p>";
+                                    ?>
                             </div>
                             <div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
                                 <a href="/detail" class="my-auto text-dark">Selengkapnya</a>
                                 <a href="#" class="my-auto text-dark"><i class="fa fa-comments me-2"></i>23 Comments</a>                            </div>
                         </div>
                     </div>
-                    <div class="blog-item">
-                        <img src="img/blog-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                         <div class="rounded-bottom bg-light">
-                            <div class="d-flex justify-content-between p-4 pb-2">
-                                <span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By Admin</span>
-                                <span class="text-dark"><i class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-                            </div>
-                            <div class="px-4 pb-0">
-                                <h4>How To Build A Cleaning Plan Data B</h4>
-                                <p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
-                            </div>
-                            <div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-                            <a href="/detail" class="my-auto text-dark">Selengkapnya</a>
-                            <a href="#" class="my-auto text-dark"><i class="fa fa-comments me-2"></i>23 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <img src="img/blog-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                         <div class="rounded-bottom bg-light">
-                            <div class="d-flex justify-content-between p-4 pb-2">
-                                <span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By Admin</span>
-                                <span class="text-dark"><i class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-                            </div>
-                            <div class="px-4 pb-0">
-                                <h4>How To Build A Cleaning Plan Data C</h4>
-                                <p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
-                            </div>
-                            <div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-                            <a href="/detail" class="my-auto text-dark">Selengkapnya</a>
-                            <a href="#" class="my-auto text-dark"><i class="fa fa-comments me-2"></i>23 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <img src="img/blog-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                         <div class="rounded-bottom bg-light">
-                            <div class="d-flex justify-content-between p-4 pb-2">
-                                <span class="pe-2 text-dark"><i class="fa fa-user me-2"></i>By Admin</span>
-                                <span class="text-dark"><i class="fas fa-calendar-alt me-2"></i>10 Feb, 2023</span>
-                            </div>
-                            <div class="px-4 pb-0">
-                                <h4>How To Build A Cleaning Plan Data D</h4>
-                                <p>Lorem ipsum dolor sit amet consectur adip sed eiusmod tempor.</p>
-                            </div>
-                            <div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
-                            <a href="/detail" class="my-auto text-dark">Selengkapnya</a>
-                             <a href="#" class="my-auto text-dark"><i class="fa fa-comments me-2"></i>23 Comments</a>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+
                 </div>
             </div>
-            
+
         </div>
         <!-- Blog End -->

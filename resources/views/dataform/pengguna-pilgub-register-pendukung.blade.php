@@ -45,10 +45,12 @@
                     @csrf
                     <div class="col-lg-6 mx-auto">
 
-                        <h3>Tim Inti Pemenangan Calon Gubernur Provinsi {{ $datadapils->namaprovinsi }}</h3>
+                        <h3>Tim Pendukung Calon Gubernur <br>Provinsi {{ $datadapils->namaprovinsi }}
+                            <br>{{ $datadapils->namakabupaten }}</h3>
 
                         <input type="hidden" name="id_dapil" class="form-control" value="{{ $datadapils->id_dapil }}">
                         <input type="hidden" name="provinsi" class="form-control" value="{{ $datadapils->id_provinsi }}">
+                        <input type="hidden" name="kabupaten" class="form-control" value="{{ $datadapils->id_kabupaten }}">
 
                         <div id="username" class="form-group">
                             <label for="username">Username:</label>
@@ -74,7 +76,7 @@
 
                         </div>
 
-                        @include('master.wilayah-pilgub')
+                        @include('master.wilayah-pilgub-pendukung')
 
 
                         <div id="alamat" class="form-group">

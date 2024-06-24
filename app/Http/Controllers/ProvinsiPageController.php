@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\provinsi;
+use App\Models\Provinces;
 
 class provinsiPageController extends Controller
 {
@@ -21,7 +21,7 @@ class provinsiPageController extends Controller
     {
         $toptitle = "Dashboard - Provinsi";
         $header = false;
-        $provinsis = provinsi::all();
+        $provinsis = Provinces::all();
         return view('provinsi.tabel', compact('header','toptitle','provinsis'));
         //return view('landingpage.layout');
     }
@@ -38,13 +38,13 @@ class provinsiPageController extends Controller
     public function simpan(Request $request)
     {
         $this->validate($request,[
-            'namaprovinsi' => 'required',
-            'slug'         => 'required'
+            'name' => 'required',
+            'slug' => 'required'
         ]);
-        
-        $simpan = provinsi::create([
-            'namaprovinsi' => $request->namaprovinsi,
-            'slug'         => $request->slug
+
+        $simpan = Provinces::create([
+            'name' => $request->name,
+            'slug' => $request->slug
         ]);
 
         if($simpan){
@@ -55,10 +55,10 @@ class provinsiPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
-        $provinsi = provinsi::find($id);
+        $provinsi = Provinces::find($id);
         $toptitle = "Ubah Data provinsi";
         return view('provinsi.ubah', ['dataubah' => $provinsi,'toptitle' => $toptitle]);
     }
@@ -67,16 +67,16 @@ class provinsiPageController extends Controller
     public function update(Request $request)
     {
         $this->validate($request,[
-            'namaprovinsi'  => 'required',
-            'slug'          => 'required'
+            'name'  => 'required',
+            'slug'  => 'required'
         ]);
 
         $id = $request->id;
-        $provinsi = provinsi::find($id);
+        $provinsi = Provinces::find($id);
 
-        provinsi::whereId($id)->update([
-            'namaprovinsi' => $request->namaprovinsi,
-            'slug'         => $request->slug
+        Provinces::whereId($id)->update([
+            'name' => $request->name,
+            'slug' => $request->slug
         ]);
 
         return redirect('admin/provinsi')->with('success','Data berhasil diubah');

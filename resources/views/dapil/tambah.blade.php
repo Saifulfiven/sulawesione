@@ -21,7 +21,8 @@
                 <div class="card-body">
                     <form action="/admin/dapil/tambah" method="post" enctype="multipart/form-data">
                         @csrf
-                        
+
+
                         <div class="form-group">
                             <label for="id_kandidat" class="col-sm-2 col-form-label">Nama Kandidat</label>
                             <select name="id_kandidat" class="form-control" required>
@@ -34,7 +35,7 @@
 
                         <div class="form-group">
                             <label for="options">Pilih Jenis:</label>
-                            
+
                                 <select id="options" onchange="showTextBoxes()" class="form-control" name="jeniskandidat">
                                     <option value="" disabled>Pilih...</option>
                                     <option value="pilkab">Pemilihan Walikota/Bupati</option>
@@ -47,22 +48,22 @@
                             <select name="id_kabupaten" id="id_kabupaten" class="form-control">
                                 <option value="0">--Pilih Kabupaten--</option>
                                 @foreach ($kabupaten as $kabupaten)
-                                    <option value="{{ $kabupaten->id }}">{{ $kabupaten->namakabupaten }}</option>
+                                    <option value="{{ $kabupaten->id }}">{{ $kabupaten->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="form-group" id="pilih-provinsi" style="display: none;">
                             <label for="id_provinsi" class="col-sm-2 col-form-label">Nama Provinsi</label>
                             <select name="id_provinsi" id="id_provinsi" class="form-control">
                                 <option value="0">--Pilih provinsi--</option>
                                 @foreach ($provinsi as $provinsi)
-                                    <option value="{{ $provinsi->id }}">{{ $provinsi->namaprovinsi }}</option>
+                                    <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
-<!--                         
+<!--
                         <div class="form-group">
                             <label for="customer" class="col-sm-2 col-form-label">Customer</label>
                             <select name="customer" class="form-control" required>
@@ -72,7 +73,17 @@
                             </select>
                         </div> -->
 
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 col-form-label">Username</label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+
+                        
                         <button class="btn btn-info">Tambah</button>
                     </form>
                 </div>

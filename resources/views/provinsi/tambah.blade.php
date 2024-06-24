@@ -24,13 +24,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="namaprovinsi" class="col-sm-2 col-form-label">Nama Provinsi</label>
-                            <input type="text" name="namaprovinsi" class="form-control" required>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="slug" class="col-sm-2 col-form-label">Slug</label>
                             <input type="text" name="slug" class="form-control" required>
                         </div>
-                        
+
                         <button class="btn btn-info">Tambah</button>
                     </form>
                 </div>

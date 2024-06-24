@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\kabupaten;
-use App\Models\provinsi;
+use App\Models\Regencies;
+use App\Models\Provinces;
 use Illuminate\Support\Facades\DB; // Import DB class
 
 class kabupatenPageController extends Controller
@@ -18,10 +18,10 @@ class kabupatenPageController extends Controller
         $toptitle = "Dashboard - kabupaten";
         $header = false;
         //$kabupatens = kabupaten::latest()->paginate(5);
-        $kabupatens = DB::table('kabupatens')
-                      ->join('provinsis','kabupatens.id_propinsi', '=' ,'provinsis.id')
-                      ->select('kabupatens.namakabupaten','kabupatens.slug','provinsis.namaprovinsi',
-                                'kabupatens.created_at','kabupatens.updated_at','kabupatens.id')->get();
+        $kabupatens = DB::table('regencies')
+                      ->join('provinces','regencies.province_id', '=' ,'provinces.id')
+                      ->select('regencies.name as namakabupaten','regencies.slug','provinces.name as namaprovinsi',
+                                'regencies.created_at','regencies.updated_at','regencies.id')->get();
         return view('kabupaten.tabel', compact('header','toptitle','kabupatens'));
         //return view('landingpage.layout');
     }
@@ -30,7 +30,7 @@ class kabupatenPageController extends Controller
     {
         $toptitle = "Tambah Data kabupaten";
         $header = false;
-        $provinsi = provinsi::get();
+        $provinsi = Provinces::get();
         //$kandidat = kandidat::get();
         return view('kabupaten.tambah', compact('header','toptitle','provinsi'));
         //return view('landingpage.layout');
@@ -44,13 +44,13 @@ class kabupatenPageController extends Controller
             'id_propinsi' => 'required',
             'slug' => 'required'
         ]);
-        
+
         $namakabupatennya = $request->namakabupaten;
         //SlugService::createSlug(Post::class, 'slug', $post->title);
 
-        $kab = kabupaten::create([
-            'namakabupaten' => $request->namakabupaten,
-            'id_propinsi'   => $request->id_propinsi,
+        $kab = Regencies::create([
+            'name' => $request->namakabupaten,
+            'province_id'   => $request->id_propinsi,
             'slug'          => $request->slug
         ]);
 
@@ -62,13 +62,13 @@ class kabupatenPageController extends Controller
         }
     }
 
-    
+
     public function ubah($id)
     {
-        $kabupaten = kabupaten::find($id);
+        $kabupaten = Regencies::find($id);
         $toptitle = "Ubah Data kabupaten";
-        
-        $provinsi = provinsi::get();
+
+        $provinsi = Provinces::get();
         //$kandidat = kandidat::get();
         return view('kabupaten.ubah', ['dataubah' => $kabupaten,'toptitle' => $toptitle,
                     'provinsi' => $provinsi
@@ -80,17 +80,17 @@ class kabupatenPageController extends Controller
     {
         $this->validate($request,[
             'namakabupaten' => 'required',
-            'id_propinsi'   => 'required',
+//            'id_propinsi'   => 'required',
             'slug'          => 'required'
         ]);
 
         $id = $request->id;
-        $kabupatens = kabupaten::find($id);
+        $kabupatens = Regencies::find($id);
 
-        kabupaten::whereId($id)->update([
-            'namakabupaten' => $request->namakabupaten,
+        Regencies::whereId($id)->update([
+            'name' => $request->namakabupaten,
             'slug'          => $request->slug,
-            'id_propinsi'   => $request->id_propinsi
+  //          'province_id'   => $request->id_propinsi
         ]);
 
         return redirect('admin/kabupaten')->with('success','Data berhasil diubah');
@@ -99,7 +99,7 @@ class kabupatenPageController extends Controller
 
     public function hapus($id)
     {
-        $kabupatens = kabupaten::find($id);
+        $kabupatens = Regencies::find($id);
         if($kabupatens->delete()){
             return redirect('admin/kabupaten')->with('success','Data berhasil dihapus');
         }

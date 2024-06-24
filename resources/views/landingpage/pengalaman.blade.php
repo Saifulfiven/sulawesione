@@ -1,106 +1,137 @@
 <style>
+    .slider {
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 10px;
+    }
 
-        .content {
-            border: 1px dotted #ccc;
-            padding:5px;
+    .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
 
-        }
-        .pagination {
-            display: inline-block;
-        }
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
-            transition: background-color .3s;
-            border: 1px solid #ddd;
-            margin: 0 4px;
-        }
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-            border: 1px solid #4CAF50;
-        }
-        .pagination a:hover:not(.active) {background-color: #ddd;}
+    .slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        display: flex;
+    }
 
-        .bg-pengalaman {
-    background-image: url("/img/bg-pengalaman.jpg");
-    background-repeat: no-repeat;
-  background-size: cover;
-}
-    </style>
-<!-- Blog Start -->
-        <div class="container-fluid py-5 bg-pengalaman">
-            <div class="container py-5">
-                <div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
-                    <h1 class="display-5">Kenali Mereka !</h1>
-                </div>
+    .slide img {
+        width: 40%;
+        height: auto;
+        border-radius: 10px 0 0 10px;
+    }
 
-                <span style="font-family: Arial, sans-serif; font-size: 22px;" class="mb-5"> Baca cerita hidup mereka dan ketahui apa yang mendorong mereka</span>
+    .student-info {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 60%;
+    }
 
-                <div class="container">
+    .student-info h3 {
+        margin: 0;
+        font-size: 18px;
+        color: #333;
+    }
 
-    <?php
-    // Konfigurasi pagination
-    $perPage = 1; // Jumlah konten per halaman
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Halaman saat ini
-    $start = ($page - 1) * $perPage; // Item pertama yang akan ditampilkan
+    .student-info p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #666;
+    }
 
-    // Contoh data (bisa diganti dengan data dari database)
-    $data = array(
-        array("title" => "Tonny Uloli", "content" => "Isi Konten 1",'image' => 'img/toni.jpg'),
-        array("title" => "H Ramli Anwar", "content" => "Isi Konten 2",'image' => 'img/hjramli.jpg'),
-        array("title" => "Belum Ada", "content" => "Isi Konten 3",'image' => 'img/kosong.jpg'),
-        array("title" => "Tonny Uloli", "content" => "Isi Konten 4",'image' => 'img/toni.jpg'),
-        array("title" => "H Ramli Anwar", "content" => "Isi Konten 5",'image' => 'img/hjramli.jpg'),
-    );
-    ?>
+    button.prev, button.next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+        font-size: 18px;
+    }
 
+    button.prev {
+        left: 10px;
+    }
 
-                <div class="content rounded">
-                    <div class="row align-items-center">
+    button.next {
+        right: 10px;
+    }
 
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay=".3s">
-                            <img src="<?php echo $data[$start]["image"] ?>" class="img-fluid rounded" alt="Acara">
-                        </div>
+    button.prev:hover, button.next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
 
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay=".5s">
-                            <h2 class="mb-4" style="color: blue;">Calon Gubernur Provinsi Gorontalo 2024</h2>
-                            <p><i>
-                            <?php $data[$start]["content"] ?>
-                            </i></p>
-                            <h1 class="mb-4" style="color: #ee2122;"><?php echo $data[$start]["title"] ?></h1>
-                            <span> Gorontalo </span><br>
-
-                            <span><b>Profil Kandidat</b></span><br>
-
-                            @if($ceritalain)
-                            <a href="/pengalaman" class="btn btn-primary mt-3" style="letter-spacing: 5px;color:white">TEMUKAN CERITA YANG LAIN</a>
-                            @endif
-                            <?php
-
-                            if($navhalaman){
-                            // Pagination links
-                            echo '<br><div class="pagination">';
-                            if ($page > 1) {
-                                echo '<a href="?page=' . ($page - 1) . '">Previous</a>';
-                            }
-                            if ($start + $perPage < count($data)) {
-                                echo '<a href="?page=' . ($page + 1) . '">Next</a>';
-                            }
-                            echo '</div>';
-                            }
-                            ?>
-
-                        </div>
-
-                    </div>
-                </div>
+    .bg-pengalaman {
+        background-image: url("/img/bg-pengalaman.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 
 
+<div class="container-fluid py-5 bg-pengalaman">
+    <div class="container py-5">
 
+        <div class="content rounded">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+<div class="slider">
+    <div class="slides">
+        <div class="slide">
+            <img src="img/toni.jpg" alt="Student Photo">
+            <div class="student-info">
+                <h1>H. Tonny Uloli, S.E., M.M. </h1>
+                <h2>Calon Gubernur Gorontalo</h2>
+                <p style="margin-top:200px;color: #d6d6d6">Sulawesione</p>
             </div>
         </div>
-                        </div>
-        <!-- Blog End -->
+        <div class="slide">
+            <img src="img/hjramli.jpg" alt="Student Photo">
+            <div class="student-info">
+                <h1>Ramli Anwar</h1>
+                <h2>Calon Walikota Gorontalo</h2>
+                <p style="margin-top:200px;color: #d6d6d6">Sulawesione</p>
+            </div>
+        </div>
+        <!-- Tambahkan slide lain sesuai kebutuhan -->
+    </div>
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+
+<script>
+    let currentIndex = 0;
+
+    function changeSlide(direction) {
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+
+        currentIndex += direction;
+
+        if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        } else if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        }
+
+        const offset = -currentIndex * 100;
+        slides.style.transform = `translateX(${offset}%)`;
+    }
+
+    // Optional: Automatic slide change every 5 seconds
+    setInterval(() => {
+        changeSlide(1);
+    }, 5000);
+</script>

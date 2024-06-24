@@ -23,19 +23,26 @@
 
             <div class="card-header pb-0 position-relative mb-5">
               <h6>Data Tim Inti Pilkab</h6>
-              <a href="{{ url('admin/timinti/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah timinti</a>
+
+            <a href="{{ url('admin/timinti') }}" class="btn btn-primary  position-absolute end-10 top-0 mt-3 me-3">Tim Inti</a>
+            <a href="{{ url('admin/pendukung') }}" class="btn btn-success  position-absolute end-0 top-0 mt-3 me-3">Pendukung</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="row">
+                <div class="col-md-12">
+            &nbsp;&nbsp;&nbsp;<a href="{{ url('admin/timinti/tambah') }}" class="btn btn-success ml-20">Tambah timinti</a>
+
+              <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
                         <th class="text-secondary">Nama</th>
                         <th class="text-secondary">Kontak</th>
-                        <th class="text-secondary">Email</th>
+                        <th class="text-secondary">Username</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Kabupaten</th>
+                      <th class="text-secondary">Kecamatan</th>
                       <th class="text-secondary">Aksi</th>
                     </tr>
                   </thead>
@@ -46,9 +53,10 @@
                           <td> {{ $no }}</td>
                           <td>{{ $timinti->nama }}</td>
                             <td>{{ $timinti->kontak }}</td>
-                            <td>{{ $timinti->email }}</td>
+                            <td>{{ $timinti->username }}</td>
                           <td>{{ $timinti->namakandidat }}</td>
                           <td>{{ $timinti->namakabupaten }}</td>
+                          <td>{{ $timinti->namakecamatan }}</td>
 
                           <td class="text-center">
                             <a href="{{ url('admin/timinti/ubah/'.$timinti->id) }}" class="btn btn-sm btn-primary">Edit</a>
@@ -60,6 +68,7 @@
 
                     </tbody>
                 </table>
+</div>
               </div>
             </div>
           </div>

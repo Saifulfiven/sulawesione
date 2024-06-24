@@ -32,7 +32,7 @@ Route::get('/tambahpendukungpilgub', 'App\Http\Controllers\DataFormPageControlle
 Route::post('/dataform/pengguna-register', 'App\Http\Controllers\DataFormPageController@penggunastore');
 Route::post('/dataform/pemilih-register', 'App\Http\Controllers\DataFormPageController@pemilihstore');
 Route::get('/dataform/sukses', 'App\Http\Controllers\DataFormPageController@sukses');
-Route::get('/dataform/{prov}', 'App\Http\Controllers\DataFormPageController@showDataKab');
+Route::get('/dataform/pilkab', 'App\Http\Controllers\DataFormPageController@showDataKab');
 Route::get('/dataform/kab/{namakab}', 'App\Http\Controllers\DataFormPageController@showFormpilkab');
 Route::get('/dataform/prov/{prov}', 'App\Http\Controllers\DataFormPageController@showFormpilgub');
 
@@ -54,7 +54,14 @@ Route::get('pengguna/logout', 'App\Http\Controllers\MasukPageController@logout')
 
 //Controller LoginPageController
 Route::get('/loginoperator', 'App\Http\Controllers\LoginPageController@index');
+Route::post('/loginoperator', 'App\Http\Controllers\LoginPageController@authenticate');
+Route::get('/admin/logout', 'App\Http\Controllers\LoginPageController@actionlogout');
 //Route::get('/landingpage', [LandingPageController::class, 'index']);
+
+//Login User Pilkad / Pilkab
+Route::get('/login-admins', 'App\Http\Controllers\LoginPageController@admins');
+Route::post('/login-admins', 'App\Http\Controllers\LoginPageController@adminauthenticate');
+Route::get('/admins-logout', 'App\Http\Controllers\LoginPageController@adminsactionlogout');
 
 
 //Controller DashboaedPageController
@@ -84,14 +91,22 @@ Route::post('/admin/searchkabupaten', 'App\Http\Controllers\MasterPageController
 Route::post('/admin/searchkecamatan', 'App\Http\Controllers\MasterPageController@searchkecamatan');
 Route::post('/admin/searchdesa', 'App\Http\Controllers\MasterPageController@searchdesa');
 Route::post('/admin/searchpemilih', 'App\Http\Controllers\MasterPageController@searchpemilih');
+Route::post('/admin/searchpemilihbobot', 'App\Http\Controllers\MasterPageController@searchpemilihbobot');
+Route::post('/admin/searchpemilihgub', 'App\Http\Controllers\MasterPageController@searchpemilihgub');
+Route::post('/admin/searchpemilihgubbobot', 'App\Http\Controllers\MasterPageController@searchpemilihgubbobot');
+
+// combobox realtime Bobot
+Route::post('/admin/searchkabupatenbobot', 'App\Http\Controllers\MasterPageController@searchkabupaten');
+Route::post('/admin/searchkecamatanbobot', 'App\Http\Controllers\MasterPageController@searchkecamatan');
+Route::post('/admin/searchdesabobot', 'App\Http\Controllers\MasterPageController@searchdesa');
 
 
-Route::get('/admin/berita', 'App\Http\Controllers\beritaPageController@home');
-Route::get('/admin/berita/tambah', 'App\Http\Controllers\beritaPageController@tambah');
-Route::post('/admin/berita/tambah', 'App\Http\Controllers\beritaPageController@simpan');
-Route::get('/admin/berita/ubah/{id}', 'App\Http\Controllers\beritaPageController@ubah');
-Route::post('/admin/berita/update', 'App\Http\Controllers\beritaPageController@update');
-Route::get('/admin/berita/hapus/{id}', 'App\Http\Controllers\beritaPageController@hapus');
+Route::get('/admin/berita', 'App\Http\Controllers\BeritaPageController@home');
+Route::get('/admin/berita/tambah', 'App\Http\Controllers\BeritaPageController@tambah');
+Route::post('/admin/berita/tambah', 'App\Http\Controllers\BeritaPageController@simpan');
+Route::get('/admin/berita/ubah/{id}', 'App\Http\Controllers\BeritaPageController@ubah');
+Route::post('/admin/berita/update', 'App\Http\Controllers\BeritaPageController@update');
+Route::get('/admin/berita/hapus/{id}', 'App\Http\Controllers\BeritaPageController@hapus');
 
 //Kandidat
 Route::get('/admin/kandidat', 'App\Http\Controllers\KandidatPageController@index');

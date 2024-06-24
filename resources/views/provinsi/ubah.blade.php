@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label for="judul" class="col-sm-2 col-form-label">Nama Provinsi</label>
                             <input type="hidden" class="form-control" name="id" id="id" value="<?php echo $dataubah->id ?>">
-                            <input type="text" class="form-control" name="namaprovinsi" id="namaprovinsi" value="<?php echo $dataubah->namaprovinsi ?>">
+                            <input type="text" class="form-control" name="name" id="namaprovinsi" value="<?php echo $dataubah->name ?>">
                         </div>
 
                         <div class="form-group">
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                                <button type="submit" name="ubah" class="btn btn-info">Ubah</button>                            
+                                <button type="submit" name="ubah" class="btn btn-info">Ubah</button>
                         </div>
 
                     </form>

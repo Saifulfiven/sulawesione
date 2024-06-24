@@ -20,7 +20,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
-            
+
             <div class="card-header pb-0 position-relative mb-5 bg-info">
               <h6 Style="color:white">Data provinsi</h6>
               <a href="{{ url('admin/provinsi/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah provinsi</a>
@@ -32,6 +32,7 @@
                     <tr>
                       <th class="text-secondary">No</th>
                       <th class="text-secondary">Nama Provinsi</th>
+                        <th class="text-secondary">Slug</th>
                       <th class="text-secondary">Created at</th>
                       <th class="text-secondary">Updated at</th>
                       <th class="text-secondary">Aksi</th>
@@ -39,10 +40,11 @@
                   </thead>
                     <tbody>
                       <?php $no = 1; ?>
-                      @foreach ($provinsis as $provinsi)  
+                      @foreach ($provinsis as $provinsi)
                         <tr>
                           <td> {{ $no }}</td>
-                          <td>{{ $provinsi->namaprovinsi }}</td>
+                            <td>{{ $provinsi->name }}</td>
+                            <td>{{ $provinsi->slug }}</td>
                           <td>{{ $provinsi->created_at }}</td>
                           <td>{{ $provinsi->updated_at }}</td>
                           <td class="text-center">
@@ -60,7 +62,7 @@
           </div>
         </div>
       </div>
-   
+
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -120,7 +122,7 @@
 
     window.setTimeout(function() {
     $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
+        $(this).remove();
     });
     }, 2000);
 </script>

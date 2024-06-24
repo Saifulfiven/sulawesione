@@ -43,21 +43,28 @@
                 @csrf
                 <div class="col-lg-6 mx-auto">
 
-                <h3>{{ $judultim }}</h3>
+                <h3>
+                    <?php
 
-                <input type="hidden" name="id_dapil" class="form-control" value="{{ $datadapils->id }}">
-                <input type="hidden" name="id_kabupaten" class="form-control" value="{{ $datadapils->id_kabupaten }}">
+         
+        echo $judultim."<br>".$namaKabupaten;
+        ?>
+        </h3>
+
+                <input type="hidden" name="id_dapil" class="form-control" value="{{ $datadapils->id_dapil }}">
+                <input type="hidden" name="provinsi" class="form-control" value="{{ $datadapils->id_provinsi }}">
+                <input type="hidden" name="kabupaten" class="form-control" value="{{ $datadapils->id_kabupaten }}">
 
                     <?php if(session('berhasil_login')){ }else{?>
-                <div id="email" class="form-group">
-                    <label for="email">Email:</label>
-                        <input type="text" id="email" name="email" class="form-control" required>
+                <div id="username" class="form-group">
+                    <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" value="{{ old('username', '') }}">
                 </div>
 
 
                 <div id="password" class="form-group">
                     <label for="password">Password:</label>
-                        <input type="text" id="password" name="password" class="form-control" required>
+                        <input type="text" id="password" name="password" class="form-control" value="{{ old('password', '') }}">
                 </div>
 
                     <?php } ?>
@@ -75,7 +82,7 @@
 
                 </div>
 
-                @include('master.wilayah')
+                @include('master.wilayah-pilkab')
 
 
                 <div id="alamat" class="form-group">
@@ -90,10 +97,31 @@
                 @if(session('berhasil_login'))
 
                 @else
+                
+                        
                 <div id="foto" class="form-group">
-                    <label for="textbox7">Foto Selfie Camera depan rumah:</label>
-                        <input type="file" id="textbox7" name="foto" class="form-control" value="{{ old('foto', '') }}">
-                </div>
+                                <label for="textbox7">Foto Selfie Camera depan rumah:</label>
+                                <input type="file" id="textbox7" name="foto" class="form-control" onchange="previewImage()">
+                                <br>
+                                <img id="image-preview" alt="image preview" style="max-width: 200px;"/>
+                            </div>
+                            <script>
+                                function previewImage() {
+                                    var preview = document.querySelector('#image-preview');
+                                    var file    = document.querySelector('input[type=file]').files[0];
+                                    var reader  = new FileReader();
+                                    
+                                    reader.onloadend = function () {
+                                        preview.src = reader.result;
+                                    }
+                                    
+                                    if (file) {
+                                        reader.readAsDataURL(file); 
+                                    } else {
+                                        preview.src = "";
+                                    }
+                                }
+                            </script>
                 @endif
 
             </div><!-- Penutup Textbox -->

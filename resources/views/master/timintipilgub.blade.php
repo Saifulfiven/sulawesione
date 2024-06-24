@@ -22,20 +22,25 @@
             @endif
 
             <div class="card-header pb-0 position-relative mb-5">
-              <h6>Data Tim Inti Pilkab</h6>
-              <a href="{{ url('admin/timintipilgub/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah timintipilgub</a>
+              <h6>Data Tim Inti Pilgub</h6>
+              <a href="{{ url('admin/timintipilgub') }}" class="btn btn-primary  position-absolute end-10 top-0 mt-3 me-3">Tim Inti</a>
+            <a href="{{ url('admin/pendukungpilgub') }}" class="btn btn-success  position-absolute end-0 top-0 mt-3 me-3">Pendukung</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+
+            &nbsp;&nbsp;&nbsp;<a href="{{ url('admin/timintipilgub/tambah') }}" class="btn btn-success" style="display:none">Tambah Tim Inti</a>
+           
+              <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
                         <th class="text-secondary">Nama</th>
-                        <th class="text-secondary">Email</th>
+                        <th class="text-secondary">username</th>
                         <th class="text-secondary">Kontak</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Provinsi</th>
+                      <th class="text-secondary">Kabupaten</th>
                       <th class="text-secondary">Aksi</th>
                     </tr>
                   </thead>
@@ -45,10 +50,11 @@
                         <tr>
                           <td> {{ $no }}</td>
                             <td>{{ $timintipilgub->nama }}</td>
-                            <td>{{ $timintipilgub->email }}</td>
-                          <td>{{ $timintipilgub->kontak }}</td>
-                          <td>{{ $timintipilgub->namakandidat }}</td>
-                          <td>{{ $timintipilgub->namaprovinsi }}</td>
+                            <td>{{ $timintipilgub->username }}</td>
+                            <td>{{ $timintipilgub->kontak }}</td>
+                            <td>{{ $timintipilgub->namakandidat }}</td>
+                            <td>{{ $timintipilgub->namaprovinsi }}</td>
+                            <td>{{ $timintipilgub->namakabupaten }}</td>
 
                           <td class="text-center">
                             <a href="{{ url('admin/timintipilgub/ubah/'.$timintipilgub->id) }}" class="btn btn-sm btn-primary">Edit</a>

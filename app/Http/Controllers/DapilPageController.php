@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Provinces;
+use App\Models\Regencies;
 use Illuminate\Http\Request;
 use App\Models\Dapils;
-use App\Models\provinsi;
 use App\Models\kandidat;
-use App\Models\kabupaten;
 use Illuminate\Support\Facades\DB; // Import DB class
 
 class DapilPageController extends Controller
@@ -21,19 +21,21 @@ class DapilPageController extends Controller
         $header = false;
         //$Dapils = Dapils::latest()->paginate(5);
         $Dapilkab = DB::table('dapils')
-                        ->join('kabupatens','dapils.id_kabupaten', '=' ,'kabupatens.id')
+                        ->join('regencies','dapils.id_kabupaten', '=' ,'regencies.id')
                         ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
                         ->where('dapils.jeniskandidat','=','pilkab')
-                      //->join('provinsis','Dapils.id_provinsi', '=' ,'provinsis.id')
-                      ->select('kandidats.namakandidat','kabupatens.namakabupaten',
+                        ->orderBy('regencies.province_id')
+                      //->joiprovince_ids','Dapils.province_id', '='province_ids.id')
+                      ->select('kandidats.namakandidat','regencies.name as namakabupaten',
                                 'dapils.created_at','dapils.updated_at','dapils.id')->get();
+
 
 
         $Dapilprov = DB::table('dapils')
         ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
-        ->join('provinsis','dapils.id_provinsi', '=' ,'provinsis.id')
+        ->join('provinces','dapils.id_provinsi', '=','provinces.id')
         ->where('dapils.jeniskandidat','=','pilgub')
-        ->select('kandidats.namakandidat','provinsis.namaprovinsi',
+        ->select('kandidats.namakandidat','provinces.name as namaprovinsi',
                 'dapils.created_at','dapils.updated_at','dapils.id')->get();
         return view('Dapil.tabel', compact('header','toptitle','Dapilkab','Dapilprov'));
         //return view('landingpage.layout');
@@ -41,11 +43,11 @@ class DapilPageController extends Controller
 
     public function tambah()
     {
-        $toptitle = "Tambah Data Dapil";
-        $header = false;
-        $provinsi = provinsi::get();
-        $kandidat = Kandidat::get();
-        $kabupaten = kabupaten::get();
+        $toptitle   = "Tambah Data Dapil";
+        $header     = false;
+        $provinsi   = Provinces::get();
+        $kandidat   = Kandidat::get();
+        $kabupaten  = Regencies::orderBy('province_id')->get();
         //$kandidat = kandidat::get();
         return view('Dapil.tambah', compact('header','toptitle','kandidat','provinsi','kabupaten'));
         //return view('landingpage.layout');
@@ -58,7 +60,10 @@ class DapilPageController extends Controller
             'id_kandidat'   => 'required',
             'id_kabupaten'  => 'nullable',
             'id_provinsi'   => 'nullable',
-            'jeniskandidat' => 'nullable'
+            'jeniskandidat' => 'nullable',
+            'username'      => 'nullable',
+            'password'      => 'nullable',
+
         ]);
 
         $namaDapilnya = $request->namaDapil;
@@ -76,7 +81,9 @@ class DapilPageController extends Controller
             'id_kandidat'   => $request->id_kandidat,
             'id_kabupaten'  => $kab,
             'id_provinsi'   => $prov,
-            'jeniskandidat' => $request->jeniskandidat
+            'jeniskandidat' => $request->jeniskandidat,
+            'username'      => $request->username,
+            'password'      => bcrypt($request->password),
         ]);
 
         if($kab){
@@ -90,19 +97,13 @@ class DapilPageController extends Controller
 
     public function ubah($id)
     {
-        $Dapil      = Dapils::find($id);
+        $dapils      = Dapils::find($id);
         $toptitle   = "Ubah Data Dapil";
-
-        $provinsi   = provinsi::get();
+        $provinsi   = Provinces::get();
         $kandidat   = Kandidat::get();
-        $kabupaten  = kabupaten::get();
+        $kabupaten  = Regencies::get();
         //$kandidat = kandidat::get();
-        return view('Dapil.ubah', ['dataubah' => $Dapil,
-                    'toptitle'  => $toptitle,
-                    'kandidat'  => $kandidat,
-                    'kabupaten' => $kabupaten,
-                    'provinsi'  => $provinsi
-                    ]);
+        return view('dapil.ubah', compact('toptitle','dapils','provinsi','kabupaten','kandidat'));
     }
 
 
@@ -111,7 +112,9 @@ class DapilPageController extends Controller
         $this->validate($request,[
             'id_kandidat' => 'required',
             'id_kabupaten' => 'nullable',
-            'id_provinsi' => 'nullable'
+            'id_provinsi' => 'nullable',
+            'username' => 'nullable',
+            'password' => 'nullable',
         ]);
 
         $id = $request->id;
@@ -119,10 +122,18 @@ class DapilPageController extends Controller
 
         $prov = 0;
 
+        if($request->password != null){
+            $password = hash('sha256', $request->password);
+        }else{
+            $password = $Dapils->password;
+        }
+
         Dapils::whereId($id)->update([
             'id_kandidat' => $request->id_kandidat,
             'id_kabupaten' => $request->id_kabupaten,
-            'id_provinsi' => $prov
+            'id_provinsi' => $prov,
+            'username' => $request->username,
+            'password' => $password
         ]);
 
         return redirect('admin/dapil')->with('success','Data berhasil diubah');
