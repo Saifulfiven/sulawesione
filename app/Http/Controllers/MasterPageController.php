@@ -719,6 +719,16 @@ public function searchpemilihbobot(Request $request)
                 ->where('regency_id', session('id_kabupaten'))->get();
 
 
+            $pemilihdapilbobot = \DB::table('pemilihs')
+            ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+            ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+            ->where('dapils.jeniskandidat', '=', 'pilkab')
+            ->where('dapils.id', session('id_dapil'))
+            ->groupBy('pemilihs.id_kecamatan', 'districts.name')
+            ->get();
+
+
             }elseif(session('jeniskandidat') == 'pilgub'){
                 $pemilihdapil = \DB::table('pemilihs')
                     ->select('regencies.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
@@ -733,6 +743,16 @@ public function searchpemilihbobot(Request $request)
                     ->join('provinces', 'dapils.id_provinsi', '=', 'provinces.id')
                     ->select('kandidats.namakandidat','dapils.id', 'provinces.name as namakecamatan')
                     ->where('dapils.jeniskandidat', session('jeniskandidat'))->get();
+
+
+                    $pemilihdapilbobot = \DB::table('pemilihs')
+                    ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                    ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                    ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+                    ->where('dapils.jeniskandidat', '=', 'pilkab')
+                    ->where('dapils.id', session('id_dapil'))
+                    ->groupBy('pemilihs.id_kecamatan', 'districts.name')
+                    ->get();
             }
 
              // ini data dalam tabel pemilihs default saat tampilkan halaman
@@ -759,14 +779,6 @@ public function searchpemilihbobot(Request $request)
 
 
             
-            $pemilihdapilbobot = \DB::table('pemilihs')
-                ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
-                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-                ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
-                ->where('dapils.jeniskandidat', '=', 'pilkab')
-                ->where('dapils.id', session('id_dapil'))
-                ->groupBy('pemilihs.id_kecamatan', 'districts.name')
-                ->get();
 
         }
 
