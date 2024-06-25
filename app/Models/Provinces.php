@@ -9,6 +9,6 @@ class Provinces extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','slug'
+        'name','slug','aktif','created_at','updated_at'
     ];
 }

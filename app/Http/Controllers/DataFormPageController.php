@@ -12,7 +12,7 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use App\Models\Districts;
 use App\Models\Villages;
-use App\Models\Timpenggunas;
+use App\Models\timpenggunas;
 use App\Models\pemilihs;
 use App\Models\Dapils;
 //use Illuminate\Support\Facades\Auth;
@@ -93,7 +93,7 @@ class DataFormPageController extends Controller
 
             // $provinsi = Provinces::select('id','name as namaprovinsi')->get();
             // $kecamatans = Districts::all();
-        
+
             $tampilkankec = DB::table('regencies')
             ->join('timpenggunas', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
             ->join('districts', 'regencies.id', '=', 'districts.regency_id')
@@ -131,7 +131,7 @@ class DataFormPageController extends Controller
             ->where('regencies.slug', $value)
             ->first();
 
-        
+
             $tampilkankec = DB::table('regencies')
             ->join('districts', 'regencies.id', '=', 'districts.regency_id')
             ->select('districts.id','districts.name as namakecamatan')
@@ -147,7 +147,7 @@ class DataFormPageController extends Controller
         //     ->select('kecamatans.namakecamatan','kecamatans.id')
         //     ->where('kabupatens.slug', $value)
         //     ->get();
-        
+
         $namaKabupaten = Regencies::select('name')->where('slug', $value)->first();
         $namaKabupaten = $namaKabupaten->name;
 
@@ -169,7 +169,7 @@ class DataFormPageController extends Controller
 
         $toptitle = $judultim;
 
-         
+
 
         return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
                     'datadapils','jeniskandidat','kecamatans','tampilkankec','namaKabupaten','judultim'));
@@ -228,7 +228,7 @@ class DataFormPageController extends Controller
 
         $id_timinti = session('id_timpengguna');
 
-        
+
         $datadapils = DB::table('timpenggunas')
             ->join('provinces', 'timpenggunas.id_provinsi', '=', 'provinces.id')
             ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
@@ -244,7 +244,7 @@ class DataFormPageController extends Controller
             ->select('districts.id','districts.name as namakecamatan')
             ->where('timpenggunas.id', $id_timinti)
             ->get();
-            
+
 
         $provinsi = Provinces::select('id','name as namaprovinsi')->get();
         $kecamatans = Districts::all();
@@ -289,7 +289,7 @@ class DataFormPageController extends Controller
                 $tujuan_upload = 'images/timpengguna';
                 $foto->move($tujuan_upload,$namafile);
             }
-            
+
            if($namafile != ""){
                 $namafile = $namafile;
            }else{
@@ -306,7 +306,7 @@ class DataFormPageController extends Controller
             $jenistim  = "A";
         }
 
-        $pengguna = Timpenggunas::create([
+        $pengguna = timpenggunas::create([
             'id_dapil'                  => $request->id_dapil,
             'id_timinti'                => $id_timinti,
             'jenistim'                  => $jenistim,
