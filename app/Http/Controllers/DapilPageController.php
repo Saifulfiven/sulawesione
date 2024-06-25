@@ -6,7 +6,7 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use Illuminate\Http\Request;
 use App\Models\Dapils;
-use App\Models\kandidat;
+use App\Models\Kandidat;
 use Illuminate\Support\Facades\DB; // Import DB class
 
 class DapilPageController extends Controller
