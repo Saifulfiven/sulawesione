@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Timpenggunas;
+use App\Models\timpenggunas;
 
 class MasukPageController extends Controller
 {
-    
+
     public function index()
     {
         //$beritas = beritas::find($id);
@@ -24,7 +24,7 @@ class MasukPageController extends Controller
             'password' => 'required'
         ]);
 
-        $admin = Timpenggunas::where('timpenggunas.username', $request->username)
+        $admin = timpenggunas::where('timpenggunas.username', $request->username)
                             ->where('timpenggunas.password', $request->password)
                             ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                             ->select('timpenggunas.id','timpenggunas.nama', 'timpenggunas.jenistim','dapils.jeniskandidat')
@@ -32,7 +32,7 @@ class MasukPageController extends Controller
         if ($admin) {
             $admin->remember_token = 1;
             $admin->save();
-            
+
             session(['berhasil_login' => true]);
             session(['username'       => $request->username]);
             session(['id_timpengguna' => $admin->id]);
@@ -40,11 +40,11 @@ class MasukPageController extends Controller
             session(['jenistim'       => $admin->jenistim]);
             session(['jeniskandidat'  => $admin->jeniskandidat]);
             return redirect('/home');
-            
-        } else {
-            Timpenggunas::where('username', $request->username)->update(['remember_token' => 0]);
 
-            
+        } else {
+            timpenggunas::where('username', $request->username)->update(['remember_token' => 0]);
+
+
         return redirect('pengguna/login')->with('error','Terdapat Kesalahan Data, Silahkan Login Kembali');
         }
 
@@ -55,7 +55,7 @@ class MasukPageController extends Controller
     {
         session()->forget('berhasil_login');
         $username = session('username');
-        Timpenggunas::where('username', $username)->update(['remember_token' => 0]);
+        timpenggunas::where('username', $username)->update(['remember_token' => 0]);
         session()->flush();
         return redirect('/');
     }
