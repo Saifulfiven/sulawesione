@@ -1,6 +1,6 @@
 <a href="{{ url('admin/pemilih/pilkab') }}" class="btn {{ $primary }} " onclick="location.reload()">Pencarian</a>
 
-            <button onclick="showHideContent()" class="btn {{ $primary }}" id="tombolsuara">Jumlah Suara</button>
+            <button onclick="showHideContent()" class="btn {{ $primary }}" id="tombolsuara" style="display: none;">Jumlah Suara</button>
             <button onclick="showHideContentBobot()" class="btn {{ $primary }} " id="tombolbobot">Jumlah Bobot Suara</button>
 
 
