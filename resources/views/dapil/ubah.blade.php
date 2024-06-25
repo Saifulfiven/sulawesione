@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="/admin/dapil/update/" method="post">
+                    <form action="/admin/dapil/update" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{ $dapils->id }}">
                         <div class="form-group">
