@@ -6,7 +6,7 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use Illuminate\Http\Request;
 use App\Models\Dapils;
-use App\Models\kandidat;
+use App\Models\Kandidat;
 use Illuminate\Support\Facades\DB; // Import DB class
 
 class DapilPageController extends Controller
@@ -37,7 +37,7 @@ class DapilPageController extends Controller
         ->where('dapils.jeniskandidat','=','pilgub')
         ->select('kandidats.namakandidat','provinces.name as namaprovinsi',
                 'dapils.created_at','dapils.updated_at','dapils.id')->get();
-        return view('Dapil.tabel', compact('header','toptitle','Dapilkab','Dapilprov'));
+        return view('dapil.tabel', compact('header','toptitle','Dapilkab','Dapilprov'));
         //return view('landingpage.layout');
     }
 
@@ -49,7 +49,7 @@ class DapilPageController extends Controller
         $kandidat   = Kandidat::get();
         $kabupaten  = Regencies::orderBy('province_id')->get();
         //$kandidat = kandidat::get();
-        return view('Dapil.tambah', compact('header','toptitle','kandidat','provinsi','kabupaten'));
+        return view('dapil.tambah', compact('header','toptitle','kandidat','provinsi','kabupaten'));
         //return view('landingpage.layout');
     }
 
