@@ -1,8 +1,8 @@
         <meta charset="utf-8">
-        <title>{{ $toptitle }}</title>
+        <title> SulawesiOne{{ $toptitle }}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="pengendalian hama, pest control, solusi hama" name="keywords">
-        <meta content="PestKit menyediakan solusi pengendalian hama terbaik untuk rumah dan bisnis Anda." name="description">
+        <meta content="Survey Data Pilkada, SulawesiOne" name="keywords">
+        <meta content="Survey Data Pilkada" name="description">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
