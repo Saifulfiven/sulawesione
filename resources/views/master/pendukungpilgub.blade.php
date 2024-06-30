@@ -28,9 +28,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
 
-            &nbsp;&nbsp;&nbsp;<a href="{{ url('admin/pendukungpilgub/tambah') }}" class="btn btn-success">Tambah Pendukung</a>
-            
-              <div class="table-responsive p-0"><table class="table align-items-center mb-0" id="tabel-data">
+              <div class="table-responsive p-3"><table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>

@@ -1,4 +1,4 @@
- <a href="{{ url('admin/pemilih/pilgub') }}" class="btn {{ $primary }} " onclick="location.reload()">Pencarian</a>
+<a href="{{ url('admin/pemilih/pilgub') }}" class="btn {{ $primary }} " onclick="location.reload()"><i class="fas fa-sync-alt"></i></a>
 
             <button onclick="showHideContent()" class="btn {{ $primary }}" id="tombolsuara">Jumlah Suara</button>
             <button onclick="showHideContentBobot()" class="btn {{ $primary }} " id="tombolbobot">Jumlah Bobot Suara</button>
@@ -16,15 +16,20 @@
               </div>
               <div class="col-md-3">
                 <select class="form-select" name="kabupaten" id="filter-kabupaten" aria-label="Default select example">
-                  <option value="" selected>Pilih Kabupaten</option>
+                  <option value="0" selected>Pilih Kabupaten</option>
                 </select>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example">
                   <option value="0" selected>Pilih Kecamatan</option>
                 </select>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
+                <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example">
+                  <option value="0" selected>Pilih Desa</option>
+                </select>
+              </div>
+              <div class="col-md-2">
                 <select class="form-select" name="kandidat" id="filter-dapil" aria-label="Default select example">
                   <option value="" selected>Pilih Nama Kandidat</option>
                   @foreach ($dapils as $item)
@@ -93,7 +98,7 @@
                   @endforeach
                 </select>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <select class="form-select" name="kabupaten" id="filter-kabupaten-bobot" aria-label="Default select example">
                   <option value="" selected>Pilih Kabupaten</option>
                 </select>
@@ -103,7 +108,12 @@
                   <option value="0" selected>Pilih Kecamatan</option>
                 </select>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
+                <select class="form-select" name="desa" id="filter-desa-bobot" aria-label="Default select example">
+                  <option value="0" selected>Pilih Desa</option>
+                </select>
+              </div>
+              <div class="col-md-2">
                 <select class="form-select" name="kandidat" id="filter-dapil-bobot" aria-label="Default select example">
                   <option value="" selected>Pilih Nama Kandidat</option>
                   @foreach ($dapils as $item)
@@ -164,16 +174,17 @@
               <script>
                 // Search Pemilih
               function searchData() {
-                $('#form-cari').hide();
-
                 $('#tblsearchpemilih').empty();
                 $('#suarapemilih').empty();
-                $('#barChart').empty();
+                $('#barChart').replaceWith('<canvas id="barChart"></canvas>');
+                
 
                 let province = $('#filter-provinsi').val();
                 let district = $('#filter-kabupaten').val();
                 let subDistrict = $('#filter-kecamatan').val();
                 let candidate = $('#filter-dapil').val();
+                let desa = $('#filter-desa').val();
+                console.log('ini kucing ' + district);
                 //let url = `{{ url('admin/master/pemilih?provinsi=') }}${province}&kabupaten=${district}&kecamatan=${subDistrict}&kandidat=${candidate}`;
                 $.ajax(
                   {
@@ -185,6 +196,7 @@
                         id_kabupaten: district,
                         id_kecamatan: subDistrict,
                         id_kandidat: candidate,
+                        id_desa: desa,
                     },
                   success: function(response) {
                     let pemilihs = response.pemilihs;
@@ -201,7 +213,6 @@
                           $('#suarapemilih').append('<tr>'+'<td>'+ nom++ +'</td><td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.jumlah_pemilih +'</td>'+'</tr>');
                       });
 
-                      $('#barChart').empty();
                   const data = {
                       labels: pemilihdapil.map(item => item.namakecamatan),
                       datasets: [{
@@ -241,14 +252,15 @@
                // Search Pemilih
                function searchDataBobot() {
                
-                $('#tblsearchpemilih').empty();
                 $('#suarapemilihbobot').empty();
-                $('#barChartBobot').empty();
+                $('#barChartBobot').replaceWith('<canvas id="barChartBobot"></canvas>');
+                $('#tblsearchpemilih').replaceWith('<tbody id="tblsearchpemilih"></tbody>');
 
                 let province = $('#filter-provinsi-bobot').val();
                 let district = $('#filter-kabupaten-bobot').val();
                 let subDistrict = $('#filter-kecamatan-bobot').val();
                 let candidate = $('#filter-dapil-bobot').val();
+                let desa = $('#filter-desa-bobot').val();
                 //let url = `{{ url('admin/master/pemilih?provinsi=') }}${province}&kabupaten=${district}&kecamatan=${subDistrict}&kandidat=${candidate}`;
                 $.ajax(
                   {
@@ -260,6 +272,7 @@
                         id_kabupaten: district,
                         id_kecamatan: subDistrict,
                         id_kandidat: candidate,
+                        id_desa: desa,
                     },
                   success: function(response) {
                     let pemilihs = response.pemilihsbobot;
@@ -311,3 +324,7 @@
                 });
               }
               </script>
+
+  
+
+              

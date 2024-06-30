@@ -70,7 +70,7 @@
                             <option value="2">2. Memilih calon lain tapi tidak bersedia menjadi relawan tim sukses calon lain itu.</option>
                             <option value="3">3. Tidak tahu memilih siapa, belum memutuskan, atau merahasiakan pilihan.</option>
                             <option value="4">4. Memilih  tapi tidak bersedia jadi relawan tim sukses.</option>
-                            <option value="4">5. Memilih  dan bersedia jadi relawan tim sukses.</option>
+                            <option value="5">5. Memilih  dan bersedia jadi relawan tim sukses.</option>
                         </select>
 
                 </div>

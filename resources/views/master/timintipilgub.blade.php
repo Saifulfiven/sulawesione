@@ -28,8 +28,6 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
 
-            &nbsp;&nbsp;&nbsp;<a href="{{ url('admin/timintipilgub/tambah') }}" class="btn btn-success" style="display:none">Tambah Tim Inti</a>
-           
               <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>

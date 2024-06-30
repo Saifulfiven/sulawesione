@@ -36,7 +36,7 @@
               @include('master.wilayahpilkabadmin')
             @endif
 
-             
+             <br>
               <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0" id="tabel-data">
                         <thead>
@@ -167,7 +167,7 @@ $(document).ready(function(){
         success: function(res){
           console.log(res);
            $('#filter-kabupaten').empty();
-           $('#filter-kabupaten').append('<option value="" selected>Pilih Kabupaten</option>');
+           $('#filter-kabupaten').append('<option value="0" selected>Pilih Kabupaten</option>');
           res.forEach(function(objek, indeks) {
               console.log("Objek ke-" + (indeks + 1) + ":");
               console.log(objek.id);console.log(objek.namakabupaten);
@@ -245,7 +245,7 @@ $(document).ready(function(){
         success: function(res){
           console.log(res);
            $('#filter-kabupaten-bobot').empty();
-           $('#filter-kabupaten-bobot').append('<option value="" selected>Pilih Kabupaten</option>');
+           $('#filter-kabupaten-bobot').append('<option value="0" selected>Pilih Kabupaten</option>');
           res.forEach(function(objek, indeks) {
               console.log("Objek ke-" + (indeks + 1) + ":");
               console.log(objek.id);console.log(objek.namakabupaten);

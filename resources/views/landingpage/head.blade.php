@@ -1,5 +1,5 @@
         <meta charset="utf-8">
-        <title> SulawesiOne{{ $toptitle }}</title>
+        <title> SulawesiOne :. {{ $toptitle }}</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="Survey Data Pilkada, SulawesiOne" name="keywords">
         <meta content="Survey Data Pilkada" name="description">
