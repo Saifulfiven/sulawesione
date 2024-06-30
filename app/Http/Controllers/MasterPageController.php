@@ -848,7 +848,8 @@ public function searchpemilihbobot(Request $request)
         }
 
         $regencies = Regencies::where('id', session('id_kabupaten'))->first();
-        $province_id = $regencies->province_id;
+
+        $province_id = $regencies ? $regencies->province_id : null;
 
         return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils','primary','success','pemilihdapil','pemilihdapilbobot','wilayah','province_id'));
         //return view('landingpage.layout');
