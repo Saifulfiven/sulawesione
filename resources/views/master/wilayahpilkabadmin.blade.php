@@ -1,12 +1,12 @@
-<a href="{{ url('admin/pemilih/pilkab') }}" class="btn {{ $primary }} " onclick="location.reload()">Pencarian</a>
+<a href="{{ url('admin/pemilih/pilkab') }}" class="btn {{ $primary }} " onclick="location.reload()"><i class="fas fa-sync-alt"></i></a>
 
-            <button onclick="showHideContent()" class="btn {{ $primary }}" id="tombolsuara" style="display: none;">Jumlah Suara</button>
+            <button onclick="showHideContent()" class="btn {{ $primary }}" id="tombolsuara">Jumlah Suara</button>
             <button onclick="showHideContentBobot()" class="btn {{ $primary }} " id="tombolbobot">Jumlah Bobot Suara</button>
 
 
             <div id="content-toggle" data-aos="fade-up" style="display: none;">
               <form action="" method="get" class="row mt-3" id="form-cari" onsubmit="event.preventDefault(); searchData()">
-              <input type="hidden" name="id_provinsi" id="filter-provinsi" value="75">  
+              <input type="hidden" name="id_provinsi" id="filter-provinsi" value="{{ $province_id }}">  
               <input type="hidden" name="id_kabupaten" value="{{ session('id_kabupaten') }}" id="filter-kabupaten">
               
               <div class="col-md-3">
@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-3">
                 <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example">
-                  <option value="" selected>Pilih Desa</option>
+                  <option value="0" selected>Pilih Desa</option>
                 </select>
               </div>
               <div class="col-md-3">
@@ -82,7 +82,7 @@
 
               <div id="content-toggle-bobot" style="display: none;" data-aos="fade-left" data-aos-duration="1000">
               <form action="" method="get" class="row mt-3" id="form-cari-bobot" onsubmit="event.preventDefault(); searchDataBobot()">
-              <input type="hidden" name="id_provinsi" id="filter-provinsi-bobot" value="75">  
+              <input type="hidden" name="id_provinsi" id="filter-provinsi-bobot" value="{{ $province_id }}">  
               <input type="hidden" name="id_kabupaten" value="{{ session('id_kabupaten') }}" id="filter-kabupaten-bobot">
               
               <div class="col-md-3">
@@ -95,7 +95,7 @@
               </div>
               <div class="col-md-3">
                 <select class="form-select" name="desa" id="filter-desa-bobot" aria-label="Default select example">
-                  <option value="" selected>Pilih Desa</option>
+                  <option value="0" selected>Pilih Desa</option>
                 </select>
               </div>
               <div class="col-md-3">
@@ -158,11 +158,10 @@
               <script>
                 // Search Pemilih
               function searchData() {
-                $('#form-cari').hide();
 
                 $('#tblsearchpemilih').empty();
                 $('#suarapemilih').empty();
-                $('#barChart').empty();
+                $('#barChart').replaceWith('<canvas id="barChart"></canvas>');
 
                 let province = $('#filter-provinsi').val();
                 let district = $('#filter-kabupaten').val();
@@ -239,7 +238,7 @@
                
                 $('#tblsearchpemilih').empty();
                 $('#suarapemilihbobot').empty();
-                $('#barChartBobot').empty();
+                $('#barChartBobot').replaceWith('<canvas id="barChartBobot"></canvas>');
 
                 let province = $('#filter-provinsi-bobot').val();
                 let district = $('#filter-kabupaten-bobot').val();
@@ -274,7 +273,6 @@
                           $('#suarapemilihbobot').append('<tr>'+'<td>'+ nom++ +'</td><td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.jumlah_pemilih +'</td>'+'</tr>');
                       });
 
-                      $('#barChartBobot').empty();
                   const data = {
                       labels: pemilihdapilbobot.map(item => item.namakecamatan),
                       datasets: [{

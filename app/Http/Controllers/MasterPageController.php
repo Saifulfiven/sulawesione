@@ -178,10 +178,10 @@ class MasterPageController extends Controller
 
     public function searchpemilih(Request $request)
     {
-        $id_provinsi = $request->id_provinsi;
+        $id_provinsi  = $request->id_provinsi;
         $id_kabupaten = $request->id_kabupaten;
         $id_kecamatan = $request->id_kecamatan;
-        $id_desa = $request->id_desa;
+        $id_desa      = $request->id_desa;
         $id_dapil     = $request->id_kandidat;
 
         // Pemilihs Untuk tampilkan di tabel  ====== pemilihdapil tampilkan di grafik dan samping
@@ -214,6 +214,7 @@ class MasterPageController extends Controller
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+                ->Where('pemilihs.id_desa', '=', $id_desa)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilkab')
                 ->groupBy('pemilihs.id_desa')->get();
@@ -247,7 +248,7 @@ class MasterPageController extends Controller
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilkab')
                 ->groupBy('pemilihs.id_desa')->get();
-        }else if ($id_kabupaten != null){
+        }else if ($id_kabupaten != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -314,10 +315,43 @@ class MasterPageController extends Controller
         $id_kabupaten = $request->id_kabupaten;
         $id_kecamatan = $request->id_kecamatan;
         $id_dapil     = $request->id_kandidat;
+        $id_desa     = $request->id_desa;
 
         // Pemilihs Untuk tampilkan di tabel  ====== pemilihdapil tampilkan di grafik dan samping
         
-        if($id_kecamatan != '0'){
+        if($id_desa != '0'){
+            $pemilihs = DB::table('pemilihs')
+                ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
+                ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+                ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+                ->join('villages', 'pemilihs.id_desa', '=', 'villages.id')
+                ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
+                     ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
+                    'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
+                    'kandidats.namakandidat',
+                    'timpenggunas.nama as namapengguna')
+                ->where('pemilihs.id_provinsi', '=', $id_provinsi)
+                ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
+                ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+                ->Where('pemilihs.id_desa', '=', $id_desa)
+                ->Where('pemilihs.id_dapil', '=', $id_dapil)
+                ->Where('dapils.jeniskandidat','=','pilgub')->get();
+                
+                $pemilihdapil = \DB::table('pemilihs')
+                ->select('villages.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('villages', 'pemilihs.id_desa', '=', 'villages.id')
+                ->where('dapils.jeniskandidat', '=', 'pilgub')
+                ->where('pemilihs.id_provinsi', '=', $id_provinsi)
+                ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
+                ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+                ->Where('pemilihs.id_desa', '=', $id_desa)
+                ->Where('pemilihs.id_dapil', '=', $id_dapil)
+                ->Where('dapils.jeniskandidat','=','pilgub')
+                ->groupBy('pemilihs.id_desa')->get();
+        }elseif($id_kecamatan != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -347,7 +381,7 @@ class MasterPageController extends Controller
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')
                 ->groupBy('pemilihs.id_desa')->get();
-        }else if ($id_kabupaten != null){
+        }else if ($id_kabupaten != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -411,14 +445,48 @@ class MasterPageController extends Controller
 // Searching Pilgub Berdasarkan jumlah Suara Bobot
 public function searchpemilihgubbobot(Request $request)
 {
-    $id_provinsi = $request->id_provinsi;
-    $id_kabupaten = $request->id_kabupaten;
-    $id_kecamatan = $request->id_kecamatan;
-    $id_dapil     = $request->id_kandidat;
+    $id_dapil       = $request->id_kandidat;
+    $id_provinsi    = $request->id_provinsi;
+    $id_kabupaten   = $request->id_kabupaten;
+    $id_kecamatan   = $request->id_kecamatan;
+    $id_desa        = $request->id_desa;
 
     // Pemilihs Untuk tampilkan di tabel  ====== pemilihdapil tampilkan di grafik dan samping
     
-    if($id_kecamatan != '0'){
+    if($id_desa != '0'){
+        $pemilihs = DB::table('pemilihs')
+            ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
+            ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+            ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+            ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+            ->join('villages', 'pemilihs.id_desa', '=', 'villages.id')
+            ->join('timpenggunas', 'pemilihs.id_timpengguna', '=', 'timpenggunas.id') // Added join to table kandidats
+                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
+                'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
+                'kandidats.namakandidat',
+                'timpenggunas.nama as namapengguna')
+            ->where('pemilihs.id_provinsi', '=', $id_provinsi)
+            ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
+            ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+            ->Where('pemilihs.id_desa', '=', $id_desa)
+            ->Where('pemilihs.id_dapil', '=', $id_dapil)
+            ->Where('dapils.jeniskandidat','=','pilgub')->get();
+
+        
+        $pemilihdapilbobot = \DB::table('pemilihs')
+        ->select('pemilihs.jenispilihan as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+        ->where('pemilihs.id_provinsi', '=', $id_provinsi)
+        ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
+        ->where('pemilihs.id_kecamatan', '=', $id_kecamatan)
+        ->Where('pemilihs.id_desa', '=', $id_desa)
+        ->where('pemilihs.id_dapil', '=', $id_dapil)
+        ->groupBy('pemilihs.jenispilihan')
+        ->get();
+        
+
+            
+    }elseif($id_kecamatan != '0'){
         $pemilihs = DB::table('pemilihs')
             ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
             ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -449,7 +517,7 @@ public function searchpemilihgubbobot(Request $request)
         
 
             
-    }else if ($id_kabupaten != null){
+    }else if ($id_kabupaten != '0'){
         $pemilihs = DB::table('pemilihs')
             ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
             ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -587,7 +655,7 @@ public function searchpemilihbobot(Request $request)
         
 
             
-    }else if ($id_kabupaten != null){
+    }else if ($id_kabupaten != '0'){
         $pemilihs = DB::table('pemilihs')
             ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
             ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
@@ -705,54 +773,54 @@ public function searchpemilihbobot(Request $request)
 
             if(session('jeniskandidat') == 'pilkab'){
 
-            $pemilihdapil = \DB::table('pemilihs')
-            ->select('regencies.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
-            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-            ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
-            ->where('dapils.jeniskandidat', '=', 'pilkab')
-            ->where('dapils.id', session('id_dapil'))
-            ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
-            ->get();
+                $pemilihdapil = \DB::table('pemilihs')
+                ->select('regencies.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+                ->where('dapils.jeniskandidat', '=', 'pilkab')
+                ->where('dapils.id', session('id_dapil'))
+                ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
+                ->get();
 
-            $wilayah = DB::table('districts')
-                ->select('id', 'name as namakecamatan')
-                ->where('regency_id', session('id_kabupaten'))->get();
+                $wilayah = DB::table('districts')
+                    ->select('id', 'name as namakecamatan')
+                    ->where('regency_id', session('id_kabupaten'))->get();
 
 
-            $pemilihdapilbobot = \DB::table('pemilihs')
-            ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
-            ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-            ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
-            ->where('dapils.jeniskandidat', '=', 'pilkab')
-            ->where('dapils.id', session('id_dapil'))
-            ->groupBy('pemilihs.id_kecamatan', 'districts.name')
-            ->get();
+                $pemilihdapilbobot = \DB::table('pemilihs')
+                ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+                ->where('dapils.jeniskandidat', '=', 'pilkab')
+                ->where('dapils.id', session('id_dapil'))
+                ->groupBy('pemilihs.id_kecamatan', 'districts.name')
+                ->get();
 
 
             }elseif(session('jeniskandidat') == 'pilgub'){
                 $pemilihdapil = \DB::table('pemilihs')
-                    ->select('regencies.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
-                    ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-                    ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
-                    ->where('dapils.id', session('id_dapil'))
-                    ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
-                    ->get();
+                ->select('regencies.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+                ->where('dapils.id', session('id_dapil'))
+                ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
+                ->get();
 
-                    $wilayah = DB::table('dapils')
-                    ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
-                    ->join('provinces', 'dapils.id_provinsi', '=', 'provinces.id')
-                    ->select('kandidats.namakandidat','dapils.id', 'provinces.name as namakecamatan')
-                    ->where('dapils.jeniskandidat', session('jeniskandidat'))->get();
+                $wilayah = DB::table('dapils')
+                ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id')
+                ->join('provinces', 'dapils.id_provinsi', '=', 'provinces.id')
+                ->select('kandidats.namakandidat','dapils.id', 'provinces.name as namakecamatan')
+                ->where('dapils.jeniskandidat', session('jeniskandidat'))->get();
 
 
-                    $pemilihdapilbobot = \DB::table('pemilihs')
-                    ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
-                    ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-                    ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
-                    ->where('dapils.jeniskandidat', '=', 'pilkab')
-                    ->where('dapils.id', session('id_dapil'))
-                    ->groupBy('pemilihs.id_kecamatan', 'districts.name')
-                    ->get();
+                $pemilihdapilbobot = \DB::table('pemilihs')
+                ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
+                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
+                ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
+                ->where('dapils.jeniskandidat', '=', 'pilkab')
+                ->where('dapils.id', session('id_dapil'))
+                ->groupBy('pemilihs.id_kecamatan', 'districts.name')
+                ->get();
             }
 
              // ini data dalam tabel pemilihs default saat tampilkan halaman
@@ -777,12 +845,12 @@ public function searchpemilihbobot(Request $request)
             ->select('kandidats.namakandidat','dapils.id')
             ->where('dapils.id', session('id_dapil'))->get();
 
-
-            
-
         }
 
-        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils','primary','success','pemilihdapil','pemilihdapilbobot','wilayah'));
+        $regencies = Regencies::where('id', session('id_kabupaten'))->first();
+        $province_id = $regencies->province_id;
+
+        return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils','primary','success','pemilihdapil','pemilihdapilbobot','wilayah','province_id'));
         //return view('landingpage.layout');
     }
 
@@ -860,7 +928,9 @@ public function searchpemilihbobot(Request $request)
             ->where('dapils.jeniskandidat', '=', 'pilgub')
             ->groupBy('pemilihs.id_kecamatan', 'districts.name')
             ->get();
-        return view('master.pemilihgub', compact('header','toptitle','pemilihs','provinsi','dapils','primary','success','pemilihdapil','pemilihdapilbobot'));
+
+        return view('master.pemilihgub', compact('header','toptitle','pemilihs','provinsi','dapils',
+                    'primary','success','pemilihdapil','pemilihdapilbobot'));
         //return view('landingpage.layout');
     }
 
