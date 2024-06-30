@@ -854,7 +854,7 @@ public function searchpemilihbobot(Request $request)
         return view('master.pemilih', compact('header','toptitle','pemilihs','provinsi','dapils','primary','success','pemilihdapil','pemilihdapilbobot','wilayah','province_id'));
         //return view('landingpage.layout');
     }
-
+ //ipul
     public function pemilihpilgub()
     {
         $toptitle = "Data Pemilih Pilgub";
