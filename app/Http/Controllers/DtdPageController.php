@@ -19,6 +19,10 @@ class DtdPageController extends Controller
 
     public function index()
     {
+
+        if(!session('berhasil_login')){
+            return redirect('/');
+        }
         $toptitle = "Survey Pemilu 2024";
         $header = false;
         $jeniskandidatx = "Pemilih";
