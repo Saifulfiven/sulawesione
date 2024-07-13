@@ -11,7 +11,6 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use App\Models\Districts;
 use App\Models\Villages;
-
 use session;
 
 class DtdPageController extends Controller

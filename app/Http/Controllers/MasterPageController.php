@@ -117,7 +117,7 @@ class MasterPageController extends Controller
         $toptitle = "Tim Inti Pilgub";
         $header = false;
 
-        $timintipilgubs = timpenggunas::where('timpenggunas.jenistim', 'A')
+        $timintipilgubs = timpenggunas::where('timpenggunas.jenistim', '=','A')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')
@@ -138,7 +138,7 @@ class MasterPageController extends Controller
         $header = false;
 
 
-        $pendukungpilgubs = timpenggunas::where('timpenggunas.jenistim', 'B')
+        $pendukungpilgubs = timpenggunas::where('timpenggunas.jenistim', '=', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')
@@ -350,7 +350,9 @@ class MasterPageController extends Controller
                 ->Where('pemilihs.id_desa', '=', $id_desa)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')
-                ->groupBy('pemilihs.id_desa')->get();
+                ->groupBy('pemilihs.id_desa')
+                ->groupBy('villages.name')
+                ->get();
         }elseif($id_kecamatan != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
@@ -380,7 +382,8 @@ class MasterPageController extends Controller
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')
-                ->groupBy('pemilihs.id_desa')->get();
+                ->groupBy('pemilihs.id_desa')
+                ->groupBy('villages.name')->get();
         }else if ($id_kabupaten != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
@@ -408,6 +411,7 @@ class MasterPageController extends Controller
                 ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')
+                ->groupBy('districts.name')
                 ->groupBy('pemilihs.id_kecamatan')->get();
         }else if ($id_provinsi != null){
             $pemilihs = DB::table('pemilihs')
@@ -434,7 +438,9 @@ class MasterPageController extends Controller
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')
-                ->groupBy('pemilihs.id_kecamatan')->get();
+                ->groupBy('pemilihs.id_kecamatan')
+                ->groupBy('districts.name')
+                ->get();
         }
             
 
