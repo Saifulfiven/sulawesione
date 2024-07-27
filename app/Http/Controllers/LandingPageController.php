@@ -19,7 +19,7 @@ class LandingPageController extends Controller
         $header     = true;
         $ceritalain = true;
         $navhalaman = false;
-        $toptitle    = "SulawesiOne";
+        $toptitle    = "To Be The One, To Be The Winner";
         $beritas = Beritas::latest()->paginate(5);
         return view('landingpage.index', compact('berita', 'acara', 'pengalaman',
                     'header','ceritalain','navhalaman','toptitle','beritas'));
