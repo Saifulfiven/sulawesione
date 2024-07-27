@@ -13,7 +13,23 @@
                     <div class="collapse navbar-collapse me-n3" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
                             <a href="/home" class="nav-item nav-link active">Home</a>
-                            <a href="/#kandidat" class="nav-item nav-link">Kenali Kandidat</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span style="color:white">Indonesia</span> <span style="color:red">One</span>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li class="dropdown-submenu">
+                                        <a class="dropdown-item dropdown-toggle" href="#">One Team</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/timinti">Tim Inti</a></li>
+                                            <li><a class="dropdown-item" href="/pendukung">Pendukung</a></li>
+                                            <li><a class="dropdown-item" href="/dtd">Dapil DPRD</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="/jakarta">JakartaOne</a></li>
+                                    <li><a class="dropdown-item" href="/palembang">PalembangOne</a></li>
+                                </ul>
+                            </li>
                             <a href="/#fitur" class="nav-item nav-link">Fitur</a>
                             <a href="/#berita" class="nav-item nav-link">Berita</a>
                            
