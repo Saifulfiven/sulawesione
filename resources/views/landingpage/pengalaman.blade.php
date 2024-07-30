@@ -5,6 +5,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         background-color: #fff;
         border-radius: 10px;
+        
     }
 
     .slides {
@@ -15,12 +16,11 @@
     .slide {
         min-width: 100%;
         box-sizing: border-box;
-        display: flex;
+        
     }
 
     .slide img {
-        width: 40%;
-        height: auto;
+        width: 100%;
         border-radius: 10px 0 0 10px;
     }
 
@@ -29,7 +29,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 60%;
+        
     }
 
     .student-info h3 {
@@ -80,36 +80,76 @@
 <div class="container-fluid py-5 bg-pengalaman">
     <div class="container py-5">
 
-        <div class="content rounded">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-<div class="slider">
-    <div class="slides">
-        <div class="slide">
-            <img src="img/toni.jpg" alt="Student Photo">
-            <div class="student-info">
-                <h1>H. Tonny Uloli, S.E., M.M. </h1>
-                <h2>Calon Gubernur Gorontalo</h2>
-                <p style="margin-top:200px;color: #d6d6d6">Sulawesione</p>
-            </div>
-        </div>
-        <div class="slide">
-            <img src="img/hjramli.jpg" alt="Student Photo">
-            <div class="student-info">
-                <h1>Ramli Anwar</h1>
-                <h2>Calon Walikota Gorontalo</h2>
-                <p style="margin-top:200px;color: #d6d6d6">Sulawesione</p>
-            </div>
-        </div>
-        <!-- Tambahkan slide lain sesuai kebutuhan -->
-    </div>
-    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="next" onclick="changeSlide(1)">&#10095;</button>
-</div>
+        <div class="row">
+
+            
+                <div class="col-md-6">
+                    <div class="slider">
+                        <div class="slides">
+                            <div class="slide">
+                                <div class="col-md-12 col-xs-12">
+                                    <img src="img/profilanisbaswedan.jpeg" alt="">
+                                </div>
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="student-info">
+                                        <h3>H. Anies Rasyid Baswedan, S.E., M.P.P., Ph.D.</h3>
+                                        <p>Calon Gubernur Jakarta</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide">
+                            <div class="col-md-12 col-xs-12">
+                                    <img src="img/profilhjramli.jpg" alt="">
+                                </div>
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="student-info">
+                                        <h3>H. Tonny Uloli, S.E., M.M.</h3>
+                                        <p>Calon Gubernur Gorontalo</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slide">
+                            <div class="col-md-12 col-xs-12">
+                                    <img src="img/profiltoni.jpg" alt="">
+                                </div>
+                                <div class="col-md-12 col-xs-12">
+                                <div class="student-info">
+                                    <h3>Haji Ramli Anwar</h3>
+                                    <p>Calon Walikota Gorontalo</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+                    </div>
                 </div>
-            </div>
+            
+        
+
+                <div class="col-md-6">
+                    
+                    <h3 class="mb-4">Kenali Kandidat</h3>
+                    
+                    <hr>
+                    <p class="lead">
+                        Strategi dengan mengelola persepsi masyarakat (people perception)
+                        secara tepat, dapat memberikan jalan dalam meningkatkan partisipasi.
+                    </p>
+                    <p>
+                        Dengan strategi ini, kamu akan dapat memperoleh gambaran lebih dini tentang
+                        figura calon Pemimpin daerah yang akan dipilih oleh masyarakat.
+                    </p>
+                    <p>
+                        Estimasi tingkat partisipasi secara lebih akurat dan tingkat loyalitas peserta
+                        terhadap calon yang dipilih dapat dilakukan dengan mudah.
+                    </p>
+                </div>
+
+            
         </div>
-    </div></div>
+    </div>
+</div>
 
 <script>
     let currentIndex = 0;

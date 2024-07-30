@@ -122,6 +122,7 @@ class MasterPageController extends Controller
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')
                                 ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
+                                ->orderBy('provinces.id', 'asc')
                                 ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.username','kandidats.namakandidat',
                                     'provinces.name as namaprovinsi','regencies.name as namakabupaten')->get();
         //return $timintipilgubs;

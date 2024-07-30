@@ -22,21 +22,26 @@ use Session;
 class DataFormPageController extends Controller
 {
     //
-    public function index()
+    public function index($id_prov)
     {
         $toptitle = "Data Form List Provinsi";
         $header = false;
         //$provinsis = Provinces::where('aktif', '=', '1')->get();
 
-
         $provinsis = DB::table('dapils')
         ->join('kandidats','dapils.id_kandidat', '=' ,'kandidats.id')
         ->join('provinces','dapils.id_provinsi', '=','provinces.id')
         ->where('dapils.jeniskandidat','=','pilgub')
+        ->where('provinces.slug', '=', $id_prov)
+        
         ->select('kandidats.namakandidat','kandidats.foto','provinces.name as namaprovinsi',
                 'provinces.slug')->get();
+
+        
         //return $provinsis;
-        return view('dataform.index', compact('header','toptitle','provinsis'));
+
+        $provinsi = Provinces::where('status', 1)->get();
+        return view('dataform.index', compact('header','toptitle','provinsis','provinsi'));
     }
 
     public function showDataKab()
@@ -51,7 +56,9 @@ class DataFormPageController extends Controller
         ->select('regencies.name as namakabupaten','regencies.slug','kandidats.foto')
         ->get();
 
-        return view('dataform.component-kabupaten', compact('data','header','toptitle'));
+
+        $provinsi = Provinces::where('status', 1)->get();
+        return view('dataform.component-kabupaten', compact('data','header','toptitle','provinsi'));
     }
 
 
@@ -111,8 +118,9 @@ class DataFormPageController extends Controller
 
 
 
+            $provinsi = Provinces::where('status', 1)->get();
         return view('dataform.pengguna-pilkab-register', compact('header','toptitle',
-                    'datadapils','tampilkankec','judultim','namaKabupaten','judultim'));
+                    'datadapils','tampilkankec','judultim','namaKabupaten','judultim','provinsi'));
     }
 
     public function showFormpilkab($value)
@@ -171,8 +179,9 @@ class DataFormPageController extends Controller
 
 
 
+        $provinsi = Provinces::where('status', 1)->get();
         return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
-                    'datadapils','jeniskandidat','kecamatans','tampilkankec','namaKabupaten','judultim'));
+                    'datadapils','jeniskandidat','kecamatans','tampilkankec','namaKabupaten','judultim','provinsi'));
     }
 
 
@@ -218,8 +227,12 @@ class DataFormPageController extends Controller
             $judultim = "Tim Inti Pemenangan Calon Gubernur $value";
         }
 
+
+        $provinsi = Provinces::where('status', 1)->get();
+
         return view('dataform.pengguna-pilgub-register',
-            compact('data','header','toptitle','jeniskandidat','kecamatans','datadapils','tampilkankab','judultim'));
+            compact('data','header','toptitle','jeniskandidat','kecamatans',
+            'datadapils','tampilkankab','judultim','provinsi'));
     }
 
 
@@ -255,8 +268,10 @@ class DataFormPageController extends Controller
         $jeniskandidat = "PILGUB";
         $judultim = "Tim Pendukung Pemenangan Calon Gubernur Provinsi ".$datadapils->namaprovinsi.", ".$datadapils->namakabupaten;
 
+
+        $provinsi = Provinces::where('status', 1)->get();
         return view('dataform.pengguna-pilgub-register-pendukung',
-            compact('header','toptitle','jeniskandidat','kecamatans','datadapils','tampilkankec','judultim'));
+            compact('header','toptitle','jeniskandidat','kecamatans','datadapils','tampilkankec','judultim','provinsi'));
     }
 
     public function penggunastore(Request $request)
@@ -342,14 +357,18 @@ class DataFormPageController extends Controller
         $toptitle = "Berhasil Mendaftar Sebagai TIM";
         $header = false;
 
-        return view('dataform.sukses', compact('header','toptitle'));
+
+        $provinsi = Provinces::where('status', 1)->get();
+        return view('dataform.sukses', compact('header','toptitle','provinsi'));
     }
 
     public function loginuser()
     {
         $toptitle = "Login User";
         $header = false;
-        return view('dataform.loginuser', compact('header','toptitle'));
+
+        $provinsi = Provinces::where('status', 1)->get();
+        return view('dataform.loginuser', compact('header','toptitle','provinsi'));
     }
 
     public function actionlogin(Request $request)

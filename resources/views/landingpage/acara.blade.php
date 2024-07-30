@@ -1,6 +1,6 @@
   
 <!-- Blog Start -->
-        <div class="container-fluid py-5  bg-pengalaman">
+        <div class="container-fluid py-5  bg-pengalaman" id="fitur">
             <div class="container py-5">
                 <div class="text-center mb-5 wow fadeInUp" data-wow-delay=".3s">
                     <h5 class="mb-2 px-3 py-1 text-dark rounded-pill d-inline-block border border-2 border-primary">Fitur Unggulan</h5>

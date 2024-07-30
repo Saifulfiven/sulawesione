@@ -13,7 +13,7 @@
                 </div>
 
             <div class="col-lg-6 wow fadeIn" data-wow-delay=".3s">
-                <img src="img/katamotivasi.jpg" class="img-fluid rounded" alt="Acara">
+                <img src="img/banner_10.jpg" class="img-fluid rounded" alt="Acara">
             </div>
         </div>
 

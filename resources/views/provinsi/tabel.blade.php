@@ -21,18 +21,19 @@
               </div>
             @endif
 
-            <div class="card-header pb-0 position-relative mb-5 bg-info">
+            <div class="card-header pb-0 position-relative mb-5 bg-primary">
               <h6 Style="color:white">Data provinsi</h6>
-              <a href="{{ url('admin/provinsi/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah provinsi</a>
+              <a href="{{ url('admin/provinsi/tambah') }}" class="btn btn-primary position-absolute end-0 top-0 mt-3 me-3">Tambah provinsi</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
                       <th class="text-secondary">No</th>
                       <th class="text-secondary">Nama Provinsi</th>
-                        <th class="text-secondary">Slug</th>
+                      <th class="text-secondary">Slug</th>
+                      <th class="text-secondary">Status</th>
                       <th class="text-secondary">Created at</th>
                       <th class="text-secondary">Updated at</th>
                       <th class="text-secondary">Aksi</th>
@@ -45,6 +46,7 @@
                           <td> {{ $no }}</td>
                             <td>{{ $provinsi->name }}</td>
                             <td>{{ $provinsi->slug }}</td>
+                            <td>{{ $provinsi->status }}</td>
                           <td>{{ $provinsi->created_at }}</td>
                           <td>{{ $provinsi->updated_at }}</td>
                           <td class="text-center">
