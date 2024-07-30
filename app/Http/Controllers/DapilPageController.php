@@ -120,7 +120,7 @@ class DapilPageController extends Controller
         $id = $request->id;
         $Dapils = Dapils::find($id);
 
-        $prov = 0;
+        //$prov = 0;
 
         if($request->password != null){
             $password = hash('sha256', $request->password);
@@ -128,9 +128,16 @@ class DapilPageController extends Controller
             $password = $Dapils->password;
         }
 
+        if($request->jeniskandidat == "pilgub"){
+            $prov = $request->id_provinsi;
+            $kab = 0;
+        }else{
+            $kab = $request->id_kabupaten;
+            $prov = 0;
+        }
         Dapils::whereId($id)->update([
             'id_kandidat' => $request->id_kandidat,
-            'id_kabupaten' => $request->id_kabupaten,
+            'id_kabupaten' => $kab,
             'id_provinsi' => $prov,
             'username' => $request->username,
             'password' => $password

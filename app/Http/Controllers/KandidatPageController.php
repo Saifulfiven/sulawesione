@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB; // Import DB class
 // Function to delete a file or photo
 
-
 class KandidatPageController extends Controller
 {
-    
-
     //Dashboard
 
     public function index()

@@ -30,6 +30,14 @@
                             <label for="slug" class="col-sm-2 col-form-label">Slug</label>
                             <input type="text" name="slug" class="form-control" required>
                         </div>
+                        <div class="form-group">
+                            <label for="status" class="col-sm-2 col-form-label">Status</label>
+                            <select name="status" class="form-control" required>
+                                <option value="">--Pilih Status--</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </select>
+                        </div>
 
                         <button class="btn btn-info">Tambah</button>
                     </form>

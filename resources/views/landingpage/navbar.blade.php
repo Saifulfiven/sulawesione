@@ -1,9 +1,15 @@
+  <style>
+    .navbar-dark .navbar-nav .nav-link:hover {
+        background-color: green;
+        color: white;
+    }
+</style>
   <!-- Navbar Start -->
         <div class="container-fluid bg-dark">
             <div class="container">
                 <nav class="navbar navbar-dark navbar-expand-lg py-lg-0">
                     <a href="/" class="navbar-brand">
-                        <img src="img/bendera.png" class="img-fluid w-100 rounded-top" style="width:40%" alt="">
+                        <img src="img/icon-cer1.png" class="img-fluid rounded-top" style="width:50%" alt="">
 
                         <!-- <h1 class="text-primary mb-0 display-5">Nobel<span class="text-white">Institute</span> -->
                     </a>
@@ -18,40 +24,65 @@
                                 <span style="color:white">Indonesia</span> <span style="color:red">One</span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li class="dropdown-submenu">
-                                        <a class="dropdown-item dropdown-toggle" href="#">One Team</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/timinti">Tim Inti</a></li>
-                                            <li><a class="dropdown-item" href="/pendukung">Pendukung</a></li>
-                                            <li><a class="dropdown-item" href="/dtd">Dapil DPRD</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="/jakarta">JakartaOne</a></li>
-                                    <li><a class="dropdown-item" href="/palembang">PalembangOne</a></li>
+                                <li><a class="dropdown-item" href="#">JakartaOne</a>
+                                    <ul style="list-style-type: none;">
+                                            <li><a href="/dataform/timinti/jakarta" class="text-dark">
+                                                <span style="display:block;padding:2px">Tim Inti</span></a>
+                                            </li>
+                                            
+                                            @if (session('jeniskandidat') == 'pilgub')
+                                                @if(session('jenistim') == 'A')
+                                                <li><a href="/tambahpendukungpilgub" class="text-dark">
+                                                    <span style="display:block;padding:2px">GPendukung
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                <li><a href="/dtd" class="text-dark">
+                                                    <span style="display:block;padding:2px">DTD
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                            @elseif (session('jeniskandidat') == 'pilkab')
+                                                @if(session('jenistim') == 'A')
+                                                <a href="/tambahpendukung" class="nav-item nav-link">WPendukung</a>
+                                                @endif
+                                                <a href="/dtd" class="nav-item nav-link">DTD</a>
+                                                <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                                <span>{{ session('namapengguna') }}</span>
+                                            @else
+                                                <span style="display:block;padding:2px">Pendukung</span></a></li>
+                                                <li><a href="#" class="text-dark">
+                                                <span style="display:block;padding:2px">DTD</span></a></li>
+                                            @endif
+
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#">SumatraOne</a>
+                                    <ul>
+                                        <li><a href="/dataform/timinti/sumatera-selatan" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Tim Inti</span></a></li>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Pendukung</span></a></li>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">DTD</span></a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#">GorontaloOne</a>
+                                    <ul>
+                                        <li><a href="/dataform/timinti/gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Tim Inti</span></a></li>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Pendukung</span></a></li>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">DTD</span></a></li>
+                                    </ul>
+                                </li>
                                 </ul>
                             </li>
                             <a href="/#fitur" class="nav-item nav-link">Fitur</a>
                             <a href="/#berita" class="nav-item nav-link">Berita</a>
                            
-                                @if (session('jeniskandidat') == 'pilgub')
-                                    @if(session('jenistim') == 'A')
-                                    <a href="/tambahpendukungpilgub" class="nav-item nav-link">Pendukung</a>
-                                    @endif
-                                    <a href="/dtd" class="nav-item nav-link">DTD</a>
-                                    <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
-                                    <span>{{ session('namapengguna') }}</span>
-                                @elseif (session('jeniskandidat') == 'pilkab')
-                                    @if(session('jenistim') == 'A')
-                                    <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
-                                    @endif
-                                    <a href="/dtd" class="nav-item nav-link">DTD</a>
-                                    <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
-                                    <span>{{ session('namapengguna') }}</span>
-                                @else                                
-                                    <a href="/dataform" class="nav-item nav-link">+ Tim Inti</a>
-                                    <a href="/pengguna/login" class="nav-item nav-link">Login</a>
-                                @endif
-
                         </div>
                     </div>
                 </nav>

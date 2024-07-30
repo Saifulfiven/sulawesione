@@ -7,23 +7,42 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
+                        <img src="img/slider1.jpg" class="img-fluid w-100" alt="Indonesia">
+                        <div class="carousel-caption">
+                            <div class="container carousel-content">
+                                <h4 class="text-white mb-4 animated slideInDown">Kami hadir dengan Program</h4>
+                                <h3 class="text-white display-1 mb-4 animated slideInDown">IndonesiaOne</h3>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="carousel-item">
+                        <img src="img/sliderjakarta.jpg" class="img-fluid w-100" alt="JakartaOne">
+                        <div class="carousel-caption">
+                            <div class="container carousel-content">
+                                <h4 class="text-white mb-4 animated slideInDown">Selamat Datang!</h4>
+                                <h3 class="text-white display-1 mb-4 animated slideInDown">JakartaOne</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
                         <img src="img/slider2.jpg" class="img-fluid w-100" alt="SulawesiOne">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Selamat Datang!</h4>
-                                <h1 class="text-white display-1 mb-4 animated slideInDown">SULAWESIONE</h1>
-                                <a href="" class="me-2"><button type="button" class="px-5 text-white py-3 btn btn-primary border-2 rounded-pill animated slideInDown">Selanjutnya</button></a>
+                                <h3 class="text-white display-1 mb-4 animated slideInDown">SULAWESIONE</h3>
                             </div>
                         </div>
                     </div>
                     
                     <div class="carousel-item">
-                        <img src="img/slider3.jpg" class="img-fluid w-100" alt="Second slide">
+                        <img src="img/slidermedan.jpg" class="img-fluid w-100" alt="Second slide">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Senang Bertemu Anda Kembali</h4>
-                                <h1 class="text-white display-1 mb-4 animated slideInDown">Alat Bantu Terbaik!</h1>
-                                <a href="" class="me-2"><button type="button" class="px-5 py-3 btn btn-primary border-2 rounded-pill animated slideInDown text-white">Selanjutnya</button></a>
+                                <h3 class="text-white display-1 mb-4 animated slideInDown">SumateraOne</h3>
                             </div>
                         </div>
                     </div>

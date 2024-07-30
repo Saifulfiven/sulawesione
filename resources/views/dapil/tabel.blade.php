@@ -26,7 +26,7 @@
               <a href="{{ url('admin/dapil/tambah') }}" class="btn btn-success position-absolute end-0 top-0 mt-3 me-3">Tambah dapil</a>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data">
                   <thead>
                     <tr>
@@ -65,7 +65,7 @@
               <h6>Data Pilgub</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-3">
                 <table class="table align-items-center mb-0" id="tabel-data-pilgub">
                   <thead>
                     <tr>

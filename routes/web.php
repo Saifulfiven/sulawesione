@@ -26,7 +26,7 @@ Route::get('/detail', 'App\Http\Controllers\BeritaPageController@index');
 
 
 //Controller DataFormPageController
-Route::get('/dataform', 'App\Http\Controllers\DataFormPageController@index');
+Route::get('/dataform/timinti/{namaprovinsi}', 'App\Http\Controllers\DataFormPageController@index');
 Route::get('/tambahpendukung', 'App\Http\Controllers\DataFormPageController@tambahpendukung');
 Route::get('/tambahpendukungpilgub', 'App\Http\Controllers\DataFormPageController@showFormpilgubpendukung');
 Route::post('/dataform/pengguna-register', 'App\Http\Controllers\DataFormPageController@penggunastore');

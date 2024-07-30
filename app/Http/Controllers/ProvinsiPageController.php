@@ -39,12 +39,14 @@ class provinsiPageController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
-            'slug' => 'required'
+            'slug' => 'required',
+            'status' => 'required'
         ]);
 
         $simpan = Provinces::create([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $request->slug,
+            'status' => $request->status
         ]);
 
         if($simpan){
@@ -68,7 +70,8 @@ class provinsiPageController extends Controller
     {
         $this->validate($request,[
             'name'  => 'required',
-            'slug'  => 'required'
+            'slug'  => 'required',
+            'status'  => 'required'
         ]);
 
         $id = $request->id;
@@ -76,7 +79,8 @@ class provinsiPageController extends Controller
 
         Provinces::whereId($id)->update([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $request->slug,
+            'status' => $request->status
         ]);
 
         return redirect('admin/provinsi')->with('success','Data berhasil diubah');
