@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\kandidat;
+use App\Models\Kandidat;
 use Illuminate\Support\Facades\File;
 
 use Illuminate\Support\Facades\DB; // Import DB class
@@ -17,7 +17,7 @@ class KandidatPageController extends Controller
     {
         $toptitle = "SulawesiOne :. Dashboard - kandidat";
         $header = false;
-        $kandidat = kandidat::latest()->paginate(5);
+        $kandidat = Kandidat::latest()->paginate(5);
 
         return view('kandidat.tabel', compact('header','toptitle','kandidat'));
     }
@@ -46,7 +46,7 @@ class KandidatPageController extends Controller
         $namakandidatnya = $request->namakandidat;
         //SlugService::createSlug(Post::class, 'slug', $post->title);
 
-        kandidat::create([
+        Kandidat::create([
             'namakandidat' => $request->namakandidat,
             'foto' => $namafile
         ]);
@@ -76,7 +76,7 @@ class KandidatPageController extends Controller
         ]);
 
         $id = $request->id;
-        $kandidat = kandidat::find($id);
+        $kandidat = Kandidat::find($id);
         $foto = $request->foto;
         if($foto){
             $namafile = time()."_".$foto->getClientOriginalName();
