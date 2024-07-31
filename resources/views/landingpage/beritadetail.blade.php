@@ -1,5 +1,4 @@
 
-       
 <!-- Blog Start -->
 <div class="container-fluid py-5" id="berita">
     <div class="container py-5">
@@ -33,5 +32,3 @@
 
 </div>
 <!-- Blog End -->
-
-        <!-- Blog End -->

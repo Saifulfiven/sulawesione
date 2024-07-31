@@ -19,6 +19,8 @@ Route::get('/landing', function () {
 });
 
 Route::get('/', 'App\Http\Controllers\LandingPageController@index');
+Route::get('/{slug}', 'App\Http\Controllers\LandingPageController@bacaberita');
+
 Route::get('/home', 'App\Http\Controllers\LandingPageController@index');
 
 //Controller BeritaPageController

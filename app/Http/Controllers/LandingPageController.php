@@ -31,6 +31,35 @@ class LandingPageController extends Controller
         //return view('landingpage.layout');
     }
 
+
+    public function bacaberita($slug)
+    {
+        $berita = Beritas::where('slug', $slug)->firstOrFail();
+        
+
+        $judulheader = $berita->judul;
+        $sharegambar = 'berita/'.$berita->gambar;
+        $header     = false;
+        $ceritalain = false;
+        $navhalaman = false;
+        $toptitle   = $slug;
+
+        $beritas = Beritas::latest()->paginate(5);
+
+        // Menyimpan IP pengunjung
+        // $ip_address = $_SERVER['REMOTE_ADDR'];
+        // $pengunjung = Pengunjungs::whereRaw("posisi = ? and date(created_at) = curdate()", [$ip_address])->first();
+        // if (!$pengunjung) {
+        //     $pengunjung = new Pengunjungs;
+        //     $pengunjung->ip_pengunjung = $ip_address;
+        //     $pengunjung->posisi = $slug;
+        //     $pengunjung->save();
+        // }
+
+        return view('landingpage.indexberita', compact('berita','header',
+                   'ceritalain','navhalaman','beritas','judulheader','sharegambar','toptitle'));
+    }
+
     public function pengalaman(){
         
         $pengalaman = "Pengalaman Mereka.";
