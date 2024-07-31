@@ -27,27 +27,27 @@
                                 <li><a class="dropdown-item" href="#">JakartaOne</a>
                                     <ul style="list-style-type: none;">
                                             <li><a href="/dataform/timinti/jakarta" class="text-dark">
-                                                <span style="display:block;padding:2px">Tim Inti</span></a>
+                                                <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
                                             </li>
                                             
                                             @if (session('jeniskandidat') == 'pilgub')
                                                 @if(session('jenistim') == 'A')
                                                 <li><a href="/tambahpendukungpilgub" class="text-dark">
-                                                    <span style="display:block;padding:2px">GPendukung
+                                                    <span style="display:block;padding:2px">Pendukung
                                                     </span>
                                                     </a>
                                                 </li>
                                                 @endif
                                                 <li><a href="/dtd" class="text-dark">
-                                                    <span style="display:block;padding:2px">DTD
+                                                    <span style="display:block;padding:2px">Data Collection
                                                     </span>
                                                     </a>
                                                 </li>
                                             @elseif (session('jeniskandidat') == 'pilkab')
                                                 @if(session('jenistim') == 'A')
-                                                <a href="/tambahpendukung" class="nav-item nav-link">WPendukung</a>
+                                                <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
                                                 @endif
-                                                <a href="/dtd" class="nav-item nav-link">DTD</a>
+                                                <a href="/dtd" class="nav-item nav-link">Data Collection</a>
                                                 <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
                                                 <span>{{ session('namapengguna') }}</span>
                                             @else
@@ -58,30 +58,47 @@
 
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="#">SumatraOne</a>
+                                <li><a class="dropdown-item" href="#">PagaralamOne</a>
                                     <ul>
-                                        <li><a href="/dataform/timinti/sumatera-selatan" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">Tim Inti</span></a></li>
+                                        <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
                                             <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Pendukung</span></a></li>
                                             <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">DTD</span></a></li>
+                                            <span style="display:block;padding:2px">Data Collection</span></a></li>
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="#">GorontaloOne</a>
+                                <li><a class="dropdown-item" href="#">ProvGorontaloOne</a>
                                     <ul>
                                         <li><a href="/dataform/timinti/gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">Tim Inti</span></a></li>
+                                        <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
                                             <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Pendukung</span></a></li>
                                             <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">DTD</span></a></li>
+                                            <span style="display:block;padding:2px">Data Collection</span></a></li>
                                     </ul>
                                 </li>
+
+                                <li><a class="dropdown-item" href="#">KotaGorontaloOne</a>
+                                    <ul>
+                                        <li><a href="/dataform/timintipilkab/kota-gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
+                                        <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Pendukung</span></a></li>
+                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <span style="display:block;padding:2px">Data Collection</span></a></li>
+                                    </ul>
+                                </li>
+
                                 </ul>
                             </li>
                             <a href="/#fitur" class="nav-item nav-link">Fitur</a>
                             <a href="/#berita" class="nav-item nav-link">Berita</a>
+                            @if(session('berhasil_login'))
+                            <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                            @else
+                            <a href="/pengguna/login" class="nav-item nav-link">Login</a>
+                            @endif
                            
                         </div>
                     </div>

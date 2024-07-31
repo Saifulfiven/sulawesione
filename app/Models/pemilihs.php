@@ -23,6 +23,9 @@ class pemilihs extends Model
         'id_kabupaten',
         'id_provinsi',
         'id_desa',
-        'alamat'
+        'alamat',
+        'id_kandidat',
+        'rt',
+        'rw',
     ];
 }

@@ -15,12 +15,11 @@
    <div class="row">
         <div class="col-lg-12">
             <br>
-            <a class="back-link btn btn-primary" href="javascript:history.back()"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <a class="back-link btn btn-primary" href="/"><i class="fas fa-arrow-left"></i> Kembali</a>
 <br><br>
-            <div class="row text-center">
+<div class="row justify-content-center">
 
             <!-- Baris Pertama -->
-            @foreach($data as $kabupaten)
             <div class="col-lg-4  col-md-4 col-xs-6">
                 <div class="card mb-3" >
                     <a href="/dataform/kab/{{ $kabupaten->slug }}" class="stretched-link">
@@ -31,7 +30,6 @@
                     </a>
                 </div>
             </div>
-            @endforeach
 
             </div>
 
