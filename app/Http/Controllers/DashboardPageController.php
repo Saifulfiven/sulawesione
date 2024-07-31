@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\timpenggunas;
+use App\Models\Timpenggunas;
 
 class DashboardPageController extends Controller
 {
@@ -20,12 +20,12 @@ class DashboardPageController extends Controller
 
 
         if(session('berhasil_login_operator', false)){
-            $jumlahtiminti              = timpenggunas::where('jenistim', 'a')->count();
-            $jumlahtimpendukung         = timpenggunas::where('jenistim', 'b')->count();
-            $jumlahtimintihariini       = timpenggunas::where('jenistim', 'a')
+            $jumlahtiminti              = Timpenggunas::where('jenistim', 'a')->count();
+            $jumlahtimpendukung         = Timpenggunas::where('jenistim', 'b')->count();
+            $jumlahtimintihariini       = Timpenggunas::where('jenistim', 'a')
                                         ->where('created_at', '>=', today())
                                         ->count();
-            $jumlahtimpendukunghariini = timpenggunas::whereDate('created_at', today())
+            $jumlahtimpendukunghariini = Timpenggunas::whereDate('created_at', today())
                                         ->where('jenistim', 'b')
                                         ->count();
 
@@ -46,12 +46,12 @@ class DashboardPageController extends Controller
                                 ->get();
 
         }elseif(session('berhasil_login_admins', false)){
-            $jumlahtiminti              = timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'a')->count();
-            $jumlahtimpendukung         = timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'b')->count();
-            $jumlahtimintihariini       = timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'a')
+            $jumlahtiminti              = Timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'a')->count();
+            $jumlahtimpendukung         = Timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'b')->count();
+            $jumlahtimintihariini       = Timpenggunas::where('id_dapil', session('id_dapil'))->where('jenistim', 'a')
                                         ->where('created_at', '>=', today())
                                         ->count();
-            $jumlahtimpendukunghariini = timpenggunas::where('id_dapil', session('id_dapil'))->whereDate('created_at', today())
+            $jumlahtimpendukunghariini = Timpenggunas::where('id_dapil', session('id_dapil'))->whereDate('created_at', today())
                                         ->where('jenistim', 'b')
                                         ->count();
                                         $totalPemilih = \DB::table('pemilihs')

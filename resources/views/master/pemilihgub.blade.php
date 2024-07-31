@@ -476,17 +476,17 @@
                    pemilihs.forEach(function(objek, indeks) {
                          $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'
                              +'<td>'+ objek.id_kandidat +'</td>'+'<td>'+ objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
-                             + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                             + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                             + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'
+                             +'<td>'+ 'RT : '+ objek.rt +' RW : '+ objek.rw +'</td>'+'<td>'+ objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
                      });
 
                      pemilihdapilcollection.forEach(function(objek, indeks) {
-                         $('#suarapemilihcollection').append('<tr>'+'<td>'+ nom++ +'</td><td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.jumlah_pemilih +'</td>'+'</tr>');
+                         $('#suarapemilihcollection').append('<tr>'+'<td>'+ nom++ +'</td><td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.jumlah_pemilih +'</td>'+'</tr>');
                      });
 
                      $('#barChartcollection').empty();
                  const data = {
-                     labels: pemilihdapilcollection.map(item => item.namakecamatan),
+                     labels: pemilihdapilcollection.map(item => item.namakandidat),
                      datasets: [{
                          label: 'Jumlah Suara',
                          data: pemilihdapilcollection.map(item => item.jumlah_pemilih),
