@@ -23,5 +23,6 @@
 
         <!-- Template Stylesheet -->
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+        <link rel="icon" href="{{ asset('/img/icon-cer1.png') }}" type="image/x-icon">
+        <meta property="og:image" content="{{ asset('/img/thumbnail-wa.jpg') }}">
 
-        

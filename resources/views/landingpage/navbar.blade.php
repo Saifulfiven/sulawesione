@@ -53,7 +53,7 @@
                                             @else
                                                 <span style="display:block;padding:2px">Pendukung</span></a></li>
                                                 <li><a href="#" class="text-dark">
-                                                <span style="display:block;padding:2px">DTD</span></a></li>
+                                                <span style="display:block;padding:2px">Data Collection</span></a></li>
                                             @endif
 
                                     </ul>
