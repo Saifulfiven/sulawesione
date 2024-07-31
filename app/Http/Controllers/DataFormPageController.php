@@ -16,6 +16,7 @@ use App\Models\timpenggunas;
 use App\Models\pemilihs;
 use App\Models\Dapils;
 //use Illuminate\Support\Facades\Auth;
+//perbaikan
 use Illuminate\Support\Facades\DB; // Import DB class
 use Session;
 
