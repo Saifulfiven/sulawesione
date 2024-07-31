@@ -99,7 +99,7 @@
                             </div>
                             <div class="slide">
                             <div class="col-md-12 col-xs-12">
-                                    <img src="img/profilhjramli.jpg" alt="">
+                                    <img src="img/profiltoni.jpg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
                                     <div class="student-info">
@@ -110,7 +110,7 @@
                             </div>
                             <div class="slide">
                             <div class="col-md-12 col-xs-12">
-                                    <img src="img/profiltoni.jpg" alt="">
+                                    <img src="img/profilhjramli.jpg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
                                 <div class="student-info">
@@ -128,7 +128,7 @@
         
 
                 <div class="col-md-6">
-                    
+                    <br>
                     <h3 class="mb-4">Kenali Kandidat</h3>
                     
                     <hr>

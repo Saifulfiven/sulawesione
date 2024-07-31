@@ -32,7 +32,7 @@ Route::get('/tambahpendukungpilgub', 'App\Http\Controllers\DataFormPageControlle
 Route::post('/dataform/pengguna-register', 'App\Http\Controllers\DataFormPageController@penggunastore');
 Route::post('/dataform/pemilih-register', 'App\Http\Controllers\DataFormPageController@pemilihstore');
 Route::get('/dataform/sukses', 'App\Http\Controllers\DataFormPageController@sukses');
-Route::get('/dataform/pilkab', 'App\Http\Controllers\DataFormPageController@showDataKab');
+Route::get('/dataform/timintipilkab/{namakab}', 'App\Http\Controllers\DataFormPageController@showDataKab');
 Route::get('/dataform/kab/{namakab}', 'App\Http\Controllers\DataFormPageController@showFormpilkab');
 Route::get('/dataform/prov/{prov}', 'App\Http\Controllers\DataFormPageController@showFormpilgub');
 
@@ -40,7 +40,6 @@ Route::get('/dataform/prov/{prov}', 'App\Http\Controllers\DataFormPageController
 Route::get('/dtd', 'App\Http\Controllers\DtdPageController@index');
 Route::post('/dtd', 'App\Http\Controllers\DtdPageController@pemilihstore');
 Route::get('/dtd/sukses', 'App\Http\Controllers\DtdPageController@sukses');
-
 
 // ini gunanya untuk batasi login ->middleware('auth');
 Route::get('/login', 'App\Http\Controllers\DataFormPageController@loginuser');
@@ -94,11 +93,18 @@ Route::post('/admin/searchpemilih', 'App\Http\Controllers\MasterPageController@s
 Route::post('/admin/searchpemilihbobot', 'App\Http\Controllers\MasterPageController@searchpemilihbobot');
 Route::post('/admin/searchpemilihgub', 'App\Http\Controllers\MasterPageController@searchpemilihgub');
 Route::post('/admin/searchpemilihgubbobot', 'App\Http\Controllers\MasterPageController@searchpemilihgubbobot');
+Route::post('/admin/searchpemilihgubcollection', 'App\Http\Controllers\MasterPageController@searchpemilihgubcollection');
 
 // combobox realtime Bobot
 Route::post('/admin/searchkabupatenbobot', 'App\Http\Controllers\MasterPageController@searchkabupaten');
 Route::post('/admin/searchkecamatanbobot', 'App\Http\Controllers\MasterPageController@searchkecamatan');
 Route::post('/admin/searchdesabobot', 'App\Http\Controllers\MasterPageController@searchdesa');
+
+
+// combobox realtime collection
+Route::post('/admin/searchkabupatencollection', 'App\Http\Controllers\MasterPageController@searchkabupaten');
+Route::post('/admin/searchkecamatancollection', 'App\Http\Controllers\MasterPageController@searchkecamatan');
+Route::post('/admin/searchdesacollection', 'App\Http\Controllers\MasterPageController@searchdesa');
 
 
 Route::get('/admin/berita', 'App\Http\Controllers\BeritaPageController@home');

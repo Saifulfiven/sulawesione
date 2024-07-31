@@ -11,6 +11,8 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use App\Models\Districts;
 use App\Models\Villages;
+use App\Models\kandidatwilayahs;
+
 use session;
 
 class DtdPageController extends Controller
@@ -44,8 +46,17 @@ class DtdPageController extends Controller
         ->where('timpenggunas.id', $id_timpengguna)
         ->get();
 
+
+        $tampilkankandidat = DB::table('kandidatwilayahs')
+        ->join('timpenggunas', function ($join) use ($id_timpengguna) {
+            $join->on('timpenggunas.id_dapil', '=', DB::raw('BINARY kandidatwilayahs.id_dapil'));
+        })
+        ->select('kandidatwilayahs.id','kandidatwilayahs.namakandidat')
+        ->where('timpenggunas.id', $id_timpengguna)
+        ->get();
+
         return view('dataform.pemilih-register',
-               compact('header','toptitle','jeniskandidatx','datadapils','tampilkankec'));
+               compact('header','toptitle','jeniskandidatx','datadapils','tampilkankec','tampilkankandidat'));
     }
 
     public function pemilihstore(Request $request)
@@ -61,6 +72,9 @@ class DtdPageController extends Controller
             'desa'             => 'nullable',
             'kontak'           => 'nullable',
             'jenispilihan'     => 'nullable',
+            'id_kandidat'      => 'nullable',
+            'rt'               => 'nullable',
+            'rw'               => 'nullable',
         ]);
 
         $id_timpengguna = session('id_timpengguna');
@@ -76,6 +90,9 @@ class DtdPageController extends Controller
             'alamat'          => $request->alamat,
             'kontak'          => $request->kontak,
             'jenispilihan'    => $request->jenispilihan, // Isi Survey
+            'id_kandidat'     => $request->id_kandidat,
+            'rt'              => $request->rt,
+            'rw'              => $request->rw
         ]);
 
         if($pemilih){

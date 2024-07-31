@@ -44,21 +44,21 @@ class DataFormPageController extends Controller
         return view('dataform.index', compact('header','toptitle','provinsis','provinsi'));
     }
 
-    public function showDataKab()
+    public function showDataKab($namakabupaten)
     {
 
         $toptitle = "List Kabupaten";
         $header = false;
-        $data = DB::table('provinces')
-        ->join('regencies', 'provinces.id', '=', 'regencies.province_id')
+        $kabupaten = DB::table('regencies')
         ->join('dapils', 'regencies.id', '=', 'dapils.id_kabupaten')
         ->join('kandidats', 'dapils.id_kandidat', '=', 'kandidats.id') // Added join to table kandidats
+        ->where('regencies.slug', '=', $namakabupaten)
         ->select('regencies.name as namakabupaten','regencies.slug','kandidats.foto')
-        ->get();
+        ->first();
 
 
         $provinsi = Provinces::where('status', 1)->get();
-        return view('dataform.component-kabupaten', compact('data','header','toptitle','provinsi'));
+        return view('dataform.component-kabupaten', compact('kabupaten','header','toptitle','provinsi'));
     }
 
 

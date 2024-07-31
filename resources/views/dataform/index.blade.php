@@ -23,9 +23,11 @@
 
 
         <div class="col-lg-12">
-        <br><br>
+        <br>
+            <a class="back-link btn btn-primary" href="/"><i class="fas fa-arrow-left"></i> Kembali</a>
+<br><br>
 
-            <div class="row justify-content-center">
+            <!-- <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100" style="background-color: #007bff;" id="pilgub"  onclick="showAjaxContent('pilgub')">
                         <div class="card-body text-center" style="transition: all 0.3s ease; background: linear-gradient(1b8bd6, #6abbf2, #bbe1fa); color: white !important;">
@@ -43,9 +45,9 @@
                     </div>
                     </a>
                 </div>
-            </div>
+            </div> -->
 
-            <div id="pilih-provinsi" style="display:none">
+            <div id="pilih-provinsi">
                 <div class="row justify-content-center">
                 @foreach($provinsis as $provinsi)
                     <div class="col-lg-4 col-md-6 col-xs-6 mb-4">

@@ -25,7 +25,7 @@
 
                 <div class="col-lg-6 mx-auto">
 
-                <h3> Door to Door  {{ $jeniskandidatx }} </h3>
+                <h3> Data Collecting  {{ $jeniskandidatx }} </h3>
 
                 @if(session('jeniskandidat') == 'pilgub')                
                     <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
@@ -50,6 +50,17 @@
                     @include('master.wilayah-pilkab')
                 @endif
 
+
+                <div class="form-group">
+                <label for="rt">RT:</label>
+                <input type="text" class="form-control" id="rt" name="rt">
+                </div>
+
+                <div class="form-group">
+                <label for="rw">RW:</label>
+                <input type="text" class="form-control" id="rw" name="rw">
+                </div>
+
                 <div id="desa" class="form-group">
                     <label for="kontak">Alamat</label>
                         <input type="text" id="alamat" name="alamat" class="form-control">
@@ -61,8 +72,22 @@
                         <input type="text" id="kontak" name="kontak" class="form-control">
                 </div>
 
+<br>
+
+
                 <div class="form-group">
-                    <label for="options">Jenis Pilihan:</label>
+                    <label for="nama">Seandainya Pilkada Jakarta dilangsungkan hari ini, Ada 13 orang calon yang akan maju sebagai calon Gubernur ?</label>
+                    <select class="form-control" id="id_kandidat" name="id_kandidat">
+                        @foreach ($tampilkankandidat as $kandidat)
+                            <option value="{{ $kandidat->id }}">{{ $kandidat->namakandidat }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+<br>
+                <div class="form-group">
+                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon Gubernur,     
+                    bagaimana sikap  dukungan anda terhadap calon tersebut ?</label>
 
                         <select id="jenispilihan" name="jenispilihan" class="form-control">
                             <option value="" disabled>Pilih...</option>
