@@ -1,0 +1,21 @@
+- buatkan saya suatu card yang backgroundnya terdapat gambar lalu di dalamnya ada gambar yang lebih tinggi z-indexnya beserta teks
+- Duplikat konten ini menjadi sepuluh dan hanya menampilkan default 3 konten serta buatkan tombol untuk menampilkan semua konten jika diklik tombolnya
+- Buatkan pagination realtime berfungsi menampilkan per satu konten per halaman
+<div class="col-md-4">
+        <div class="card" style="transition: transform .2s;">
+            <div class="card-img-overlay d-flex flex-column justify-content-end" style="transition: background-color .2s;">
+                <h5 class="card-title">dr. Reisa Broto Asmoro</h5>    
+                <p class="card-text text-white">Dokter</p>
+            </div>
+            <img src="img/pengalaman-1.jpg" class="card-img-top" alt="Gambar 4">
+            <style>
+                .card:hover {
+                    transform: scale(1.05);
+                    cursor: pointer;
+                }
+                .card-img-overlay:hover {
+                    background-color: rgba(0, 0, 0, 0.5);
+                }
+            </style>
+        </div>
+    </div>

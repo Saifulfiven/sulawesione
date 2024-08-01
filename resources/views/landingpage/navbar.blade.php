@@ -48,7 +48,7 @@
                                                 <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
                                                 @endif
                                                 <a href="/dtd" class="nav-item nav-link">Data Collection</a>
-                                                <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                                
                                                 <span>{{ session('namapengguna') }}</span>
                                             @else
                                                 <span style="display:block;padding:2px">Pendukung</span></a></li>

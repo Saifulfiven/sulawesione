@@ -167,6 +167,7 @@ Route::get('/admin/desa/ubah/{id}', 'App\Http\Controllers\DesaPageController@uba
 Route::post('/admin/desa/update', 'App\Http\Controllers\DesaPageController@update');
 Route::get('/admin/desa/hapus/{id}', 'App\Http\Controllers\DesaPageController@hapus');
 
+Route::get('/{slug}', 'App\Http\Controllers\LandingPageController@bacaberita');
 // Route::get('/admin/pengalaman/home', 'App\Http\Controllers\pengalamanPageController@home');
 // Route::get('/admin/pengalaman/tambah', 'App\Http\Controllers\pengalamanPageController@tambah');
 // Route::post('/admin/pengalaman/tambah', 'App\Http\Controllers\pengalamanPageController@simpan');
