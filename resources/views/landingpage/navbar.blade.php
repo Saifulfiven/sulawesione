@@ -18,7 +18,7 @@
                     </button>
                     <div class="collapse navbar-collapse me-n3" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="/home" class="nav-item nav-link active">Home</a>
+                            <a href="/" class="nav-item nav-link active">Home</a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span style="color:white">Indonesia</span> <span style="color:red">One</span>
