@@ -24,13 +24,3 @@
         <!-- Template Stylesheet -->
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
         <link rel="icon" href="{{ asset('/img/icon-cer1.png') }}" type="image/x-icon">
-        <meta property="og:image" content="{{ asset('/img/thumbnail-wa.jpg') }}">
-
-  <!-- Open Graph Tags -->
-    <meta property="og:title" content="To Be The One, To Be The Winner">
-    <meta property="og:description" content="Kehadiran CER INDONESIA sebagai perusahaan Riset dan Komunikasi Bisnis yang mengedepankan data dan kegiatan yang berbasis riset untuk membantu pengusaha untuk memotret secara utuh kondisi dan realitas bisnis yang terjadi saat ini.">
-    <meta property="og:url" content="https://cerindonesia.com/">
-    <meta property="og:type" content="website">
-  <!-- Tambahkan tag berikut untuk kompatibilitas dengan WhatsApp -->
-  <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
