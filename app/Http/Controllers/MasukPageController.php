@@ -39,7 +39,7 @@ class MasukPageController extends Controller
             session(['namapengguna'   => $admin->nama]);
             session(['jenistim'       => $admin->jenistim]);
             session(['jeniskandidat'  => $admin->jeniskandidat]);
-            return redirect('/home');
+            return redirect('/');
 
         } else {
             Timpenggunas::where('username', $request->username)->update(['remember_token' => 0]);
