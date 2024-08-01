@@ -18,7 +18,7 @@
                     </button>
                     <div class="collapse navbar-collapse me-n3" id="navbarCollapse">
                         <div class="navbar-nav ms-auto">
-                            <a href="/home" class="nav-item nav-link active">Home</a>
+                            <a href="/" class="nav-item nav-link active">Home</a>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span style="color:white">Indonesia</span> <span style="color:red">One</span>
@@ -48,12 +48,12 @@
                                                 <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
                                                 @endif
                                                 <a href="/dtd" class="nav-item nav-link">Data Collection</a>
-                                                <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                                
                                                 <span>{{ session('namapengguna') }}</span>
                                             @else
                                                 <span style="display:block;padding:2px">Pendukung</span></a></li>
                                                 <li><a href="#" class="text-dark">
-                                                <span style="display:block;padding:2px">DTD</span></a></li>
+                                                <span style="display:block;padding:2px">Data Collection</span></a></li>
                                             @endif
 
                                     </ul>

@@ -75,7 +75,7 @@ Tersedia platform berbasis web yang akan memudahkan Anda melihat Statistik pada 
 
                             
                     <div class="col-lg-4">
-                        <img src="img/gambar-keunggulan.png" class="img-fluid w-100 rounded" alt="">
+                        <img src="img/items-gambar-keunggulan.png" class="img-fluid w-100 rounded" alt="">
                     </div>
 
                     <div class="col-lg-4">
