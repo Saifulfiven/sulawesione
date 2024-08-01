@@ -12,7 +12,7 @@ use App\Models\pendukungs;
 use App\Models\Provinces;
 use App\Models\kandidat;
 use App\Models\Desa;
-use App\Models\timpenggunas;
+use App\Models\Timpenggunas;
 use Illuminate\Support\Facades\DB; // Import DB class
 
 class MasterPageController extends Controller
@@ -41,7 +41,7 @@ class MasterPageController extends Controller
         $header = false;
 
         if (session('berhasil_login_operator')) {
-            $timintis = timpenggunas::where('timpenggunas.jenistim', 'A')
+            $timintis = Timpenggunas::where('timpenggunas.jenistim', 'A')
                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
@@ -52,7 +52,7 @@ class MasterPageController extends Controller
                 ->get();
         } elseif (session('berhasil_login_admins')) {
             $dapil = session('id_dapil');
-            $timintis = timpenggunas::where('timpenggunas.jenistim', 'A')
+            $timintis = Timpenggunas::where('timpenggunas.jenistim', 'A')
                 ->where('timpenggunas.id_dapil', $dapil)
                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
@@ -78,7 +78,7 @@ class MasterPageController extends Controller
 
 
         if (session('berhasil_login_operator')) {
-        $pendukungs = timpenggunas::where('timpenggunas.jenistim', 'B')
+        $pendukungs = Timpenggunas::where('timpenggunas.jenistim', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
@@ -90,7 +90,7 @@ class MasterPageController extends Controller
         } elseif (session('berhasil_login_admins')) {
         $dapil = session('id_dapil');
 
-        $pendukungs = timpenggunas::where('timpenggunas.jenistim', 'B')
+        $pendukungs = Timpenggunas::where('timpenggunas.jenistim', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
@@ -117,7 +117,7 @@ class MasterPageController extends Controller
         $toptitle = "Tim Inti Pilgub";
         $header = false;
 
-        $timintipilgubs = timpenggunas::where('timpenggunas.jenistim', '=','A')
+        $timintipilgubs = Timpenggunas::where('timpenggunas.jenistim', '=','A')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')
@@ -139,7 +139,7 @@ class MasterPageController extends Controller
         $header = false;
 
 
-        $pendukungpilgubs = timpenggunas::where('timpenggunas.jenistim', '=', 'B')
+        $pendukungpilgubs = Timpenggunas::where('timpenggunas.jenistim', '=', 'B')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')

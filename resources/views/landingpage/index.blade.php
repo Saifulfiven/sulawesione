@@ -7,6 +7,7 @@
 @include('landingpage.pengalaman')
 @include('landingpage.acara')
 @include('landingpage.keunggulannya')
+
     @include('landingpage.berita')
 
 @endsection
