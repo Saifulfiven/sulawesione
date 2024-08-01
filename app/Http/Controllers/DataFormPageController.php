@@ -12,7 +12,7 @@ use App\Models\Provinces;
 use App\Models\Regencies;
 use App\Models\Districts;
 use App\Models\Villages;
-use App\Models\timpenggunas;
+use App\Models\Timpenggunas;
 use App\Models\pemilihs;
 use App\Models\Dapils;
 //use Illuminate\Support\Facades\Auth;
@@ -322,7 +322,7 @@ class DataFormPageController extends Controller
             $jenistim  = "A";
         }
 
-        $pengguna = timpenggunas::create([
+        $pengguna = Timpenggunas::create([
             'id_dapil'                  => $request->id_dapil,
             'id_timinti'                => $id_timinti,
             'jenistim'                  => $jenistim,

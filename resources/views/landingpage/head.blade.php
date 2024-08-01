@@ -31,3 +31,6 @@
     <meta property="og:description" content="Kehadiran CER INDONESIA sebagai perusahaan Riset dan Komunikasi Bisnis yang mengedepankan data dan kegiatan yang berbasis riset untuk membantu pengusaha untuk memotret secara utuh kondisi dan realitas bisnis yang terjadi saat ini.">
     <meta property="og:url" content="https://cerindonesia.com/">
     <meta property="og:type" content="website">
+  <!-- Tambahkan tag berikut untuk kompatibilitas dengan WhatsApp -->
+  <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
