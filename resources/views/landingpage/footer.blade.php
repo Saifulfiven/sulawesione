@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                   <!-- bismillah sekarang-->
+                   <!-- bismillah sekarang gasss-->
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-item">
                             <h4 class="text-white fw-bold mb-4">Contact Us</h4>
