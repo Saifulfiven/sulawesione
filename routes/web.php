@@ -19,7 +19,6 @@ Route::get('/landing', function () {
 });
 
 Route::get('/', 'App\Http\Controllers\LandingPageController@index');
-Route::get('/{slug}', 'App\Http\Controllers\LandingPageController@bacaberita');
 
 Route::get('/home', 'App\Http\Controllers\LandingPageController@index');
 
@@ -173,6 +172,9 @@ Route::get('/admin/desa/hapus/{id}', 'App\Http\Controllers\DesaPageController@ha
 // Route::get('/admin/pengalaman/ubah/{id}', 'App\Http\Controllers\pengalamanPageController@ubah');
 // Route::post('/admin/pengalaman/update', 'App\Http\Controllers\pengalamanPageController@update');
 // Route::get('/admin/pengalaman/hapus/{id}', 'App\Http\Controllers\pengalamanPageController@hapus');
+
+
+Route::get('/{slug}', 'App\Http\Controllers\LandingPageController@bacaberita');
 
 Route::middleware('auth:admin')->group(function(){
     // Tulis routemu di sini.

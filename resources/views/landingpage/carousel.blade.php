@@ -11,7 +11,7 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img src="img/carousel/slider1.jpg" class="img-fluid w-100" alt="Indonesia">
+                        <img src="img/carousel/slider1baru.jpg" class="img-fluid w-100" alt="Indonesia">
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Kami hadir dengan Program</h4>
