@@ -109,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="slide">
-                            <div class="col-md-12 col-xs-12">
+                                <div class="col-md-12 col-xs-12">
                                     <img src="img/profilhjramli.jpg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
@@ -119,14 +119,16 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 col-xs-12">
-                                    <img src="/img/andiislamuddin.jpeg" alt="">
+
+                            <div class="slide">
+                                <div class="col-md-12 col-xs-12">
+                                    <img src="/img/andiislamuddinbone.jpg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
-                                <div class="student-info">
-                                    <h3>Drs. H. Andi Islamuddin, M.H.</h3>
-                                    <p>Calon Bupati Kabupaten Bone</p>
-                                </div>
+                                    <div class="student-info">
+                                        <h3>Drs. H. Andi Islamuddin, M.H.</h3>
+                                        <p>Calon Bupati Kabupaten Bone</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
