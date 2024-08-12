@@ -119,6 +119,16 @@
                                 </div>
                                 </div>
                             </div>
+                            <div class="col-md-12 col-xs-12">
+                                    <img src="/images/kandidat/1719626105_PJ_BUPATI-86-scaled.jpeg" alt="">
+                                </div>
+                                <div class="col-md-12 col-xs-12">
+                                <div class="student-info">
+                                    <h3>Drs. H. Andi Islamuddin, M.H.</h3>
+                                    <p>Calon Bupati Kabupaten Bone</p>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
                         <button class="next" onclick="changeSlide(1)">&#10095;</button>
