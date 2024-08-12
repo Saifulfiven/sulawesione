@@ -58,14 +58,38 @@
 
                                     </ul>
                                 </li>
-                                <li><a class="dropdown-item" href="#">PagaralamOne</a>
-                                    <ul>
-                                        <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
-                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">Pendukung</span></a></li>
-                                            <li><a href="#" class="text-dark" style="transition: all .3s ease-in-out;">
-                                            <span style="display:block;padding:2px">Data Collection</span></a></li>
+                                <li><a class="dropdown-item" href="#">KabBoneOne</a>
+                                    <ul style="list-style-type: none;">
+                                            <li><a href="/dataform/timinti/kabupaten-bone" class="text-dark">
+                                                <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
+                                            </li>
+                                            
+                                            @if (session('jeniskandidat') == 'pilgub')
+                                                @if(session('jenistim') == 'A')
+                                                <li><a href="/tambahpendukungpilgub" class="text-dark">
+                                                    <span style="display:block;padding:2px">Pendukung
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                                @endif
+                                                <li><a href="/dtd" class="text-dark">
+                                                    <span style="display:block;padding:2px">Data Collection
+                                                    </span>
+                                                    </a>
+                                                </li>
+                                            @elseif (session('jeniskandidat') == 'pilkab')
+                                                @if(session('jenistim') == 'A')
+                                                <a href="/tambahpendukung" class="nav-item nav-link">Pendukung</a>
+                                                @endif
+                                                <a href="/dtd" class="nav-item nav-link">Data Collection</a>
+                                                <a href="/pengguna/logout" class="nav-item nav-link">Logout</a>
+                                                <span>{{ session('namapengguna') }}</span>
+                                            @else
+                                                <span style="display:block;padding:2px">Pendukung</span></a></li>
+                                                <li><a href="#" class="text-dark">
+                                                <span style="display:block;padding:2px">Data Collection</span></a></li>
+                                            @endif
+
                                     </ul>
                                 </li>
                                 <li><a class="dropdown-item" href="#">ProvGorontaloOne</a>

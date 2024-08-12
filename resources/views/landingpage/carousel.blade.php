@@ -15,7 +15,7 @@
                         <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Kami hadir dengan Program</h4>
-                                <h3 class="text-white display-1 mb-4 animated slideInDown">IndonesiaOne</h3>
+                                <h3 class="text-white display-1 mb-4 animated slideInDown">Indonesia<span style="color:red">One</span></h3>
                             </div>
                         </div>
                     </div>
