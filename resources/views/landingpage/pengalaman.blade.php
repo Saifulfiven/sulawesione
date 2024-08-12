@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 col-xs-12">
-                                    <img src="/images/kandidat/1719626105_PJ_BUPATI-86-scaled.jpeg" alt="">
+                                    <img src="/img/andiislamuddin.jpeg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
                                 <div class="student-info">
@@ -185,3 +185,4 @@
         changeSlide(1);
     }, 5000);
 </script>
+
