@@ -60,13 +60,13 @@
                                 </li>
                                 <li><a class="dropdown-item" href="#">KabBoneOne</a>
                                     <ul style="list-style-type: none;">
-                                            <li><a href="/dataform/timinti/kabupaten-bone" class="text-dark">
+                                            <li><a href="/dataform/timintipilkab/kabupaten-bone" class="text-dark">
                                                 <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
                                             </li>
                                             
                                             @if (session('jeniskandidat') == 'pilgub')
                                                 @if(session('jenistim') == 'A')
-                                                <li><a href="/tambahpendukungpilgub" class="text-dark">
+                                                <li><a href="/tambahpendukungpilkab" class="text-dark">
                                                     <span style="display:block;padding:2px">Pendukung
                                                     </span>
                                                     </a>
