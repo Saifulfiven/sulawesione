@@ -42,6 +42,7 @@ class MasterPageController extends Controller
 
         if (session('berhasil_login_operator')) {
             $timintis = Timpenggunas::where('timpenggunas.jenistim', 'A')
+                ->where('timpenggunas.id_dapil', 6) // Tampilkan hanya dari dapil 6
                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')

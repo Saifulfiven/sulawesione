@@ -66,6 +66,7 @@ Route::get('/admins-logout', 'App\Http\Controllers\LoginPageController@adminsact
 
 //Controller DashboaedPageController
 Route::get('/dashboard', 'App\Http\Controllers\DashboardPageController@index');
+Route::get('/admin/grafiksuara', 'App\Http\Controllers\DashboardPageController@grafiksuara');
 
 //CRUD ACARA Admin
 
@@ -84,8 +85,6 @@ Route::get('/admin/timintipilgub', 'App\Http\Controllers\MasterPageController@ti
 Route::get('/admin/pendukungpilgub', 'App\Http\Controllers\MasterPageController@pendukungpilgub');
 Route::get('/admin/pemilih/pilkab', 'App\Http\Controllers\MasterPageController@pemilihpilkab');
 Route::get('/admin/pemilih/pilgub', 'App\Http\Controllers\MasterPageController@pemilihpilgub');
-Route::get('/admin/caleg', 'App\Http\Controllers\MasterPageController@caleg');
-
 //combobox realtime bertingkat
 Route::post('/admin/searchkabupaten', 'App\Http\Controllers\MasterPageController@searchkabupaten');
 Route::post('/admin/searchkecamatan', 'App\Http\Controllers\MasterPageController@searchkecamatan');

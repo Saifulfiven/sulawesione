@@ -115,20 +115,12 @@ class DashboardPageController extends Controller
             ->count();
 
            // Gubernur
-                // $pemilihDapil = \DB::table('pemilihs')
-                //     ->select('regencies.name', \DB::raw('count(*) as jumlah_pemilih'))
-                //     ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-                //     ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
-                //     ->where('dapils.id', '6')
-                //     ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
-                //     ->get();
-
-                    $pemilihDapil = \DB::table('pemilihs')
-                    ->select('districts.name', \DB::raw('count(*) as jumlah_pemilih'))
+                $pemilihDapil = \DB::table('pemilihs')
+                    ->select('regencies.name', \DB::raw('count(*) as jumlah_pemilih'))
                     ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
-                    ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
-                    ->where('dapils.id', 6)
-                    ->groupBy('pemilihs.id_kecamatan', 'districts.name')
+                    ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+                    ->where('dapils.id', '6')
+                    ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
                     ->get();
 
         $data = [

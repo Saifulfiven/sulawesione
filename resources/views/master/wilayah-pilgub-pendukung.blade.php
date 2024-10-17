@@ -10,10 +10,10 @@
 </div>
 
 <div id="desa" class="form-group">
-    <label for="desa">Kelurahan:</label>
+    <label for="desa">Kelurahan / Desa:</label>
 
     <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example">
-        <option value="" selected>Pilih Kelurahan</option>
+        <option value="" selected>Pilih Kelurahan / Desa</option>
     </select>
 </div>
 

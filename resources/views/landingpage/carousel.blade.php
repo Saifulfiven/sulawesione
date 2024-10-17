@@ -11,18 +11,18 @@
                 </ol>
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img src="img/carousel/slider1baru.jpg" class="img-fluid w-100" alt="Indonesia">
-                        <div class="carousel-caption">
+                        <img src="img/carousel/satu.jpeg" class="img-fluid w-100" alt="Indonesia">
+                        <!-- <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Kami hadir dengan Program</h4>
                                 <h3 class="text-white display-1 mb-4 animated slideInDown">Indonesia<span style="color:red">One</span></h3>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
 
                     <div class="carousel-item">
-                        <img src="img/carousel/slider2.png" class="img-fluid w-100" alt="JakartaOne">
+                        <img src="img/carousel/dua.jpeg" class="img-fluid w-100" alt="JakartaOne">
                         <!-- <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Selamat Datang!</h4>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="carousel-item">
-                        <img src="img/carousel/slider3.png" class="img-fluid w-100" alt="SulawesiOne">
+                        <img src="img/carousel/tiga.jpeg" class="img-fluid w-100" alt="SulawesiOne">
                         <div class="carousel-caption">
                             <!-- <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Selamat Datang!</h4>
@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="carousel-item">
-                        <img src="img/carousel/slider4.png" class="img-fluid w-100" alt="Second slide">
+                        <img src="img/carousel/empat.jpeg" class="img-fluid w-100" alt="Second slide">
                         <!-- <div class="carousel-caption">
                             <div class="container carousel-content">
                                 <h4 class="text-white mb-4 animated slideInDown">Senang Bertemu Anda Kembali</h4>
@@ -50,12 +50,12 @@
                             </div>
                         </div> -->
                     </div>
-                    <div class="carousel-item">
+                    <!-- <div class="carousel-item">
                         <img src="img/carousel/slider5.png" class="img-fluid w-100" alt="Second slide">
                     </div>
                     <div class="carousel-item">
                         <img src="img/carousel/slider6.png" class="img-fluid w-100" alt="Second slide">
-                    </div>
+                    </div> -->
                 </div>
                 <button class="carousel-control-prev btn btn-primary border border-2 border-start-0 border-primary" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
