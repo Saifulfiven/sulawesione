@@ -31,7 +31,7 @@
                     <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
                     <h6>{{ $datadapils->namakabupaten }}</h6>
                 @else
-                    <h6>Calon Bupati {{ $datadapils->namakabupaten }}</h6>
+                    <h6>Calon Walikota {{ $datadapils->namakabupaten }}</h6>
                 @endif
                 <br>
 
@@ -40,7 +40,7 @@
                     <input type="hidden" name="id_dapil" value="{{ $datadapils->id_dapil }}">
                     <input type="hidden" name="provinsi" value="{{ $datadapils->id_provinsi }}">
                     <input type="hidden" name="kabupaten" value="{{ $datadapils->id_kabupaten }}">
-                    <input type="text" id="nama" name="nama" class="form-control">
+                    <input type="text" id="nama" name="nama" class="form-control" required>
 
                 </div>
 
@@ -76,7 +76,7 @@
 
 
                 <div class="form-group">
-                    <label for="nama">Seandainya Pilkada Jakarta dilangsungkan hari ini, Ada 13 orang calon yang akan maju sebagai calon Gubernur ?</label>
+                    <label for="nama">Seandainya Pilkada Kota Gorontalo dilangsungkan hari ini, Ada 4 orang calon yang akan maju sebagai calon Walikota ?</label>
                     <select class="form-control" id="id_kandidat" name="id_kandidat">
                         @foreach ($tampilkankandidat as $kandidat)
                             <option value="{{ $kandidat->id }}">{{ $kandidat->namakandidat }}</option>
@@ -86,7 +86,7 @@
 
 <br>
                 <div class="form-group">
-                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon Gubernur,     
+                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon Walikota,
                     bagaimana sikap  dukungan anda terhadap calon tersebut ?</label>
 
                         <select id="jenispilihan" name="jenispilihan" class="form-control">

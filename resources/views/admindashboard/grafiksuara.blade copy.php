@@ -1,74 +1,5 @@
+
 <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Tim Inti</p>
-                    <h5 class="font-weight-bolder mb-0">
-                      {{ $data['jumlahtiminti']}}
-                      <span class="text-success text-sm font-weight-bolder">+ 
-                      {{ $data['jumlahtimintihariini']}}</span>
-                    </h5>
-                  </div>
-                </div>
-                <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Pendukung</p>
-                    <h5 class="font-weight-bolder mb-0">
-                    {{ $data['jumlahtimpendukung'] }}
-                      <span class="text-success text-sm font-weight-bolder">+ {{ $data['jumlahtimpendukunghariini'] }}</span>
-                    </h5>
-                  </div>
-                </div>
-                <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-body p-3">
-              <div class="row">
-                <div class="col-8">
-                  <div class="numbers">
-                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Jumlah Pemilih</p>
-                    <h5 class="font-weight-bolder mb-0">
-                    {{ $data['totalPemilih'] }}
-                      <span class="text-danger text-sm font-weight-bolder">+
-                    {{ $data['pemilihHariIni'] }}</span>
-                    </h5>
-                  </div>
-                </div>
-                <div class="col-4 text-end">
-                  <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <div class="row mt-4">
@@ -78,7 +9,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="d-flex flex-column h-100">
-                    <h5 class="font-weight-bolder">Jumlah Suara Masing-masing</h5>
+                    <h5 class="font-weight-bolder">Grafik Suara Kota Gorontalo</h5>
                     <br>
                     <canvas id="barChart" width="400" height="200"></canvas>
                   </div>

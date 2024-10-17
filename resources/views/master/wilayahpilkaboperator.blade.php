@@ -43,7 +43,7 @@
           </form>
 
               <div class="row">
-                <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="col-lg-8 mb-lg-0 mb-4">
                 <div class="card h-100">
                     <div class="card-body p-3">
                       <div class="row">
@@ -59,7 +59,7 @@
                 </div>
 
 
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                   <div class="card h-100 p-3">
                     <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('assetsadmin/img/ivancik.jpg') }}');">
                       <span class="mask bg-gradient-dark"></span>

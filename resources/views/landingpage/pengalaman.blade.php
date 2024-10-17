@@ -86,7 +86,7 @@
                 <div class="col-md-6">
                     <div class="slider">
                         <div class="slides">
-                            <div class="slide">
+                            <!-- <div class="slide">
                                 <div class="col-md-12 col-xs-12">
                                     <img src="img/profilanisbaswedan.jpeg" alt="">
                                 </div>
@@ -96,7 +96,7 @@
                                         <p>Calon Gubernur Jakarta</h3>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="slide">
                             <div class="col-md-12 col-xs-12">
                                     <img src="img/profiltoni.jpg" alt="">
@@ -110,7 +110,7 @@
                             </div>
                             <div class="slide">
                                 <div class="col-md-12 col-xs-12">
-                                    <img src="img/profilhjramli.jpg" alt="">
+                                    <img src="img/1717268040_hjramli.jpg" alt="">
                                 </div>
                                 <div class="col-md-12 col-xs-12">
                                 <div class="student-info">
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
 
-                            <div class="slide">
+                            <!-- <div class="slide">
                                 <div class="col-md-12 col-xs-12">
                                     <img src="/img/andiislamuddinbone.jpg" alt="">
                                 </div>
@@ -130,7 +130,7 @@
                                         <p>Calon Bupati Kabupaten Bone</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
                         <button class="next" onclick="changeSlide(1)">&#10095;</button>

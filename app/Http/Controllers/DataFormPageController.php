@@ -131,7 +131,7 @@ class DataFormPageController extends Controller
         if ($value == "kota-gorontalo"){
             $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON WALIKOTA Gorontalo";
         }else{
-            $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON Bupati $value";
+            $jeniskandidat = "DATA TIM INTI PEMENANGAN CALON WALIKOTA $value";
         }
 
         $datadapils = DB::table('dapils')
@@ -164,13 +164,13 @@ class DataFormPageController extends Controller
             if ($namaKabupaten == "kota gorontalo"){
                 $judultim = "Tim Pendukung  Calon Walikota ";
             }else{
-                $judultim = "Tim Pendukung  Calon Bupati ";
+                $judultim = "Tim Pendukung  Calon Walikota ";
             }
         }else{
              if ($namaKabupaten == "kota gorontalo"){
                  $judultim = "Tim Inti  Calon Walikota ";
              }else{
-                 $judultim = "Tim Inti  Calon Bupati ";
+                 $judultim = "Tim Inti  Calon Walikota ";
              }
 
         }

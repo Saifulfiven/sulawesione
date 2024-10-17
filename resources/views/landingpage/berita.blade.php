@@ -22,7 +22,7 @@
                             </div>
                             <div class="p-4 py-2 d-flex justify-content-between bg-primary rounded-bottom blog-btn">
                                 Selengkapnya
-                                <span><i class="fa fa-comments me-2"></i>23 Comments</span>
+                                
                             </div>
                     </a>
                 </div>
