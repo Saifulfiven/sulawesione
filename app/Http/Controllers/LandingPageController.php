@@ -75,7 +75,7 @@ class LandingPageController extends Controller
     }
 
 
-    public function bacaberita($slug)
+    public function bacaberitalama($slug)
     {
         $berita = Beritas::where('slug', $slug)->firstOrFail();
         $toptitle = $slug;
