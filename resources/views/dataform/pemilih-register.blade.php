@@ -78,22 +78,22 @@
                 <div class="form-group">
                     <label for="nama">Seandainya Pilkada 
                 @if(session('jeniskandidat') == 'pilgub')                
-                    <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
-                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                    Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}
+                    
                 @else
-                    <h6>Calon Walikota {{ $datadapils->namakabupaten }}</h6>
+                    Calon Walikota {{ $datadapils->namakabupaten }}
                 @endif
                 
-                dilangsungkan hari ini, Ada 4 orang calon yang akan maju sebagai calon 
+                dilangsungkan hari ini, Ada 4 orang calon yang akan maju sebagai
                 
                 @if(session('jeniskandidat') == 'pilgub')                
-                    <h6>Calon Gubernur</h6>
-                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                    Calon Gubernur
+                    {{ $datadapils->namaprovinsi }}
                 @else
-                    <h6>Calon Walikota</h6>
+                    Calon Walikota
                 @endif
 
-                ?</label>
+                </label>
                     <select class="form-control" id="id_kandidat" name="id_kandidat">
                         @foreach ($tampilkankandidat as $kandidat)
                             <option value="{{ $kandidat->id }}">{{ $kandidat->namakandidat }}</option>
@@ -103,15 +103,15 @@
 
 <br>
                 <div class="form-group">
-                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon 
+                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi  
                     
                 @if(session('jeniskandidat') == 'pilgub')                
-                    <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
-                    <h6>{{ $datadapils->namakabupaten }}</h6>
-                @else
-                    <h6>Calon Walikota {{ $datadapils->namakabupaten }}</h6>
-                @endif
+                    Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}
                     
+                @else
+                    Calon Walikota {{ $datadapils->namakabupaten }}
+                @endif
+
                     ,
                     bagaimana sikap  dukungan anda terhadap calon tersebut ?</label>
 
