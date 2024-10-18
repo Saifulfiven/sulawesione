@@ -119,7 +119,7 @@ class DashboardPageController extends Controller
                     ->select('regencies.name', \DB::raw('count(*) as jumlah_pemilih'))
                     ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                     ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
-                    ->where('dapils.id', '6')
+                    ->where('dapils.id', '5')
                     ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
                     ->get();
 
