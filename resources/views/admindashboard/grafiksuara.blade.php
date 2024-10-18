@@ -9,7 +9,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="d-flex flex-column h-100">
-                    <h5 class="font-weight-bolder">Grafik Suara Kota Gorontalo</h5>
+                    <h5 class="font-weight-bolder">Grafik Suara Provinsi Gorontalo</h5>
                     <br>
                     <canvas id="barChart" width="400" height="200"></canvas>
                   </div>
