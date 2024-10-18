@@ -76,7 +76,24 @@
 
 
                 <div class="form-group">
-                    <label for="nama">Seandainya Pilkada Kota Gorontalo dilangsungkan hari ini, Ada 4 orang calon yang akan maju sebagai calon Walikota ?</label>
+                    <label for="nama">Seandainya Pilkada 
+                @if(session('jeniskandidat') == 'pilgub')                
+                    <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
+                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                @else
+                    <h6>Calon Walikota {{ $datadapils->namakabupaten }}</h6>
+                @endif
+                
+                dilangsungkan hari ini, Ada 4 orang calon yang akan maju sebagai calon 
+                
+                @if(session('jeniskandidat') == 'pilgub')                
+                    <h6>Calon Gubernur</h6>
+                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                @else
+                    <h6>Calon Walikota</h6>
+                @endif
+
+                ?</label>
                     <select class="form-control" id="id_kandidat" name="id_kandidat">
                         @foreach ($tampilkankandidat as $kandidat)
                             <option value="{{ $kandidat->id }}">{{ $kandidat->namakandidat }}</option>
@@ -86,7 +103,16 @@
 
 <br>
                 <div class="form-group">
-                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon Walikota,
+                    <label for="options">Bila calon yang anda sebut di atas  benar menjadi calon 
+                    
+                @if(session('jeniskandidat') == 'pilgub')                
+                    <h6>Calon Gubernur  Provinsi {{ $datadapils->namaprovinsi }}</h6>
+                    <h6>{{ $datadapils->namakabupaten }}</h6>
+                @else
+                    <h6>Calon Walikota {{ $datadapils->namakabupaten }}</h6>
+                @endif
+                    
+                    ,
                     bagaimana sikap  dukungan anda terhadap calon tersebut ?</label>
 
                         <select id="jenispilihan" name="jenispilihan" class="form-control">
