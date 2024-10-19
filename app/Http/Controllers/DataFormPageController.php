@@ -168,9 +168,9 @@ class DataFormPageController extends Controller
             }
         }else{
              if ($namaKabupaten == "kota gorontalo"){
-                 $judultim = "Tim Inti  Calon Walikota ";
+                 $judultim = "Tim Pemenangan  Calon Walikota ";
              }else{
-                 $judultim = "Tim Inti  Calon Walikota ";
+                 $judultim = "Tim Pemenangan  Calon Walikota ";
              }
 
         }
