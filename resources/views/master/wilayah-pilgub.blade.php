@@ -2,7 +2,7 @@
 
     <div id="kabupaten" class="form-group">
                     <label for="textbox3">Kabupaten:</label>
-      <select class="form-select" name="kabupaten" id="filter-kabupaten" aria-label="Default select example">
+      <select class="form-select" name="kabupaten" id="filter-kabupaten" aria-label="Default select example" required>
         <option value="" selected>Pilih Kabupaten</option>
         @foreach ($tampilkankab as $item)
         <option value="{{ $item->id }}" {{ request()->get('regencies') == $item->id ? 'selected' : '' }}>{{ $item->namakabupaten }}</option>
@@ -13,7 +13,7 @@
 <div id="kecamatan" class="form-group">
     <label for="textbox3">Kecamatan:</label>
 
-    <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example">
+    <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example" required>
         <option value="" selected>Pilih Kecamatan</option>
     </select>
 </div>
@@ -21,7 +21,7 @@
 <div id="desa" class="form-group">
     <label for="desa">Kelurahan:</label>
 
-    <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example">
+    <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example" required>
         <option value="" selected>Pilih Kelurahan</option>
     </select>
 </div>

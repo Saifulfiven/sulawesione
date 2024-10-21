@@ -120,7 +120,7 @@
                                     <ul>
                                         <li><a href="/dataform/timinti/gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
                                         <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
-                                            <li><a href="/dataform/timinti/gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <li><a href="/pendukung/gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Pendukung</span></a></li>
                                             <li><a href="/dtd" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Data Collection</span></a></li>
@@ -131,7 +131,7 @@
                                     <ul>
                                         <li><a href="/dataform/timintipilkab/kota-gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
                                         <span style="display:block;padding:2px">Daftar Tim Inti</span></a>
-                                            <li><a href="/dataform/timintipilkab/kota-gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
+                                            <li><a href="/pendukungkab/kota-gorontalo" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Pendukung</span></a></li>
                                             <li><a href="/dtd" class="text-dark" style="transition: all .3s ease-in-out;">
                                             <span style="display:block;padding:2px">Data Collection</span></a></li>
