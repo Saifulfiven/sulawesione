@@ -11,20 +11,11 @@
                 <img src="{{ asset('img/icon-sukses.png') }}" 
                 class="img-fluid mt-3 animated zoomIn"
                 alt="Sukses" width="150" style="animation-duration: 1.5s;">
-                    <br>
+
                    
-                    @if(session('berhasil_login'))
                         <h4>Terima kasih data yang kamu inputkan berhasil kami Terima!</h4>
-                    <h6>Kembali Ke Input data</h6>
-                    <div class="d-flex justify-content-center">
-                        <!-- <a href="/dataform" class="btn btn-success">Pendukung</a>  -->
-                        <a href="/dtd" class="btn btn-success">Form DTD</a>
-                    </div>
+                        <a href="/" class="btn btn-success">Ke Beranda ➜</a>
                     
-                    @else
-                        <h4>Terima kasih data yang kamu inputkan berhasil kami Terima!</h4>
-                        <a href="/" class="btn btn-success">Home ➜</a>
-                    @endif
                     
                 </div>
             </div>

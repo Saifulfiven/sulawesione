@@ -1,7 +1,7 @@
 <div id="kecamatan" class="form-group">
     <label for="textbox3">Kecamatan:</label>
 
-    <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example">
+    <select class="form-select" name="kecamatan" id="filter-kecamatan" aria-label="Default select example" required>
         <option value="" selected>Pilih Kecamatan</option>
         @foreach ($tampilkankec as $item)
         <option value="{{ $item->id }}" {{ request()->get('districts') == $item->id ? 'selected' : '' }}>{{ $item->namakecamatan }}</option>
@@ -12,7 +12,7 @@
 <div id="desa" class="form-group">
     <label for="desa">Desa:</label>
 
-    <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example">
+    <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example" required>
         <option value="" selected>Pilih Desa</option>
     </select>
 </div>

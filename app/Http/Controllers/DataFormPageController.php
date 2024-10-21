@@ -175,16 +175,12 @@ class DataFormPageController extends Controller
 
         }
 
-
         $toptitle = $judultim;
-
-
 
         $provinsi = Provinces::where('status', 1)->get();
         return view('dataform.pengguna-pilkab-register', compact('data','header','toptitle',
                     'datadapils','jeniskandidat','kecamatans','tampilkankec','namaKabupaten','judultim','provinsi'));
     }
-
 
     public function showFormpilgub($value)
     {

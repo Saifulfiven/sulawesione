@@ -28,14 +28,24 @@ Route::get('/detail', 'App\Http\Controllers\BeritaPageController@index');
 
 //Controller DataFormPageController
 Route::get('/dataform/timinti/{namaprovinsi}', 'App\Http\Controllers\DataFormPageController@index');
-Route::get('/tambahpendukung', 'App\Http\Controllers\DataFormPageController@tambahpendukung');
-Route::get('/tambahpendukungpilgub', 'App\Http\Controllers\DataFormPageController@showFormpilgubpendukung');
 Route::post('/dataform/pengguna-register', 'App\Http\Controllers\DataFormPageController@penggunastore');
 Route::post('/dataform/pemilih-register', 'App\Http\Controllers\DataFormPageController@pemilihstore');
 Route::get('/dataform/sukses', 'App\Http\Controllers\DataFormPageController@sukses');
 Route::get('/dataform/timintipilkab/{namakab}', 'App\Http\Controllers\DataFormPageController@showDataKab');
 Route::get('/dataform/kab/{namakab}', 'App\Http\Controllers\DataFormPageController@showFormpilkab');
 Route::get('/dataform/prov/{prov}', 'App\Http\Controllers\DataFormPageController@showFormpilgub');
+
+//Pendukung
+Route::get('/pendukung/{namaprovinsi}', 'App\Http\Controllers\PendukungController@index');
+Route::get('/pendukung/prov/{prov}', 'App\Http\Controllers\PendukungController@showFormpilgub');
+Route::post('/pendukung/pengguna-register', 'App\Http\Controllers\PendukungController@penggunastore');
+Route::get('/pendukungkab/{namakab}', 'App\Http\Controllers\PendukungController@showDataKab');
+Route::get('/pendukung/kab/{namakab}', 'App\Http\Controllers\PendukungController@showFormpilkab');
+Route::get('/pendukung/berhasil', 'App\Http\Controllers\PendukungController@berhasil');
+
+//Abaikan Dulu ini
+Route::get('/tambahpendukung', 'App\Http\Controllers\DataFormPageController@tambahpendukung');
+Route::get('/tambahpendukungpilgub/{namaprovinsi}', 'App\Http\Controllers\DataFormPageController@showFormpilgubpendukung');
 
 //Controller dtdPagePageController ini untuk mengisi Survey Data Pemilih ( DTD )
 Route::get('/dtd', 'App\Http\Controllers\DtdPageController@index');

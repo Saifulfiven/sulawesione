@@ -27,5 +27,6 @@ class pemilihs extends Model
         'id_kandidat',
         'rt',
         'rw',
+        'jenis_suara'
     ];
 }
