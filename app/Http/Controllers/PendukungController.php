@@ -134,6 +134,7 @@ class PendukungController extends Controller
             'alamat'                    => $request->alamat,
             'jenispilihan'              => 5,
             'id_kandidat'               => $request->id_kandidat,
+            'kodetim'                   => $request->kodetim,
         ]);
 
 

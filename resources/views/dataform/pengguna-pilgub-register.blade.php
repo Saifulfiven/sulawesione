@@ -52,12 +52,12 @@
 
                         <div id="username" class="form-group">
                             <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" class="form-control" required>
+                            <input type="text" id="username" name="username" class="form-control" value="{{ old('username', '') }}" required>
                         </div>
 
                         <div id="password" class="form-group">
                             <label for="password">Password:</label>
-                            <input type="text" id="password" name="password" class="form-control" required>
+                            <input type="text" id="password" name="password" class="form-control" value="{{ old('password', '') }}" required>
                         </div>
 
                         <div id="nama" class="form-group">
@@ -75,6 +75,19 @@
                         </div>
 
                         @include('master.wilayah-pilgub')
+
+                        <div class="form-group">
+                            <label for="options">Tim:</label>
+                            <select class="form-control" id="options" name="kodetim" required>
+                                <option value="A">Team Keluarga</option>
+                                <option value="B">Team Partai Nasdem</option>
+                                <option value="C">Team PKS</option>
+                                <option value="D">Team PKB</option>
+                                <option value="E">Team Comando</option>
+                                <option value="F">Team DtD</option>
+                                <option value="G">Team Desa/Khusus</option>
+                            </select>
+                        </div>
 
 
                         <div id="alamat" class="form-group">
