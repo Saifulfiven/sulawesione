@@ -13,6 +13,7 @@ class Timpenggunas extends Model
         'ktp',
         'id_kecamatan', 'id_kabupaten','id_provinsi','alamat','kontak','username',
         'latitude','longitude','id_timinti',
-        'id_dapil','foto','id_desa','jenistim','email','password','remember_token','jumlahpemilihrumahtangga','nomortps'
+        'id_dapil','foto','id_desa','jenistim','email','password','remember_token',
+        'jumlahpemilihrumahtangga','nomortps','kodetim'
     ];
 }

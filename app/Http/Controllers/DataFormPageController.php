@@ -338,6 +338,7 @@ class DataFormPageController extends Controller
             'remember_token'            => 0,
             'latitude'                  => 'latitude',
             'longitude'                 => 'longitude',
+            'kodetim'                   => $request->kodetim
         ]);
 
 
