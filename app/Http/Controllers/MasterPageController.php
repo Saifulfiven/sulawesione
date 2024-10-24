@@ -79,19 +79,19 @@ class MasterPageController extends Controller
 
 
         if (session('berhasil_login_operator')) {
-        $pendukungs = Timpenggunas::where('timpenggunas.jenistim', 'B')
-                                ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
+        $pendukungs = Pemilihs::where('pemilihs.jenis_suara', '2')
+                                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
-                                ->join('districts', 'timpenggunas.id_kecamatan', '=', 'districts.id') // Tambahkan join kecamatan
-                                ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.username',
+                                ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id') // Tambahkan join kecamatan
+                                ->select('pemilihs.nama','pemilihs.kontak',
                                     'kandidats.namakandidat','regencies.name as namakabupaten', 'districts.name as namakecamatan')
                                 ->orderBy('kandidats.namakandidat', 'asc')
                                 ->get();
         } elseif (session('berhasil_login_admins')) {
         $dapil = session('id_dapil');
 
-        $pendukungs = Timpenggunas::where('timpenggunas.jenistim', 'B')
+        $pendukungs = Pemilihs::where('pemilihs.jenis_suara', '2')
                                 ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
                                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
@@ -140,13 +140,15 @@ class MasterPageController extends Controller
         $header = false;
 
 
-        $pendukungpilgubs = Timpenggunas::where('timpenggunas.jenistim', '=', 'B')
-                                ->join('dapils', 'timpenggunas.id_dapil', '=', 'dapils.id')
+        $pendukungpilgubs = DB::table('pemilihs')
+                                ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                                 ->join('kandidats', 'kandidats.id', '=', 'dapils.id_kandidat')
-                                ->join('provinces', 'provinces.id', '=', 'dapils.id_provinsi')
-                                ->join('regencies', 'timpenggunas.id_kabupaten', '=', 'regencies.id')
-                                ->select('timpenggunas.nama','timpenggunas.kontak','kandidats.namakandidat',
-                                         'regencies.name as namakabupaten','provinces.name as namaprovinsi','timpenggunas.username')->get();
+                                ->join('provinces', 'provinces.id', '=', 'pemilihs.id_provinsi')
+                                ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
+                                ->select('pemilihs.nama','pemilihs.kontak','kandidats.namakandidat',
+                                         'regencies.name as namakabupaten','provinces.name as namaprovinsi')
+                                         ->Where('pemilihs.jenis_suara','=','2')
+                                ->where('pemilihs.jenis_suara','=','2')->get();
        //return $pendukungpilgubs;
         return view('master.pendukungpilgub', compact('header','toptitle','pendukungpilgubs'));
         //return view('landingpage.layout');
