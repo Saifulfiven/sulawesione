@@ -85,7 +85,7 @@ class MasterPageController extends Controller
                                 ->join('regencies', 'regencies.id', '=', 'dapils.id_kabupaten')
                                 ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id') // Tambahkan join kecamatan
                                 ->select('pemilihs.nama','pemilihs.kontak',
-                                    'kandidats.namakandidat','regencies.name as namakabupaten', 'districts.name as namakecamatan')
+                                    'kandidats.namakandidat','regencies.name as namakabupaten', 'districts.name as namakecamatan','pemilihs.kodetim')
                                 ->orderBy('kandidats.namakandidat', 'asc')
                                 ->get();
         } elseif (session('berhasil_login_admins')) {
@@ -99,7 +99,7 @@ class MasterPageController extends Controller
 
                                 ->where('timpenggunas.id_dapil', $dapil)
                                 ->select('timpenggunas.nama','timpenggunas.kontak','timpenggunas.username',
-                                    'kandidats.namakandidat','regencies.name as namakabupaten', 'districts.name as namakecamatan')
+                                    'kandidats.namakandidat','regencies.name as namakabupaten', 'districts.name as namakecamatan','pemilihs.kodetim')
                                 ->orderBy('kandidats.namakandidat', 'asc')
                                 ->get();
         }
@@ -146,7 +146,7 @@ class MasterPageController extends Controller
                                 ->join('provinces', 'provinces.id', '=', 'pemilihs.id_provinsi')
                                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
                                 ->select('pemilihs.nama','pemilihs.kontak','kandidats.namakandidat',
-                                         'regencies.name as namakabupaten','provinces.name as namaprovinsi')
+                                         'regencies.name as namakabupaten','provinces.name as namaprovinsi','pemilihs.kodetim')
                                          ->Where('pemilihs.jenis_suara','=','2')
                                 ->where('pemilihs.jenis_suara','=','2')->get();
        //return $pendukungpilgubs;
@@ -335,7 +335,8 @@ class MasterPageController extends Controller
                      ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                     'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                     'kandidats.namakandidat',
-                    'timpenggunas.nama as namapengguna')
+                    'timpenggunas.nama as namapengguna',
+                    'pemilihs.kodetim')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -369,7 +370,7 @@ class MasterPageController extends Controller
                      ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                     'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                     'kandidats.namakandidat',
-                    'timpenggunas.nama as namapengguna')
+                    'timpenggunas.nama as namapengguna','pemilihs.kodetim')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -400,7 +401,7 @@ class MasterPageController extends Controller
                     ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                     'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                     'kandidats.namakandidat',
-                    'timpenggunas.nama as namapengguna')
+                    'timpenggunas.nama as namapengguna','pemilihs.kodetim')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
@@ -429,7 +430,7 @@ class MasterPageController extends Controller
                     ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                     'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                     'kandidats.namakandidat',
-                    'timpenggunas.nama as namapengguna')
+                    'timpenggunas.nama as namapengguna','pemilihs.kodetim')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
                 ->Where('dapils.jeniskandidat','=','pilgub')->get();
@@ -475,7 +476,7 @@ public function searchpemilihgubbobot(Request $request)
                  ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -508,7 +509,7 @@ public function searchpemilihgubbobot(Request $request)
                  ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -539,7 +540,7 @@ public function searchpemilihgubbobot(Request $request)
                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
@@ -565,7 +566,7 @@ public function searchpemilihgubbobot(Request $request)
                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
             ->Where('dapils.jeniskandidat','=','pilgub')->get();
@@ -607,7 +608,7 @@ public function searchpemilihgubcollection(Request $request)
             ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.id_kandidat','pemilihs.rt','pemilihs.rw','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -641,7 +642,7 @@ public function searchpemilihgubcollection(Request $request)
             ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.id_kandidat','pemilihs.rt','pemilihs.rw','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -674,7 +675,7 @@ public function searchpemilihgubcollection(Request $request)
             ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.id_kandidat','pemilihs.rt','pemilihs.rw','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
@@ -702,7 +703,7 @@ public function searchpemilihgubcollection(Request $request)
                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.id_kandidat','pemilihs.rt','pemilihs.rw','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
             ->Where('dapils.jeniskandidat','=','pilgub')->get();
@@ -747,7 +748,7 @@ public function searchpemilihbobot(Request $request)
                  ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -783,7 +784,7 @@ public function searchpemilihbobot(Request $request)
                  ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -817,7 +818,7 @@ public function searchpemilihbobot(Request $request)
                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
@@ -846,7 +847,7 @@ public function searchpemilihbobot(Request $request)
                 ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->where('pemilihs.id_provinsi', '=', $id_provinsi)
             ->Where('pemilihs.id_dapil', '=', $id_dapil)
             ->Where('dapils.jeniskandidat','=','pilkab')->get();
@@ -898,7 +899,7 @@ public function searchpemilihbobot(Request $request)
             ->select('pemilihs.nama','pemilihs.kontak','pemilihs.jenispilihan','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->Where('dapils.jeniskandidat','=', 'pilkab')->get();
 
 
@@ -1029,7 +1030,7 @@ public function searchpemilihbobot(Request $request)
             ->select('pemilihs.nama','pemilihs.kontak','pemilihs.id_kandidat','pemilihs.jenispilihan','pemilihs.rt','pemilihs.rw','pemilihs.created_at','villages.name as namadesa',
                 'districts.name as namakecamatan','regencies.name as namakabupaten','provinces.name as namaprovinsi',
                 'kandidats.namakandidat',
-                'timpenggunas.nama as namapengguna')
+                'timpenggunas.nama as namapengguna','pemilihs.kodetim')
             ->Where('dapils.jeniskandidat','=','pilgub')->get();
 
         $primary = "btn-success";

@@ -206,7 +206,7 @@
                           $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'+'<td>'
                               + objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
                               + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                              + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                              + objek.namapengguna +'</td><td>'+ objek.kodetim +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
                       });
 
                       pemilihdapil.forEach(function(objek, indeks) {
@@ -282,7 +282,7 @@
                           $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'+'<td>'
                               + objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
                               + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                              + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                              + objek.namapengguna +'</td><td>'+ objek.kodetim +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
                       });
 
                       pemilihdapilbobot.forEach(function(objek, indeks) {
