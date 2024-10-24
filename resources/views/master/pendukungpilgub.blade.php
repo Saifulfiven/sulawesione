@@ -34,7 +34,6 @@
                       <th class="text-secondary">No</th>
                       <th class="text-secondary">Nama</th>
                         <th class="text-secondary">Kontak</th>
-                        <th class="text-secondary">Username</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Provinsi</th>
                       <th class="text-secondary">Kabupaten</th>
@@ -49,14 +48,9 @@
                           <td> {{ $no }}</td>
                           <td>{{ $pendukungpilgub->nama }}</td>
                             <td>{{ $pendukungpilgub->kontak }}</td>
-                            <td>{{ $pendukungpilgub->username }}</td>
                           <td>{{ $pendukungpilgub->namakandidat }}</td>
                           <td>{{ $pendukungpilgub->namaprovinsi }}</td>
                           <td>{{ $pendukungpilgub->namakabupaten }}</td>
-<!-- 
-                          <td class="text-center">
-                            <a href="{{ url('admin/pendukungpilgub/hapus/'.$pendukungpilgub->id) }}" class="btn btn-sm btn-danger">Hapus</a>
-                          </td> -->
                         </tr>
                         <?php $no++; ?>
                       @endforeach

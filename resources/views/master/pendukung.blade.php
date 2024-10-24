@@ -35,7 +35,7 @@
                     <tr>
                       <th class="text-secondary">No</th>
                         <th class="text-secondary">Nama</th>
-                        <th class="text-secondary">Username</th>
+                        
                       <th class="text-secondary">Kontak</th>
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Kabupaten</th>
@@ -49,7 +49,7 @@
                         <tr>
                           <td> {{ $no }}</td>
                             <td>{{ $pendukung->nama }}</td>
-                            <td>{{ $pendukung->username }}</td>
+                            
                           <td>{{ $pendukung->kontak }}</td>
                           <td>{{ $pendukung->namakandidat }}</td>
                           <td>{{ $pendukung->namakabupaten }}</td>
