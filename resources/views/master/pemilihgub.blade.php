@@ -326,7 +326,7 @@
                           $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'+'<td>'
                               + objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
                               + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                              + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                              + objek.namapengguna +'</td><td>'+ objek.kodetim +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
                       });
 
                       pemilihdapil.forEach(function(objek, indeks) {
@@ -401,7 +401,7 @@
                           $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'+'<td>'
                               + objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
                               + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'+'<td>'
-                              + objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                              + objek.namapengguna +'</td>'+ objek.kodetim +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
                       });
 
                       pemilihdapilbobot.forEach(function(objek, indeks) {
@@ -474,10 +474,37 @@
                    let pemilihdapilcollection = response.pemilihdapilcollection;
                    let no = 1;let nom = 1;
                    pemilihs.forEach(function(objek, indeks) {
+
+                        
+                         let team = '';
+                         switch (objek.kodetim) {
+                             case 'A':
+                                 team = 'Team Keluarga';
+                                 break;
+                             case 'B':
+                                 team = 'Team Parti Nasdem';
+                                 break;
+                             case 'C':
+                                 team = 'Team PKS';
+                                 break;
+                             case 'D':
+                                 team = 'Team PKB';
+                                 break;
+                             case 'E':
+                                 team = 'Team Commando';
+                                 break;
+                             case 'F':
+                                 team = 'Team DTD';
+                                 break;
+                             case 'G':
+                                 team = 'Team Desa/Khusus';
+                                 break;
+                         }
                          $('#tblsearchpemilih').append('<tr>'+'<td>'+ no++ +'</td><td>'+ objek.nama +'</td>'+'<td>'+ objek.kontak +'</td>'
                              +'<td>'+ objek.id_kandidat +'</td>'+'<td>'+ objek.jenispilihan +'</td>'+'<td>'+ objek.namakandidat +'</td>'+'<td>'+ objek.namaprovinsi +'</td>'+'<td>'
                              + objek.namakabupaten +'</td>'+'<td>'+ objek.namakecamatan +'</td>'+'<td>'+ objek.namadesa +'</td>'
-                             +'<td>'+ 'RT : '+ objek.rt +' RW : '+ objek.rw +'</td>'+'<td>'+ objek.namapengguna +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                             +'<td>'+ 'RT : '+ objek.rt +' RWss : '+ objek.rw +'</td>'+'<td>'+ objek.namapengguna +'</td><td>'+ team +'</td>'+'<td>'+ objek.created_at +'</td></tr>');
+                             
                      });
 
                      pemilihdapilcollection.forEach(function(objek, indeks) {
@@ -551,6 +578,7 @@
                         <th>Desa</th>
                         <th>RT RW</th>
                         <th>Pengguna</th>
+                        <th>Jenis Tim</th>
                         <th>Waktu</th>
                     </tr>
                   </thead>
@@ -570,7 +598,8 @@
                           <td>{{ $pemilih->namakecamatan }}</td>
                           <td>{{ $pemilih->namadesa }}</td>
                           <td>RT : {{ $pemilih->rt }} | RW : {{ $pemilih->rw }}</td>
-                            <td>{{ $pemilih->namapengguna }}</td>
+                          <td>{{ $pemilih->namapengguna }}</td>
+                          <td>{{ $pemilih->kodetim }}</td>
                             <td>{{ $pemilih->created_at }}</td>
                         </tr>
                         <?php $no++; ?>

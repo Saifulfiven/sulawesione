@@ -37,6 +37,7 @@
                       <th class="text-secondary">Kandidat</th>
                       <th class="text-secondary">Provinsi</th>
                       <th class="text-secondary">Kabupaten</th>
+                      <th class="text-secondary">Jenis Tim</th>
                         <!-- Ini Adalah Wilayah Kandidat -->
                       <!-- <th class="text-secondary">Aksi</th> -->
                     </tr>
@@ -44,6 +45,7 @@
                     <tbody>
                       <?php $no = 1; ?>
                       @foreach ($pendukungpilgubs as $pendukungpilgub)
+
                         <tr>
                           <td> {{ $no }}</td>
                           <td>{{ $pendukungpilgub->nama }}</td>
@@ -51,6 +53,23 @@
                           <td>{{ $pendukungpilgub->namakandidat }}</td>
                           <td>{{ $pendukungpilgub->namaprovinsi }}</td>
                           <td>{{ $pendukungpilgub->namakabupaten }}</td>
+                          <td>
+                            @if ($pendukungpilgub->kodetim == 'A')
+                              Team Keluarga
+                            @elseif ($pendukungpilgub->kodetim == 'B')
+                              Team Parti Nasdem
+                            @elseif ($pendukungpilgub->kodetim == 'C')
+                              Team PKS
+                            @elseif ($pendukungpilgub->kodetim == 'D')
+                              Team PKB
+                            @elseif ($pendukungpilgub->kodetim == 'E')
+                              Team Commando
+                            @elseif ($pendukungpilgub->kodetim == 'F')
+                              Team DTD
+                            @elseif ($pendukungpilgub->kodetim == 'G')
+                              Team Desa/Khusus
+                            @endif
+                          </td>
                         </tr>
                         <?php $no++; ?>
                       @endforeach
