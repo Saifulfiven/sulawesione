@@ -118,9 +118,11 @@ class PendukungController extends Controller
             'kontak'     => 'nullable',
         ]);
 
+        $id_timpengguna = session('id_timpengguna') ? session('id_timpengguna') : 0;
+
         $pemilihs = Pemilihs::create([
             'id_dapil'                  => $request->id_dapil,
-            'id_timpengguna'            => '0',
+            'id_timpengguna'            => $id_timpengguna,
             'nama'                      => $request->nama,
             'ktp'                       => $request->ktp,
             'id_desa'                   => $request->desa,

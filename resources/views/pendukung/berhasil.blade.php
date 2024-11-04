@@ -14,7 +14,7 @@
                     <br>
                    
                     <h4>Terima kasih data yang kamu inputkan berhasil kami Terima!</h4>
-                    <a href="/dtd" class="btn btn-success">Kembali ke input data ➜</a>
+                    <a href="/pendukung/prov/{{ $namaprovinsi }}" class="btn btn-success">Tambah Data Pendukung ➜</a>
                 </div>
             </div>
         </div>
