@@ -92,7 +92,9 @@ class DtdPageController extends Controller
             'jenispilihan'    => $request->jenispilihan, // Isi Survey
             'id_kandidat'     => $request->id_kandidat,
             'rt'              => $request->rt,
-            'rw'              => $request->rw
+            'rw'              => $request->rw,
+            'jenis_suara'     => '3',
+            'kodetim'         => 'A'
         ]);
 
         if($pemilih){
