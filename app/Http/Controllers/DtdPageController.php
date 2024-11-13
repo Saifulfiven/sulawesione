@@ -93,7 +93,7 @@ class DtdPageController extends Controller
             'id_kandidat'     => $request->id_kandidat,
             'rt'              => $request->rt,
             'rw'              => $request->rw,
-            'jenis_suara'     => '3',
+            'jenis_suara'     => '2',
             'kodetim'         => 'A'
         ]);
 
