@@ -10,10 +10,10 @@
 </div>
 
 <div id="desa" class="form-group">
-    <label for="desa">Desa:</label>
+    <label for="desa">Kelurahan:</label>
 
     <select class="form-select" name="desa" id="filter-desa" aria-label="Default select example" required>
-        <option value="" selected>Pilih Desa</option>
+        <option value="" selected>Pilih Kelurahan</option>
     </select>
 </div>
 
@@ -88,7 +88,7 @@
                           success: function(res){
                               console.log(res);
                               $('#filter-desa').empty();
-                              $('#filter-desa').append('<option value="" selected>Pilih Desa</option>');
+                              $('#filter-desa').append('<option value="" selected>Pilih Kelurahan</option>');
                               res.forEach(function(objek, indeks) {
                                   $('#filter-desa').append('<option value="'+ objek.id +'">'+ objek.namadesa +'</option>');
                               });

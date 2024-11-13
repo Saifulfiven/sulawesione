@@ -930,6 +930,7 @@ public function searchpemilihbobot(Request $request)
                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
                 ->where('dapils.jeniskandidat', '=', 'pilkab')
                 ->where('dapils.id', session('id_dapil'))
+                ->where('pemilihs.jenis_suara', 3)
                 ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
                 ->get();
 
@@ -944,6 +945,7 @@ public function searchpemilihbobot(Request $request)
                 ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
                 ->where('dapils.jeniskandidat', '=', 'pilkab')
                 ->where('dapils.id', session('id_dapil'))
+                ->where('pemilihs.jenis_suara', 3)
                 ->groupBy('pemilihs.id_kecamatan', 'districts.name')
                 ->get();
 
@@ -954,6 +956,7 @@ public function searchpemilihbobot(Request $request)
                 ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                 ->join('regencies', 'pemilihs.id_kabupaten', '=', 'regencies.id')
                 ->where('dapils.id', session('id_dapil'))
+                ->where('pemilihs.jenis_suara', 3)
                 ->groupBy('pemilihs.id_kabupaten', 'regencies.name')
                 ->get();
 
@@ -970,6 +973,7 @@ public function searchpemilihbobot(Request $request)
                 ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
                 ->where('dapils.jeniskandidat', '=', 'pilkab')
                 ->where('dapils.id', session('id_dapil'))
+                ->where('pemilihs.jenis_suara', 3)
                 ->groupBy('pemilihs.id_kecamatan', 'districts.name')
                 ->get();
             }
@@ -988,6 +992,7 @@ public function searchpemilihbobot(Request $request)
                 'kandidats.namakandidat',
                 'timpenggunas.nama as namapengguna')
             ->Where('dapils.jeniskandidat','=', session('jeniskandidat'))
+            ->where('pemilihs.jenis_suara', 3)
             ->where('dapils.id', session('id_dapil'))->get();
 
 
