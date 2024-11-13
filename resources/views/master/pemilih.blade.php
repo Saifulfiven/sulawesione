@@ -41,7 +41,6 @@
                 <table class="table align-items-center mb-0" id="tabel-data">
                         <thead>
                     <tr>
-
                         <th>No</th>
                         <th>Nama</th>
                         <th>Kontak</th>

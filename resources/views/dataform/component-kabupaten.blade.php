@@ -22,7 +22,7 @@
             <!-- Baris Pertama -->
             <div class="col-lg-4  col-md-4 col-xs-6">
                 <div class="card mb-3" >
-                    <a href="/pendukung/kab/{{ $kabupaten->slug }}" class="stretched-link">
+                    <a href="/dataform/kab/{{ $kabupaten->slug }}" class="stretched-link">
                         <img src="/images/kandidat/{{ $kabupaten->foto }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <p class="card-text">{{ $kabupaten->namakabupaten }}</p>

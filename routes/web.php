@@ -77,6 +77,7 @@ Route::get('/admins-logout', 'App\Http\Controllers\LoginPageController@adminsact
 //Controller DashboaedPageController
 Route::get('/dashboard', 'App\Http\Controllers\DashboardPageController@index');
 Route::get('/admin/grafiksuara', 'App\Http\Controllers\DashboardPageController@grafiksuara');
+Route::get('/admin/grafiksuara/kab', 'App\Http\Controllers\DashboardPageController@grafiksuarakab');
 
 //CRUD ACARA Admin
 
