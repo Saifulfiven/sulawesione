@@ -189,7 +189,7 @@ class MasterPageController extends Controller
         $id_dapil     = $request->id_kandidat;
 
         // Pemilihs Untuk tampilkan di tabel  ====== pemilihdapil tampilkan di grafik dan samping
-        $namakab = "pilkab";
+        $namakab = 'pilkabtesss';
         if($id_desa != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
