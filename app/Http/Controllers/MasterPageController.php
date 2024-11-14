@@ -220,7 +220,6 @@ class MasterPageController extends Controller
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
                 ->Where('pemilihs.id_desa', '=', $id_desa)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
-                ->Where('dapils.jeniskandidat','=','pilkab')
                 ->groupBy('pemilihs.id_desa')->get();
         }else if($id_kecamatan != '0'){
             $pemilihs = DB::table('pemilihs')
@@ -250,7 +249,6 @@ class MasterPageController extends Controller
                 ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
-                ->Where('dapils.jeniskandidat','=','pilkab')
                 ->groupBy('pemilihs.id_desa')->get();
         }else if ($id_kabupaten != '0'){
             $pemilihs = DB::table('pemilihs')
