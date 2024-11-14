@@ -245,7 +245,7 @@ class MasterPageController extends Controller
                 ->select('villages.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
                 ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                 ->join('villages', 'pemilihs.id_desa', '=', 'villages.id')
-                ->where('dapils.jeniskandidat', '=', $namakab)
+                ->where('dapils.jeniskandidat', '=', 'pilkab')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_kecamatan', '=', $id_kecamatan)
@@ -268,7 +268,7 @@ class MasterPageController extends Controller
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->Where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
-                ->Where('dapils.jeniskandidat','=',"pilkab")->get();
+                ->Where('dapils.jeniskandidat','=', 'pilkab')->get();
                 
                 $pemilihdapil = \DB::table('pemilihs')
                 ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
