@@ -189,7 +189,7 @@ class MasterPageController extends Controller
         $id_dapil     = $request->id_kandidat;
 
         // Pemilihs Untuk tampilkan di tabel  ====== pemilihdapil tampilkan di grafik dan samping
-        $namakab = 'pilkabtesss';
+        $namakab = 'pilkab';
         if($id_desa != '0'){
             $pemilihs = DB::table('pemilihs')
                 ->join('provinces', 'pemilihs.id_provinsi', '=', 'provinces.id')
@@ -272,7 +272,7 @@ class MasterPageController extends Controller
                 ->select('districts.name as namakecamatan', \DB::raw('count(*) as jumlah_pemilih'))
                 ->join('dapils', 'pemilihs.id_dapil', '=', 'dapils.id')
                 ->join('districts', 'pemilihs.id_kecamatan', '=', 'districts.id')
-                ->where('dapils.jeniskandidat', '=', `$namakab`)
+                ->where('dapils.jeniskandidat', '=', '"$namakab"')
                 ->where('pemilihs.id_provinsi', '=', $id_provinsi)
                 ->where('pemilihs.id_kabupaten', '=', $id_kabupaten)
                 ->Where('pemilihs.id_dapil', '=', $id_dapil)
